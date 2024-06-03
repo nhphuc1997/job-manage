@@ -3,8 +3,8 @@
     <div class="create">
       <el-row :gutter="12">
         <el-col :span="6">
-          <el-input v-model="inputSearch" @change="(value: string) => handleInputChange(value)" placeholder="Tìm kiếm"
-            :suffix-icon="ElIconSearch" />
+          <el-input v-model="inputSearch" @change="(value: string) => handleInputSearchChange(value)"
+            placeholder="Tìm kiếm" :suffix-icon="ElIconSearch" />
         </el-col>
 
         <el-col :span="9">
@@ -13,20 +13,20 @@
         </el-col>
 
         <el-col :span="3">
-          <el-select v-model="status" placeholder="Trạng thái" @change="(value) => handleSelectChange(value)">
+          <el-select v-model="status" placeholder="Trạng thái" @change="(value) => handleSelectChange(value, 'status')">
             <el-option v-for="item in jobStore.optionsStatus" :key="item.value" :label="item.label"
               :value="item.value" />
           </el-select>
         </el-col>
 
         <el-col :span="3">
-          <el-select v-model="area" placeholder="Khu vực" @change="(value) => handleSelectChange(value)">
+          <el-select v-model="area" placeholder="Khu vực" @change="(value) => handleSelectChange(value, 'area')">
             <el-option v-for="item in jobStore.optionsArea" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-col>
 
         <el-col :span="3">
-          <el-button @click="dialogFormVisible = true" plain style="width: 100%;" type="success"
+          <el-button @click="jobStore.dialogNewFormVisible = true" plain style="width: 100%;" type="success"
             :icon="ElIconWindPower">Tạo công việc</el-button>
         </el-col>
 
@@ -63,53 +63,109 @@
         <el-col :span="24">
           <div class="paginate">
             <el-pagination v-model:current-page="jobStore.currentPage" v-model:page-size="jobStore.size"
-              :page-sizes="[5, 50, 100]" layout="total, sizes, prev, pager, next, jumper"
+              :page-sizes="[5, 10, 100]" layout="total, sizes, prev, pager, next, jumper"
               :total="jobStore.totalElements" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
           </div>
         </el-col>
       </el-row>
     </div>
 
-    <el-dialog v-model="dialogFormVisible" title="Khởi tạo công việc" width="650">
-      <el-form :model="form">
+    <!-- dialog init job -->
+    <el-dialog v-model="jobStore.dialogNewFormVisible" title="Khởi tạo công việc" width="650">
+      <el-form :model="jobStore.newJobObject">
         <el-form-item label="Tên công việc" :label-width="formLabelWidth">
-          <el-input v-model="form.title" autocomplete="off" placeholder="Tên công việc" />
+          <el-input v-model="jobStore.newJobObject.title" autocomplete="off" placeholder="Tên công việc" />
+        </el-form-item>
+
+        <el-form-item label="URL hình ảnh" :label-width="formLabelWidth">
+          <el-input v-model="jobStore.newJobObject.imageUrl" autocomplete="off" placeholder="URL hình ảnh" />
         </el-form-item>
 
         <el-form-item label="Khu vực" :label-width="formLabelWidth">
-          <el-select v-model="form.areaId" placeholder="Khu vực">
+          <el-select v-model="jobStore.newJobObject.areaId" placeholder="Khu vực">
             <el-option v-for="item in jobStore.optionsArea" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
 
         <el-form-item label="Ngày hết hạn" :label-width="formLabelWidth">
-          <el-date-picker style="width: 100%;" v-model="form.expiredDate" type="date" placeholder="Ngày hết hạn" />
+          <el-date-picker style="width: 100%;" v-model="jobStore.newJobObject.expiredDate" type="date"
+            placeholder="Ngày hết hạn" />
         </el-form-item>
 
         <el-form-item label="Tóm tắt công việc" :label-width="formLabelWidth">
-          <el-input v-model="form.summary" style="width: 100%" :rows="2" type="textarea"
+          <el-input v-model="jobStore.newJobObject.summary" style="width: 100%" :rows="2" type="textarea"
             placeholder="Tóm tắt công việc" />
         </el-form-item>
 
         <el-form-item label="Mô tả công việc" :label-width="formLabelWidth">
-          <el-input v-model="form.description" style="width: 100%" :rows="2" type="textarea"
+          <el-input v-model="jobStore.newJobObject.description" style="width: 100%" :rows="2" type="textarea"
             placeholder="Mô tả công việc" />
         </el-form-item>
 
         <el-form-item label="Nội dung html" :label-width="formLabelWidth">
-          <el-input v-model="form.htmlContent" style="width: 100%" :rows="2" type="textarea"
+          <el-input v-model="jobStore.newJobObject.htmlContent" style="width: 100%" :rows="2" type="textarea"
             placeholder="Mô tả công việc" />
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Huỷ</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">
+          <el-button @click="jobStore.dialogNewFormVisible = false">Huỷ</el-button>
+          <el-button type="primary" @click="jobStore.createJob">
             Tạo mới
           </el-button>
         </div>
       </template>
     </el-dialog>
+    <!-- dialog init job -->
+
+    <!-- dialog init job -->
+    <el-dialog v-model="jobStore.dialogEditFormVisible" title="Chỉnh sửa công việc" width="650">
+      <el-form :model="jobStore.editJobObject">
+        <el-form-item label="Tên công việc" :label-width="formLabelWidth">
+          <el-input v-model="jobStore.editJobObject.title" autocomplete="off" placeholder="Tên công việc" />
+        </el-form-item>
+
+        <el-form-item label="URL hình ảnh" :label-width="formLabelWidth">
+          <el-input v-model="jobStore.editJobObject.imageUrl" autocomplete="off" placeholder="URL hình ảnh" />
+        </el-form-item>
+
+        <el-form-item label="Khu vực" :label-width="formLabelWidth">
+          <el-select v-model="jobStore.editJobObject.areaId" placeholder="Khu vực">
+            <el-option v-for="item in jobStore.optionsArea" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="Ngày hết hạn" :label-width="formLabelWidth">
+          <el-date-picker style="width: 100%;" v-model="jobStore.editJobObject.expiredDate" type="date"
+            placeholder="Ngày hết hạn" />
+        </el-form-item>
+
+        <el-form-item label="Tóm tắt công việc" :label-width="formLabelWidth">
+          <el-input v-model="jobStore.editJobObject.summary" style="width: 100%" :rows="2" type="textarea"
+            placeholder="Tóm tắt công việc" />
+        </el-form-item>
+
+        <el-form-item label="Mô tả công việc" :label-width="formLabelWidth">
+          <el-input v-model="jobStore.editJobObject.description" style="width: 100%" :rows="2" type="textarea"
+            placeholder="Mô tả công việc" />
+        </el-form-item>
+
+        <el-form-item label="Nội dung html" :label-width="formLabelWidth">
+          <el-input v-model="jobStore.editJobObject.htmlContent" style="width: 100%" :rows="2" type="textarea"
+            placeholder="Mô tả công việc" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="jobStore.dialogEditFormVisible = false">Huỷ</el-button>
+          <el-button type="primary" @click="jobStore.editJobObject">
+            Chỉnh sửa
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+    <!-- dialog init job -->
+
   </div>
 </template>
 
@@ -130,23 +186,14 @@ await jobStore.fetchJobs()
 await jobStore.fetchArea()
 
 const formLabelWidth = '140px'
-const form = reactive({
-  title: '',
-  summary: '',
-  description: '',
-  htmlContent: '',
-  imageUrl: '',
-  areaId: '',
-  expiredDate: '',
-})
-const dialogFormVisible = ref(false)
 const inputSearch = ref('')
 const value1 = ref('')
 const status = ref('')
 const area = ref('')
 
-const handleEdit = (index: number, row: Job) => {
-  console.log(index, row)
+const handleEdit = (index: number, job: Job) => {
+  console.log(index, job)
+  jobStore.editJob(job)
 }
 
 const handleDelete = (index: number, row: Job) => {
@@ -164,13 +211,21 @@ const handleCurrentChange = async (val: number) => {
   await jobStore.fetchJobs()
 }
 
-const handleInputChange = async (value: string) => {
+const handleInputSearchChange = async (value: string) => {
   jobStore.searchTearm = value
   await jobStore.fetchJobs()
 }
 
-const handleSelectChange = async (value: string) => {
-  jobStore.status = value
+const handleSelectChange = async (value: string, type: 'status' | 'area') => {
+
+  if (type === 'status') {
+    jobStore.status = value
+  }
+
+  if (type === 'area') {
+    jobStore.area = value
+  }
+
   await jobStore.fetchJobs()
 }
 </script>
