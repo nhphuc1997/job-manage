@@ -12,10 +12,16 @@
             end-placeholder="Ngày kết thúc" style="width: 95%;" />
         </el-col>
 
-        <el-col :span="6">
-          <el-select v-model="value" placeholder="Select" @change="(value) => handleSelectChange(value)">
+        <el-col :span="3">
+          <el-select v-model="status" placeholder="Trạng thái" @change="(value) => handleSelectChange(value)">
             <el-option v-for="item in jobStore.optionsStatus" :key="item.value" :label="item.label"
               :value="item.value" />
+          </el-select>
+        </el-col>
+
+        <el-col :span="3">
+          <el-select v-model="area" placeholder="Khu vực" @change="(value) => handleSelectChange(value)">
+            <el-option v-for="item in jobStore.optionsArea" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-col>
 
@@ -64,7 +70,7 @@
       </el-row>
     </div>
 
-    <el-dialog v-model="dialogFormVisible" title="Khởi tạo công việc" width="1000">
+    <el-dialog v-model="dialogFormVisible" title="Khởi tạo công việc" width="650">
       <el-form :model="form">
         <el-form-item label="Tên công việc" :label-width="formLabelWidth">
           <el-input v-model="form.title" autocomplete="off" placeholder="Tên công việc" />
@@ -72,7 +78,7 @@
 
         <el-form-item label="Khu vực" :label-width="formLabelWidth">
           <el-select v-model="form.areaId" placeholder="Khu vực">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+            <el-option v-for="item in jobStore.optionsArea" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
 
@@ -121,6 +127,7 @@ import type { Job } from '~/utils/interfaces';
 
 const jobStore = useJobStore()
 await jobStore.fetchJobs()
+await jobStore.fetchArea()
 
 const formLabelWidth = '140px'
 const form = reactive({
@@ -135,7 +142,8 @@ const form = reactive({
 const dialogFormVisible = ref(false)
 const inputSearch = ref('')
 const value1 = ref('')
-const value = ref('')
+const status = ref('')
+const area = ref('')
 
 const handleEdit = (index: number, row: Job) => {
   console.log(index, row)

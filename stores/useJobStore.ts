@@ -15,7 +15,8 @@ export const useJobStore = defineStore('useJobStore', {
       }
     ],
     searchTearm: '',
-    status: ''
+    status: '',
+    optionsArea: [] as any
   }),
   actions: {
     async fetchJobs() {
@@ -36,5 +37,12 @@ export const useJobStore = defineStore('useJobStore', {
       this.totalElements = jobs?.data?.totalElements
       this.currentPage = this.page + 1
     },
+
+    async fetchArea() {
+      const areas: any = await doGET(`http://18.141.39.162:8089/v1/api/job-manger/areas`)
+      this.optionsArea = areas?.data.content
+        .filter((item: any) => item.status === 'ACTIVE')
+        .map((element: any) => ({ value: element.code, label: element.name }))
+    }
   }
 })
