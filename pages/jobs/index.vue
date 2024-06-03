@@ -7,7 +7,7 @@
             placeholder="Tìm kiếm" :suffix-icon="ElIconSearch" />
         </el-col>
 
-        <el-col :span="9">
+        <el-col :span="6">
           <el-date-picker v-model="value1" type="daterange" range-separator="Đến" start-placeholder="Ngày bắt đầu"
             end-placeholder="Ngày kết thúc" style="width: 95%;" />
         </el-col>
@@ -26,6 +26,11 @@
         </el-col>
 
         <el-col :span="3">
+          <el-button @click="jobStore.resetFilter" plain style="width: 100%;" type="info" :icon="ElIconMug">Xoá bộ
+            lọc</el-button>
+        </el-col>
+
+        <el-col :span="3">
           <el-button @click="jobStore.dialogNewFormVisible = true" plain style="width: 100%;" type="success"
             :icon="ElIconWindPower">Tạo công việc</el-button>
         </el-col>
@@ -34,28 +39,26 @@
     </div>
 
     <div class="infor">
-      <el-scrollbar height="calc(100% - 100px)">
-        <el-table ref="tableRef" row-key="date" :data="jobStore.jobs" style="width: 100%" :border="true">
-          {jobStore.jobs}
-          <el-table-column prop="id" label="Id" sortable width="80" align="center" />
-          <el-table-column prop="title" label="Tên" sortable />
-          <el-table-column prop="summary" label="Tóm tắt" sortable />
-          <el-table-column prop="imageUrl" label="Hình ảnh Url" sortable />
-          <el-table-column prop="areaId" label="Khu vực" sortable align="center" />
-          <el-table-column prop="expiredDate" label="Ngày hết hạn" sortable />
-          <el-table-column prop="status" label="Trạng thái" sortable align="center" />
-          <el-table-column align="center" width="200">
-            <template #default="scope">
-              <el-button :icon="ElIconEditPen" size="small" @click="handleEdit(scope.$index, scope.row)">
-                Chỉnh sửa
-              </el-button>
-              <el-button :icon="ElIconDelete" size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">
-                Xoá
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-scrollbar>
+      <el-table ref="tableRef" row-key="date" :data="jobStore.jobs" style="width: 100%" :border="true" height="600">
+        {jobStore.jobs}
+        <el-table-column prop="id" label="Id" sortable width="80" align="center" />
+        <el-table-column prop="title" label="Tên" sortable />
+        <el-table-column prop="summary" label="Tóm tắt" sortable />
+        <el-table-column prop="imageUrl" label="Hình ảnh Url" sortable />
+        <el-table-column prop="areaId" label="Khu vực" sortable align="center" />
+        <el-table-column prop="expiredDate" label="Ngày hết hạn" sortable />
+        <el-table-column prop="status" label="Trạng thái" sortable align="center" />
+        <el-table-column align="center" width="200">
+          <template #default="scope">
+            <el-button :icon="ElIconEditPen" size="small" @click="handleEdit(scope.$index, scope.row)">
+              Chỉnh sửa
+            </el-button>
+            <el-button :icon="ElIconDelete" size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">
+              Xoá
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
 
     <div class="footer">
@@ -118,7 +121,7 @@
     </el-dialog>
     <!-- dialog init job -->
 
-    <!-- dialog init job -->
+    <!-- dialog edit job -->
     <el-dialog v-model="jobStore.dialogEditFormVisible" title="Chỉnh sửa công việc" width="650">
       <el-form :model="jobStore.editJobObject">
         <el-form-item label="Tên công việc" :label-width="formLabelWidth">
@@ -164,7 +167,7 @@
         </div>
       </template>
     </el-dialog>
-    <!-- dialog init job -->
+    <!-- dialog edit job -->
 
   </div>
 </template>

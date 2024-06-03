@@ -1,5 +1,6 @@
 import type { Job } from "~/utils/interfaces"
-import { doGET } from "~/utils/apis"
+import { doGET, doPOST } from "~/utils/apis"
+import { dayjs } from "element-plus"
 
 export const useJobStore = defineStore('useJobStore', {
   state: () => ({
@@ -62,7 +63,24 @@ export const useJobStore = defineStore('useJobStore', {
     },
 
     async createJob() {
-      console.log(JSON.stringify(this.newJobObject));
+      const payload = this.newJobObject
+      payload['expiredDate'] = dayjs(payload['expiredDate']).format('DD/MM/YYYY hh:mm:ss').toString()
+      const jobs: any = await doPOST(`http://18.141.39.162:8089/v1/api/job-manger/jobs`, this.newJobObject)
+
+      if (jobs.code === '00') {
+        ElNotification({
+          message: 'Tạo mới công việc thành công',
+          type: 'success',
+        })
+        this.fetchJobs()
+        this.resetNewJob()
+        return
+      }
+      ElNotification({
+        message: 'Tạo mới công việc thất bại',
+        type: 'error',
+      })
+      this.resetNewJob()
     },
 
     resetNewJob() {
@@ -75,6 +93,13 @@ export const useJobStore = defineStore('useJobStore', {
         description: '',
         htmlContent: ''
       }
+    },
+
+    async resetFilter() {
+      this.searchTearm = ''
+      this.status = ''
+      this.area = ''
+      await this.fetchJobs()
     },
 
     editJob(jobPayload: Job) {

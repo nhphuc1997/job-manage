@@ -20,6 +20,8 @@
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.9",
+    "@nuxtjs/moment": "^1.6.1",
+    "dayjs-nuxt": "^2.1.9",
     "sass": "^1.77.4"
   }
 }

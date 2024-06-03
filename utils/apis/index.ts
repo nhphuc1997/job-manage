@@ -6,7 +6,7 @@ export const doGET = async (url: string, params?: any, query?: any) => {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzQzMzY5NCwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.G4lgyYf8YGKyORsZEJTbi4L90XfWrun7sQcypO2WMi4`,
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzQ2OTgyNiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.PAA2HQiEDZygwbHYZJhH9PlXrnz_lo4wY7IpuBB7FvQ`,
       },
       method: 'GET',
       params: params,
@@ -26,16 +26,37 @@ export const doGET = async (url: string, params?: any, query?: any) => {
 export const doPOST = async (url: string, payload: any) => {
   const accessToken = useCookie("accessToken")
   const { data, error } = await useFetch(
-    `http://18.141.39.162:8089/${url}`,
+    url,
     {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${accessToken.value}`,
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzQ2OTgyNiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.PAA2HQiEDZygwbHYZJhH9PlXrnz_lo4wY7IpuBB7FvQ`,
       },
       method: 'POST',
       body: payload,
+    }
+  )
 
+  if (error.value?.message) {
+    return ElNotification(error.value?.message)
+  }
+
+  return data?.value
+}
+
+export const doPATCH = async (url: string, payload: any) => {
+  const accessToken = useCookie("accessToken")
+  const { data, error } = await useFetch(
+    url,
+    {
+      headers: {
+        "Accept-Language": "en-US",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzQ2OTgyNiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.PAA2HQiEDZygwbHYZJhH9PlXrnz_lo4wY7IpuBB7FvQ`,
+      },
+      method: 'PATCH',
+      body: payload,
     }
   )
 
