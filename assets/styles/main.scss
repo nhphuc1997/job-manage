@@ -1,5 +1,11 @@
+@font-face {
+  font-family: 'Mulish';
+  src: url('/fonts/Mulish-Regular.ttf') format('truetype');
+}
+
 html,
 body {
+  font-family: 'Mulish', sans-serif;
   margin: 0px;
   padding: 0px;
   width: 100%;
@@ -22,6 +28,7 @@ body {
 
   .section-container {
     height: calc(100% - 40px);
+    border-top: 1px solid var(--el-menu-border-color);
   }
 
   .section-header {

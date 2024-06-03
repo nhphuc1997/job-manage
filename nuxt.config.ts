@@ -6,4 +6,7 @@ export default defineNuxtConfig({
   elementPlus: {},
   devtools: { enabled: false },
   css: [`~/assets/styles/main.scss`],
+  devServer: {
+    port: 9000
+  }
 })
