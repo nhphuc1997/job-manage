@@ -3,7 +3,8 @@
     <div class="create">
       <el-row :gutter="12">
         <el-col :span="6">
-          <el-input v-model="input1" placeholder="Tìm kiếm" :suffix-icon="ElIconSearch" />
+          <el-input v-model="inputSearch" @change="(value: string) => handleInputChange(value)" placeholder="Tìm kiếm"
+            :suffix-icon="ElIconSearch" />
         </el-col>
 
         <el-col :span="9">
@@ -12,8 +13,9 @@
         </el-col>
 
         <el-col :span="6">
-          <el-select v-model="value" placeholder="Select">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+          <el-select v-model="value" placeholder="Select" @change="(value) => handleSelectChange(value)">
+            <el-option v-for="item in jobStore.optionsStatus" :key="item.value" :label="item.label"
+              :value="item.value" />
           </el-select>
         </el-col>
 
@@ -27,14 +29,15 @@
 
     <div class="infor">
       <el-scrollbar height="calc(100% - 100px)">
-        <el-table ref="tableRef" row-key="date" :data="tableData" style="width: 100%" :border="true">
-          <el-table-column prop="id" label="Id" sortable />
+        <el-table ref="tableRef" row-key="date" :data="jobStore.jobs" style="width: 100%" :border="true">
+          {jobStore.jobs}
+          <el-table-column prop="id" label="Id" sortable width="80" align="center" />
           <el-table-column prop="title" label="Tên" sortable />
           <el-table-column prop="summary" label="Tóm tắt" sortable />
           <el-table-column prop="imageUrl" label="Hình ảnh Url" sortable />
-          <el-table-column prop="areaId" label="Khu vực" sortable />
+          <el-table-column prop="areaId" label="Khu vực" sortable align="center" />
           <el-table-column prop="expiredDate" label="Ngày hết hạn" sortable />
-          <el-table-column prop="status" label="Trạng thái" sortable />
+          <el-table-column prop="status" label="Trạng thái" sortable align="center" />
           <el-table-column align="center" width="200">
             <template #default="scope">
               <el-button :icon="ElIconEditPen" size="small" @click="handleEdit(scope.$index, scope.row)">
@@ -53,9 +56,9 @@
       <el-row>
         <el-col :span="24">
           <div class="paginate">
-            <el-pagination v-model:current-page="currentPage4" v-model:page-size="pageSize4"
-              :page-sizes="[100, 200, 300, 400]" :small="small" layout="total, sizes, prev, pager, next, jumper"
-              :total="400" />
+            <el-pagination v-model:current-page="jobStore.currentPage" v-model:page-size="jobStore.size"
+              :page-sizes="[5, 50, 100]" layout="total, sizes, prev, pager, next, jumper"
+              :total="jobStore.totalElements" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
           </div>
         </el-col>
       </el-row>
@@ -114,10 +117,11 @@ definePageMeta({
 })
 
 import { ref } from 'vue'
-import type { TableInstance } from 'element-plus'
 import type { Job } from '~/utils/interfaces';
 
-const dialogFormVisible = ref(false)
+const jobStore = useJobStore()
+await jobStore.fetchJobs()
+
 const formLabelWidth = '140px'
 const form = reactive({
   title: '',
@@ -128,24 +132,10 @@ const form = reactive({
   areaId: '',
   expiredDate: '',
 })
-const currentPage4 = ref(4)
-const pageSize4 = ref(100)
-const small = ref(false)
-const input1 = ref('')
+const dialogFormVisible = ref(false)
+const inputSearch = ref('')
 const value1 = ref('')
 const value = ref('')
-const options = [
-  {
-    value: 'Option4',
-    label: 'Option4',
-  },
-]
-
-const tableData: Job[] = [
-
-]
-
-const tableRef = ref<TableInstance>()
 
 const handleEdit = (index: number, row: Job) => {
   console.log(index, row)
@@ -155,4 +145,24 @@ const handleDelete = (index: number, row: Job) => {
   console.log(index, row)
 }
 
+const handleSizeChange = async (val: number) => {
+  jobStore.size = val
+  await jobStore.fetchJobs()
+}
+
+const handleCurrentChange = async (val: number) => {
+  jobStore.page = val
+  jobStore.currentPage - 1
+  await jobStore.fetchJobs()
+}
+
+const handleInputChange = async (value: string) => {
+  jobStore.searchTearm = value
+  await jobStore.fetchJobs()
+}
+
+const handleSelectChange = async (value: string) => {
+  jobStore.status = value
+  await jobStore.fetchJobs()
+}
 </script>
