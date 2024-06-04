@@ -3,7 +3,7 @@ export interface Job {
   updatedAt?: string,
   createdBy?: string,
   lastModifiedBy?: string,
-  id?: number,
+  id?: number | null,
   title?: string,
   summary?: string,
   description?: string,

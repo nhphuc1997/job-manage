@@ -1,5 +1,5 @@
 import type { Job } from "~/utils/interfaces"
-import { doGET, doPOST } from "~/utils/apis"
+import { doGET, doPATCH, doPOST, doPUT } from "~/utils/apis"
 import { dayjs } from "element-plus"
 
 export const useJobStore = defineStore('useJobStore', {
@@ -29,6 +29,8 @@ export const useJobStore = defineStore('useJobStore', {
     dialogNewFormVisible: false,
     dialogEditFormVisible: false,
     dialogViewFormVisible: false,
+    dialogEditStatusFormVisible: false,
+    jobStatusEdit: ''
   }),
   actions: {
     async fetchJobs() {
@@ -97,6 +99,20 @@ export const useJobStore = defineStore('useJobStore', {
       }
     },
 
+    resetEditJob() {
+      this.newJobObject = {
+        id: null,
+        title: '',
+        summary: '',
+        imageUrl: '',
+        areaId: '',
+        expiredDate: '',
+        description: '',
+        htmlContent: '',
+        status: ''
+      }
+    },
+
     async resetFilter() {
       this.searchTearm = ''
       this.status = ''
@@ -104,11 +120,17 @@ export const useJobStore = defineStore('useJobStore', {
       await this.fetchJobs()
     },
 
-    editJob(jobPayload: Job) {
+    editJob(jobPayload: Job, kind: 'edit_job_attr' | 'edit_job_status') {
+      if (kind === 'edit_job_status') {
+        this.dialogEditStatusFormVisible = true
+      }
+
+      if (kind === 'edit_job_attr') {
+        this.dialogEditFormVisible = true
+      }
+
       const expiredDate = jobPayload.expiredDate.split('/')
       const newDate = expiredDate[1] + '/' + expiredDate[0] + '/' + expiredDate[2];
-
-      this.dialogEditFormVisible = true
       this.editJobObject = {
         id: jobPayload.id,
         title: jobPayload.title,
@@ -120,6 +142,25 @@ export const useJobStore = defineStore('useJobStore', {
         htmlContent: jobPayload.htmlContent,
         status: jobPayload.status
       }
+    },
+
+    async updateJob() {
+      const payload = this.editJobObject
+      const id = this.editJobObject.id
+      delete payload['id']
+      delete payload['status']
+      payload['expiredDate'] = dayjs(this.editJobObject.expiredDate).format('DD/MM/YYYY hh:mm:ss').toString()
+      console.log(JSON.stringify(payload));
+      await doPUT(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${id}`, payload)
+      this.dialogEditFormVisible = false
+      await this.fetchJobs()
+    },
+
+    async editStatus() {
+      const payload = this.editJobObject
+      await doPATCH(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${payload.id}`, { status: this.jobStatusEdit })
+      await this.fetchJobs()
+      this.dialogEditStatusFormVisible = false
     },
 
     async detailJob(job: Job) {

@@ -68,7 +68,8 @@
               </el-col>
 
               <el-col :span="12">
-                <el-button type="primary" :icon="ElIconEditPen" size="small" plain />
+                <el-button type="primary" :icon="ElIconEditPen" size="small" plain
+                  @click="handleEditStatus(scope.$index, scope.row)" />
               </el-col>
             </el-row>
           </template>
@@ -182,7 +183,7 @@
 
         <el-form-item label="Nội dung html" :label-width="formLabelWidth">
           <el-input v-model="jobStore.newJobObject.htmlContent" style="width: 100%" :rows="2" type="textarea"
-            placeholder="Mô tả công việc" />
+            placeholder="Nội dung html" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -236,7 +237,29 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="jobStore.dialogEditFormVisible = false">Huỷ</el-button>
-          <el-button type="primary" @click="jobStore.editJobObject">
+          <el-button type="primary" @click="jobStore.updateJob">
+            Chỉnh sửa
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+    <!-- dialog edit job -->
+
+    <!-- dialog edit job's status -->
+    <el-dialog v-model="jobStore.dialogEditStatusFormVisible" title="Chỉnh sửa trạng thái công việc" width="450">
+      <el-form :model="jobStore.detailJobObject">
+        <el-form-item label="Trạng thái" :label-width="formLabelWidth">
+          <el-select v-model="jobStore.jobStatusEdit">
+            <el-option v-for="item in jobStore.optionsStatus" :key="item.value" :label="item.label"
+              :value="item.value" />
+          </el-select>
+        </el-form-item>
+
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="jobStore.dialogEditStatusFormVisible = false">Huỷ</el-button>
+          <el-button type="primary" @click="jobStore.editStatus">
             Chỉnh sửa
           </el-button>
         </div>
@@ -271,7 +294,12 @@ const area = ref('')
 
 const handleEdit = (index: number, job: Job) => {
   console.log(index, job)
-  jobStore.editJob(job)
+  jobStore.editJob(job, 'edit_job_attr')
+}
+
+const handleEditStatus = (index: number, job: Job) => {
+  console.log(index, job)
+  jobStore.editJob(job, 'edit_job_status')
 }
 
 const handleView = async (index: number, job: Job) => {
