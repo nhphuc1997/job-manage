@@ -7,7 +7,7 @@
     <JobDialogView />
     <JobDialogCreate />
     <JobDialogEdit />
-    <JobDialoEditStatus />
+    <JobDialogEditStatus />
 
   </div>
 </template>

@@ -22,7 +22,7 @@ export const useJobStore = defineStore('useJobStore', {
       viewJob: {} as Job,
       newJob: {} as Job,
       editAttrJob: {} as Job,
-      editStatusJob: { id: null, status: null },
+      editStatusJob: { id: '', status: '' },
       area: [] as any,
       listStatus: [
         { value: 'ACTIVE', label: 'active' },

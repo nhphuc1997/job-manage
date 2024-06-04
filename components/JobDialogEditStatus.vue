@@ -1,8 +1,13 @@
 <template>
   <el-dialog v-model="jobStore.dialog.editJobStatusVisible" title="Chỉnh sửa trạng thái công việc" width="450">
     <el-form :model="jobStore.data.editStatusJob">
+
+      <el-form-item label="Id" :label-width="formLabelWidth">
+        <el-text type="info">{{ jobStore.data.editStatusJob.id }}</el-text>
+      </el-form-item>
+
       <el-form-item label="Trạng thái" :label-width="formLabelWidth">
-        <el-select v-model="jobStore.data.editStatusJob">
+        <el-select v-model="jobStore.data.editStatusJob.status">
           <template>
             <el-text>{{ jobStore.data.editStatusJob.status }}</el-text>
           </template>
