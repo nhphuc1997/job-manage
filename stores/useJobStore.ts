@@ -24,9 +24,11 @@ export const useJobStore = defineStore('useJobStore', {
     area: '',
     optionsArea: [] as any,
     newJobObject: {} as Job,
-    dialogNewFormVisible: false,
     editJobObject: {} as Job,
+    detailJobObject: {} as Job,
+    dialogNewFormVisible: false,
     dialogEditFormVisible: false,
+    dialogViewFormVisible: false,
   }),
   actions: {
     async fetchJobs() {
@@ -118,6 +120,11 @@ export const useJobStore = defineStore('useJobStore', {
         htmlContent: jobPayload.htmlContent,
         status: jobPayload.status
       }
+    },
+
+    async detailJob(job: Job) {
+      const jobs: any = await doGET(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${job.id}`)
+      this.detailJobObject = jobs?.data
     }
   }
 })

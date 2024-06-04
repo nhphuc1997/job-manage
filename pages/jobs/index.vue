@@ -44,7 +44,13 @@
         <el-table-column prop="id" label="Id" sortable width="80" align="center" />
         <el-table-column prop="title" label="Tên" sortable />
         <el-table-column prop="summary" label="Tóm tắt" sortable />
-        <el-table-column prop="imageUrl" label="Hình ảnh Url" sortable />
+        <el-table-column prop="imageUrl" label="Hình ảnh Url" sortable>
+          <template #default="scope">
+            <el-text type="primary">
+              {{ scope.row.imageUrl }}
+            </el-text>
+          </template>
+        </el-table-column>
         <el-table-column prop="areaId" label="Khu vực" sortable align="center" />
         <el-table-column prop="expiredDate" label="Ngày hết hạn" sortable />
         <el-table-column prop="status" label="Trạng thái" sortable align="center">
@@ -70,7 +76,7 @@
         <el-table-column align="center" width="150">
           <template #default="scope">
             <el-button :icon="ElIconEdit" size="small" @click="handleEdit(scope.$index, scope.row)" />
-            <el-button plain :icon="ElIconView" size="small" @click="handleDelete(scope.$index, scope.row)" />
+            <el-button plain :icon="ElIconView" size="small" @click="handleView(scope.$index, scope.row)" />
           </template>
         </el-table-column>
       </el-table>
@@ -87,6 +93,60 @@
         </el-col>
       </el-row>
     </div>
+
+    <!-- dialog view job -->
+    <el-dialog v-model="jobStore.dialogViewFormVisible" title="Chi tiết công việc" width="800">
+      <el-form :model="jobStore.detailJobObject">
+        <el-form-item label="Id" :label-width="formLabelWidth">
+          <el-input disabled v-model="jobStore.detailJobObject.id" autocomplete="off" />
+        </el-form-item>
+
+        <el-form-item label="Tên công việc" :label-width="formLabelWidth">
+          <el-input disabled v-model="jobStore.detailJobObject.title" autocomplete="off" />
+        </el-form-item>
+
+        <el-form-item label="URL hình ảnh" :label-width="formLabelWidth">
+          <el-input disabled v-model="jobStore.detailJobObject.imageUrl" autocomplete="off" />
+        </el-form-item>
+
+        <el-form-item label="Khu vực" :label-width="formLabelWidth">
+          <el-select disabled v-model="jobStore.detailJobObject.areaId">
+            <el-option v-for="item in jobStore.optionsArea" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="Ngày hết hạn" :label-width="formLabelWidth">
+          <el-date-picker disabled style="width: 100%;" v-model="jobStore.detailJobObject.expiredDate" type="date" />
+        </el-form-item>
+
+        <el-form-item label="Tóm tắt công việc" :label-width="formLabelWidth">
+          <el-input disabled v-model="jobStore.detailJobObject.summary" style="width: 100%" :rows="2" type="textarea" />
+        </el-form-item>
+
+        <el-form-item label="Mô tả công việc" :label-width="formLabelWidth">
+          <el-input disabled v-model="jobStore.detailJobObject.description" style="width: 100%" :rows="2"
+            type="textarea" />
+        </el-form-item>
+
+        <el-form-item label="Nội dung html" :label-width="formLabelWidth">
+          <el-input disabled v-model="jobStore.detailJobObject.htmlContent" style="width: 100%" :rows="2"
+            type="textarea" />
+        </el-form-item>
+
+        <el-form-item label="Tạo mới lúc" :label-width="formLabelWidth">
+          <el-input disabled v-model="jobStore.detailJobObject.createdAt" style="width: 100%" :rows="2" />
+        </el-form-item>
+
+        <el-form-item label="Cập nhập lúc" :label-width="formLabelWidth">
+          <el-input disabled v-model="jobStore.detailJobObject.updatedAt" style="width: 100%" :rows="2" />
+        </el-form-item>
+
+        <el-form-item label="Người tạo" :label-width="formLabelWidth">
+          <el-input disabled v-model="jobStore.detailJobObject.createdBy" style="width: 100%" :rows="2" />
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+    <!-- dialog init job -->
 
     <!-- dialog init job -->
     <el-dialog v-model="jobStore.dialogNewFormVisible" title="Khởi tạo công việc" width="650">
@@ -214,8 +274,10 @@ const handleEdit = (index: number, job: Job) => {
   jobStore.editJob(job)
 }
 
-const handleDelete = (index: number, row: Job) => {
-  console.log(index, row)
+const handleView = async (index: number, job: Job) => {
+  console.log(index, job)
+  await jobStore.detailJob(job)
+  jobStore.dialogViewFormVisible = true
 }
 
 const handleSizeChange = async (val: number) => {

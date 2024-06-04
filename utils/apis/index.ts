@@ -6,7 +6,7 @@ export const doGET = async (url: string, params?: any, query?: any) => {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzQ2OTgyNiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.PAA2HQiEDZygwbHYZJhH9PlXrnz_lo4wY7IpuBB7FvQ`,
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzU1MDM2MywiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.HywhcHuhSVgsiIp0URJZ5y8lTsAAMuy_bt0bS8T0k7M`,
       },
       method: 'GET',
       params: params,
@@ -31,7 +31,7 @@ export const doPOST = async (url: string, payload: any) => {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzQ2OTgyNiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.PAA2HQiEDZygwbHYZJhH9PlXrnz_lo4wY7IpuBB7FvQ`,
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzU1MDM2MywiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.HywhcHuhSVgsiIp0URJZ5y8lTsAAMuy_bt0bS8T0k7M`,
       },
       method: 'POST',
       body: payload,
@@ -53,7 +53,7 @@ export const doPATCH = async (url: string, payload: any) => {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzQ2OTgyNiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.PAA2HQiEDZygwbHYZJhH9PlXrnz_lo4wY7IpuBB7FvQ`,
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzU1MDM2MywiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.HywhcHuhSVgsiIp0URJZ5y8lTsAAMuy_bt0bS8T0k7M`,
       },
       method: 'PATCH',
       body: payload,
