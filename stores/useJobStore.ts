@@ -122,6 +122,7 @@ export const useJobStore = defineStore('useJobStore', {
 
     editJob(jobPayload: Job, kind: 'edit_job_attr' | 'edit_job_status') {
       if (kind === 'edit_job_status') {
+        this.jobStatusEdit = jobPayload.status || 'INACTIVE'
         this.dialogEditStatusFormVisible = true
       }
 

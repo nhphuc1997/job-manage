@@ -250,6 +250,9 @@
       <el-form :model="jobStore.detailJobObject">
         <el-form-item label="Trạng thái" :label-width="formLabelWidth">
           <el-select v-model="jobStore.jobStatusEdit">
+            <template>
+              <el-text>{{ jobStore.optionsStatus }}</el-text>
+            </template>
             <el-option v-for="item in jobStore.optionsStatus" :key="item.value" :label="item.label"
               :value="item.value" />
           </el-select>
