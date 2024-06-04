@@ -103,6 +103,9 @@ export const useJobStore = defineStore('useJobStore', {
     },
 
     editJob(jobPayload: Job) {
+      const expiredDate = jobPayload.expiredDate.split('/')
+      const newDate = expiredDate[1] + '/' + expiredDate[0] + '/' + expiredDate[2];
+
       this.dialogEditFormVisible = true
       this.editJobObject = {
         id: jobPayload.id,
@@ -110,7 +113,7 @@ export const useJobStore = defineStore('useJobStore', {
         summary: jobPayload.summary,
         imageUrl: jobPayload.imageUrl,
         areaId: jobPayload.areaId,
-        expiredDate: jobPayload.expiredDate,
+        expiredDate: dayjs(newDate).toISOString(),
         description: jobPayload.description,
         htmlContent: jobPayload.htmlContent,
         status: jobPayload.status
