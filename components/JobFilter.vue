@@ -13,13 +13,14 @@
 
       <el-col :span="3">
         <el-select v-model="jobStore.filter.status" placeholder="Trạng thái" @change="jobStore.fetchJobs">
-          <el-option v-for="item in jobStore.optionsStatus" :key="item.value" :label="item.label" :value="item.value" />
+          <el-option v-for="item in jobStore.data.listStatus" :key="item.value" :label="item.label"
+            :value="item.value" />
         </el-select>
       </el-col>
 
       <el-col :span="3">
         <el-select v-model="jobStore.filter.area" placeholder="Khu vực" @change="jobStore.fetchJobs">
-          <el-option v-for="item in jobStore.optionsArea" :key="item.value" :label="item.label" :value="item.value" />
+          <el-option v-for="item in jobStore.data.area" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-col>
 

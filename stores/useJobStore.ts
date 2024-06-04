@@ -118,6 +118,13 @@ export const useJobStore = defineStore('useJobStore', {
     async editStatusJob() {
       const { id, status } = this.data.editStatusJob
       await doPUT(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${id}`, { status })
-    }
+    },
+    async resetFilter() {
+      this.filter.search = ''
+      this.filter.date = ''
+      this.filter.status = ''
+      this.filter.area = ''
+      await this.fetchJobs()
+    },
   }
 })
