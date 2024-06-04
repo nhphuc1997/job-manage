@@ -15,7 +15,7 @@
 
       <el-form-item label="Khu vực" :label-width="formLabelWidth">
         <el-select disabled v-model="jobStore.data.viewJob.areaId">
-          <el-option v-for="item in jobStore.optionsArea" :key="item.value" :label="item.label" :value="item.value" />
+          <el-option v-for="item in jobStore.data.area" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
 

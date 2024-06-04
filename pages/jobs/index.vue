@@ -6,12 +6,13 @@
 
     <JobDialogView />
     <JobDialogCreate />
+    <JobDialogEdit />
 
     <!-- dialog edit job's status -->
-    <el-dialog v-model="jobStore.dialogEditStatusFormVisible" title="Chỉnh sửa trạng thái công việc" width="450">
-      <el-form :model="jobStore.detailJobObject">
+    <el-dialog v-model="jobStore.dialog.editJobStatusVisible" title="Chỉnh sửa trạng thái công việc" width="450">
+      <el-form :model="jobStore.data.editStatusJob">
         <el-form-item label="Trạng thái" :label-width="formLabelWidth">
-          <el-select v-model="jobStore.jobStatusEdit">
+          <el-select v-model="jobStore.data.editStatusJob">
             <template>
               <el-text>{{ jobStore.optionsStatus }}</el-text>
             </template>
@@ -23,7 +24,7 @@
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button @click="jobStore.dialogEditStatusFormVisible = false">Huỷ</el-button>
+          <el-button @click="jobStore.dialog.editJobStatusVisible = false">Huỷ</el-button>
           <el-button type="primary" @click="jobStore.editStatus">
             Chỉnh sửa
           </el-button>
@@ -44,28 +45,8 @@ definePageMeta({
   layout: 'default'
 })
 
-import { ref } from 'vue'
-import type { Job } from '~/utils/interfaces';
-
 const jobStore = useJobStore()
 await jobStore.fetchJobs()
 await jobStore.fetchArea()
 
-const formLabelWidth = '140px'
-
-const handleEdit = (index: number, job: Job) => {
-  console.log(index, job)
-  jobStore.editJob(job, 'edit_job_attr')
-}
-
-const handleEditStatus = (index: number, job: Job) => {
-  console.log(index, job)
-  jobStore.editJob(job, 'edit_job_status')
-}
-
-const handleView = async (index: number, job: Job) => {
-  console.log(index, job)
-  await jobStore.detailJob(job)
-  jobStore.dialogViewFormVisible = true
-}
 </script>
