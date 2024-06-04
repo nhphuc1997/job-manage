@@ -24,6 +24,10 @@ export const useJobStore = defineStore('useJobStore', {
       editAttrJob: {} as Job,
       editStatusJob: { id: null, status: null },
       area: [] as any,
+      listStatus: [
+        { value: 'ACTIVE', label: 'active' },
+        { value: 'INACTIVE', label: 'in active' },
+      ]
     },
     dialog: {
       createJobVisible: false,
