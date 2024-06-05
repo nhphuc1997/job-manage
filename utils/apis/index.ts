@@ -6,7 +6,7 @@ export const doGET = async (url: string, params?: any, query?: any) => {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzU4OTM1NywiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.pcckZ_wpX3PK4H2Xz1N4-slQp_MYCI4pb-5dY2tnIPg`,
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzYyNzc2MiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.Ut0rBARJ--pWiMLkveocIa2ALxNS-quFzAswsfeJ7SY`,
       },
       method: 'GET',
       params: params,
@@ -31,7 +31,7 @@ export const doPOST = async (url: string, payload: any) => {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzU4OTM1NywiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.pcckZ_wpX3PK4H2Xz1N4-slQp_MYCI4pb-5dY2tnIPg`,
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzYyNzc2MiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.Ut0rBARJ--pWiMLkveocIa2ALxNS-quFzAswsfeJ7SY`,
       },
       method: 'POST',
       body: payload,
@@ -53,7 +53,7 @@ export const doPUT = async (url: string, payload: any) => {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzU4OTM1NywiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.pcckZ_wpX3PK4H2Xz1N4-slQp_MYCI4pb-5dY2tnIPg`,
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzYyNzc2MiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.Ut0rBARJ--pWiMLkveocIa2ALxNS-quFzAswsfeJ7SY`,
       },
       method: 'PUT',
       body: payload,
@@ -75,7 +75,7 @@ export const doPATCH = async (url: string, payload: any) => {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzU4OTM1NywiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.pcckZ_wpX3PK4H2Xz1N4-slQp_MYCI4pb-5dY2tnIPg`,
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZWN1cmVkLWFwaSIsImF1ZCI6InNlY3VyZWQtYXBwIiwic3ViIjoidXNlcl9hZG1pbiIsImV4cCI6MTcxNzYyNzc2MiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdfQ.Ut0rBARJ--pWiMLkveocIa2ALxNS-quFzAswsfeJ7SY`,
       },
       method: 'PATCH',
       body: payload,
