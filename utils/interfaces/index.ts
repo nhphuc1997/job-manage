@@ -41,7 +41,7 @@ export interface Resume {
   status: string
 }
 
-export interface ApplyJob {
+export interface JobConfirm {
   createdAt: string,
   updatedAt: string,
   createdBy: string,

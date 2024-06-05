@@ -1,6 +1,5 @@
-import type { Area, Job } from "~/utils/interfaces"
+import type { Area } from "~/utils/interfaces"
 import { doGET, doPATCH, doPOST, doPUT } from "~/utils/apis"
-import { stringToDate } from "~/utils"
 
 export const useAreaStore = defineStore('useAreaStore', {
   state: () => ({
