@@ -1,5 +1,5 @@
 import type { Job } from "~/utils/interfaces"
-import { doGET, doPOST, doPUT } from "~/utils/apis"
+import { doGET, doPATCH, doPOST, doPUT } from "~/utils/apis"
 import { dayjs } from "element-plus"
 import { stringToDate } from "~/utils"
 
@@ -100,9 +100,10 @@ export const useJobStore = defineStore('useJobStore', {
       const jobs: any = await doPOST(`http://18.141.39.162:8089/v1/api/job-manger/jobs`, this.data.newJob)
       if (jobs.code === '00') {
         ElNotification({ message: 'Tạo mới công việc thành công', type: 'success' })
+        this.data.newJob = {} as Job
+        this.dialog.createJobVisible = false
+        await this.fetchJobs()
         return
-      } else {
-        ElNotification({ message: 'Tạo mới công việc thất bại', type: 'error', })
       }
       this.fetchJobs()
       this.data.newJob = {} as Job
@@ -117,7 +118,9 @@ export const useJobStore = defineStore('useJobStore', {
     },
     async editStatusJob() {
       const { id, status } = this.data.editStatusJob
-      await doPUT(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${id}`, { status })
+      await doPATCH(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${id}`, { status: status })
+      this.dialog.editJobStatusVisible = false
+      await this.fetchJobs()
     },
     async resetFilter() {
       this.filter.search = ''

@@ -11,7 +11,7 @@
 
       <el-form-item label="Khu vực" :label-width="formLabelWidth">
         <el-select v-model="jobStore.data.newJob.areaId" placeholder="Khu vực">
-          <el-option v-for="item in jobStore.optionsArea" :key="item.value" :label="item.label" :value="item.value" />
+          <el-option v-for="item in jobStore.data.area" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
 
@@ -37,7 +37,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="jobStore.dialogNewFormVisible = false">Huỷ</el-button>
+        <el-button @click="jobStore.dialog.createJobVisible = false">Huỷ</el-button>
         <el-button type="primary" @click="jobStore.createJob">
           Tạo mới
         </el-button>
