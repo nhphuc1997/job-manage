@@ -5,8 +5,6 @@
     <SmsPagination />
 
     <SmsDialogView />
-    <SmsDialogCreate />
-
   </div>
 </template>
 

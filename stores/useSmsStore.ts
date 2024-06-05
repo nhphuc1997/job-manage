@@ -64,19 +64,6 @@ export const useSmsStore = defineStore('useSmsStore', {
       this.metadata.currentPage - 1
       await this.fetchSms()
     },
-    async createJob() {
-      const { senderName, senderPhone, content, receivedDate } = this.data.newSms
-      const sms: any = await doPOST(`v1/api/job-manger/sms`, { senderName, senderPhone, content, receivedDate })
-
-      if (sms.code === '00') {
-        ElNotification({ message: 'Tạo mới tin nhắn thành công', type: 'success' })
-        this.data.newSms = {} as Sms
-        this.dialog.createSmsVisible = false
-        await this.fetchSms()
-        return
-      }
-    },
-
     async resetFilter() {
       this.filter.userId = ''
       this.filter.content = ''
