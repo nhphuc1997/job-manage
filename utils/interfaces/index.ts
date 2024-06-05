@@ -20,3 +20,14 @@ export interface Area {
   status: string,
   id: string
 }
+
+export interface Sms {
+  id: number,
+  userId: number,
+  senderName: string,
+  senderPhone: string,
+  content: string,
+  userName: string,
+  receivedDate: string,
+  createdDate: string
+}
