@@ -1,7 +1,7 @@
 export const doGET = async (url: string, params?: any, query?: any) => {
   const accessToken = useCookie("accessToken")
   const { data, error } = await useFetch(
-    url,
+    `http://18.141.39.162:8089/${url}`,
     {
       headers: {
         "Accept-Language": "en-US",
@@ -26,7 +26,7 @@ export const doGET = async (url: string, params?: any, query?: any) => {
 export const doPOST = async (url: string, payload: any) => {
   const accessToken = useCookie("accessToken")
   const { data, error } = await useFetch(
-    url,
+    `http://18.141.39.162:8089/${url}`,
     {
       headers: {
         "Accept-Language": "en-US",
@@ -48,7 +48,7 @@ export const doPOST = async (url: string, payload: any) => {
 export const doPUT = async (url: string, payload: any) => {
   const accessToken = useCookie("accessToken")
   const { data, error } = await useFetch(
-    url,
+    `http://18.141.39.162:8089/${url}`,
     {
       headers: {
         "Accept-Language": "en-US",
@@ -70,7 +70,7 @@ export const doPUT = async (url: string, payload: any) => {
 export const doPATCH = async (url: string, payload: any) => {
   const accessToken = useCookie("accessToken")
   const { data, error } = await useFetch(
-    url,
+    `http://18.141.39.162:8089/${url}`,
     {
       headers: {
         "Accept-Language": "en-US",

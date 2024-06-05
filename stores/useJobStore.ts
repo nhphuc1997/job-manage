@@ -51,7 +51,7 @@ export const useJobStore = defineStore('useJobStore', {
       if (this.filter.area !== '') {
         query['filter'] = `areaId~'${this.filter.area}'`
       }
-      const jobs: any = await doGET(`http://18.141.39.162:8089/v1/api/job-manger/jobs`, query)
+      const jobs: any = await doGET(`v1/api/job-manger/jobs`, query)
       this.data.jobs = jobs?.data?.content
       this.metadata.size = jobs?.data?.size
       this.metadata.page = jobs?.data?.number
@@ -59,7 +59,7 @@ export const useJobStore = defineStore('useJobStore', {
       this.metadata.currentPage = this.metadata.page + 1
     },
     async fetchArea() {
-      const areas: any = await doGET(`http://18.141.39.162:8089/v1/api/job-manger/areas`)
+      const areas: any = await doGET(`v1/api/job-manger/areas`)
       this.data.area = areas?.data.content
         .filter((area: any) => area.status === 'ACTIVE')
         .map((area: any) => ({ value: area.id, label: area.name }))
@@ -67,7 +67,7 @@ export const useJobStore = defineStore('useJobStore', {
     async openDialogEditJobStatus(row: any) {
       const { id } = row
       this.dialog.editJobStatusVisible = true
-      const job: any = await doGET(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${id}`)
+      const job: any = await doGET(`v1/api/job-manger/jobs/${id}`)
       this.data.editStatusJob = {
         id: job.data.id,
         status: job.data.status,
@@ -76,13 +76,13 @@ export const useJobStore = defineStore('useJobStore', {
     async openDialogEditJobAttr(row: any) {
       const { id } = row
       this.dialog.editJobAttrVisible = true
-      const job: any = await doGET(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${id}`, this.data.editAttrJob)
+      const job: any = await doGET(`v1/api/job-manger/jobs/${id}`, this.data.editAttrJob)
       this.data.editAttrJob = job.data
     },
     async openDialogViewJob(row: any) {
       this.dialog.viewJobVisible = true
       const { id } = row
-      const job: any = await doGET(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${id}`)
+      const job: any = await doGET(`v1/api/job-manger/jobs/${id}`)
       this.data.viewJob = job.data
     },
     async paginationSizeChange(size: number) {
@@ -96,8 +96,8 @@ export const useJobStore = defineStore('useJobStore', {
     },
     async createJob() {
       const payload = this.data.newJob
-      payload['expiredDate'] = dayjs(payload['expiredDate']).format('DD/MM/YYYY hh:mm:ss').toString()
-      const jobs: any = await doPOST(`http://18.141.39.162:8089/v1/api/job-manger/jobs`, this.data.newJob)
+      payload['expiredDate'] = stringToDate(payload['expiredDate'])
+      const jobs: any = await doPOST(`v1/api/job-manger/jobs`, this.data.newJob)
       if (jobs.code === '00') {
         ElNotification({ message: 'Tạo mới công việc thành công', type: 'success' })
         this.data.newJob = {} as Job
@@ -105,8 +105,6 @@ export const useJobStore = defineStore('useJobStore', {
         await this.fetchJobs()
         return
       }
-      this.fetchJobs()
-      this.data.newJob = {} as Job
     },
     async editAttrJob() {
       const payload = this.data.editAttrJob
@@ -114,13 +112,25 @@ export const useJobStore = defineStore('useJobStore', {
       delete payload['id']
       delete payload['status']
       payload['expiredDate'] = stringToDate(payload['expiredDate'])
-      await doPUT(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${id}`, payload)
+      const job: any = await doPUT(`v1/api/job-manger/jobs/${id}`, payload)
+      if (job.code === '00') {
+        ElNotification({ message: 'Chỉnh sửa công việc thành công', type: 'success' })
+        this.data.editAttrJob = {} as Job
+        this.dialog.editJobAttrVisible = false
+        await this.fetchJobs()
+        return
+      }
     },
     async editStatusJob() {
       const { id, status } = this.data.editStatusJob
-      await doPATCH(`http://18.141.39.162:8089/v1/api/job-manger/jobs/${id}`, { status: status })
-      this.dialog.editJobStatusVisible = false
-      await this.fetchJobs()
+      const job: any = await doPATCH(`v1/api/job-manger/jobs/${id}`, { status: status })
+      if (job.code === '00') {
+        ElNotification({ message: 'Chỉnh sửa trạng thái công việc thành công', type: 'success' })
+        this.data.editAttrJob = {} as Job
+        this.dialog.editJobStatusVisible = false
+        await this.fetchJobs()
+        return
+      }
     },
     async resetFilter() {
       this.filter.search = ''
