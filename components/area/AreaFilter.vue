@@ -6,7 +6,7 @@
           :suffix-icon="ElIconSearch" />
       </el-col>
 
-      <el-col :span="3">
+      <el-col :span="4">
         <el-select v-model="areaStore.filter.status" placeholder="Trạng thái" @change="areaStore.fetchAreas">
           <el-option v-for="item in areaStore.data.listStatus" :key="item.value" :label="item.label"
             :value="item.value" />
@@ -24,7 +24,7 @@
           lọc</el-button>
       </el-col>
 
-      <el-col :span="3">
+      <el-col :span="3" :offset="4">
         <el-button @click="areaStore.dialog.createAreaVisible = true" plain style="width: 100%;" type="success"
           :icon="ElIconWindPower">Tạo khu vực</el-button>
       </el-col>

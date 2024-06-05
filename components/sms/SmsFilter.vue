@@ -17,14 +17,9 @@
           :suffix-icon="ElIconSearch" />
       </el-col>
 
-      <el-col :span="3">
+      <el-col :span="3" :offset="3">
         <el-button @click="smsStore.resetFilter" plain style="width: 100%;" type="info" :icon="ElIconMug">Xoá bộ
           lọc</el-button>
-      </el-col>
-
-      <el-col :span="3">
-        <el-button @click="smsStore.dialog.createSmsVisible = true" plain style="width: 100%;" type="success"
-          :icon="ElIconWindPower">Tạo sms</el-button>
       </el-col>
     </el-row>
   </div>
