@@ -16,6 +16,10 @@ export const useResumeStore = defineStore('useResumeStore', {
     },
     data: {
       resumes: [] as Resume[],
+      optionsStatus: [
+        { label: 'Full updated', value: 'FULL_UPDATED' },
+        { label: 'Need updated', value: 'NEED_UPDATE' },
+      ]
     },
   }),
   actions: {
