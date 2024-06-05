@@ -111,11 +111,18 @@ export const useJobStore = defineStore('useJobStore', {
       }
     },
     async editAttrJob() {
-      const payload = this.data.editAttrJob
-      const { id } = payload
-      delete payload['id']
-      delete payload['status']
-      payload['expiredDate'] = stringToDate(payload['expiredDate'])
+      const editAttrJob = this.data.editAttrJob
+      const { id, title, summary, description, htmlContent, imageUrl, areaId, expiredDate } = editAttrJob
+      const payload = {
+        title,
+        summary,
+        description,
+        htmlContent,
+        imageUrl,
+        areaId,
+        expiredDate: stringToDate(editAttrJob.expiredDate),
+      }
+
       const job: any = await doPUT(`v1/api/job-manger/jobs/${id}`, payload)
       if (job.code === '00') {
         ElNotification({ message: 'Chỉnh sửa công việc thành công', type: 'success' })

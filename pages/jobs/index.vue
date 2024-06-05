@@ -17,6 +17,8 @@
 </style>
 
 <script lang="ts" setup>
+import { JobDataTable } from '#components'
+
 definePageMeta({
   layout: 'default'
 })
