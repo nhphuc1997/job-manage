@@ -25,6 +25,13 @@
       </el-icon>
       <template #title>Quản lí Resumes</template>
     </el-menu-item>
+
+    <el-menu-item index="6" @click="navigateTo('/job-confirm')">
+      <el-icon>
+        <management />
+      </el-icon>
+      <template #title>Quản lí phân bổ</template>
+    </el-menu-item>
   </el-menu>
 </template>
 
@@ -32,7 +39,8 @@
 import {
   Menu as IconMenu,
   Setting,
-  List
+  List,
+  Management
 } from '@element-plus/icons-vue'
 
 </script>
