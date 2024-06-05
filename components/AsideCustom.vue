@@ -18,6 +18,13 @@
       </el-icon>
       <template #title>Quản lí SMS</template>
     </el-menu-item>
+
+    <el-menu-item index="5" @click="navigateTo('/resumes')">
+      <el-icon>
+        <list />
+      </el-icon>
+      <template #title>Quản lí Resumes</template>
+    </el-menu-item>
   </el-menu>
 </template>
 
