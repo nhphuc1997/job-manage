@@ -3,19 +3,19 @@
     <el-form :model="areaStore.data.viewArea">
 
       <el-form-item label="Id" :label-width="formLabelWidth">
-        <el-input disabled v-model="areaStore.data.viewArea.id" autocomplete="off" />
+        <el-input disabled v-model="areaStore.data.viewArea.id" />
       </el-form-item>
 
       <el-form-item label="Mã khu vực" :label-width="formLabelWidth">
-        <el-input disabled v-model="areaStore.data.viewArea.code" autocomplete="off" />
+        <el-input disabled v-model="areaStore.data.viewArea.code" />
       </el-form-item>
 
       <el-form-item label="Tên khu vực" :label-width="formLabelWidth">
-        <el-input disabled v-model="areaStore.data.viewArea.name" autocomplete="off" />
+        <el-input disabled v-model="areaStore.data.viewArea.name" />
       </el-form-item>
 
       <el-form-item label="Trạng thái" :label-width="formLabelWidth">
-        <el-input disabled v-model="areaStore.data.viewArea.status" autocomplete="off" />
+        <el-input disabled v-model="areaStore.data.viewArea.status" />
       </el-form-item>
 
     </el-form>
