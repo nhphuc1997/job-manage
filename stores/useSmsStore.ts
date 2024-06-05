@@ -12,11 +12,9 @@ export const useSmsStore = defineStore('useSmsStore', {
     },
     filter: {
       userId: '',
-      senderName: '',
-      senderPhone: '',
       content: '',
       userName: '',
-      date: ''
+      createdDate: ''
     },
     data: {
       sms: [] as Sms[],
@@ -34,12 +32,9 @@ export const useSmsStore = defineStore('useSmsStore', {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
       }
-      if (this.filter.userId !== '') query['filter'] = `userId~'*${this.filter.userId}*'`
-      if (this.filter.senderName !== '') query['filter'] = `senderName~'*${this.filter.senderName}*'`
-      if (this.filter.senderPhone !== '') query['filter'] = `areaId~'*${this.filter.senderPhone}*'`
-      if (this.filter.content !== '') query['filter'] = `areaId~'*${this.filter.content}*'`
-      if (this.filter.userName !== '') query['filter'] = `areaId~'*${this.filter.userName}*'`
-      if (this.filter.date !== '') query['filter'] = `expiredDate` // TODO
+      if (this.filter.content !== '') query['filter'] = `content~'*${this.filter.content}*'`
+      if (this.filter.userName !== '') query['filter'] = `userName~'*${this.filter.userName}*'`
+      if (this.filter.createdDate !== '') query['filter'] = `createdDate~'*${this.filter.userName}*'` // TODO
 
       const sms: any = await doGET(`v1/api/job-manger/sms`, query)
       if (sms.code === '00') {
@@ -84,11 +79,9 @@ export const useSmsStore = defineStore('useSmsStore', {
 
     async resetFilter() {
       this.filter.userId = ''
-      this.filter.senderName = ''
-      this.filter.senderPhone = ''
       this.filter.content = ''
       this.filter.userName = ''
-      this.filter.date = ''
+      this.filter.createdDate = ''
       await this.fetchSms()
     },
   }

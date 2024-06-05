@@ -11,6 +11,13 @@
       <el-icon><icon-menu /></el-icon>
       <template #title>Quản lí công việc</template>
     </el-menu-item>
+
+    <el-menu-item index="4" @click="navigateTo('/sms')">
+      <el-icon>
+        <list />
+      </el-icon>
+      <template #title>Quản lí SMS</template>
+    </el-menu-item>
   </el-menu>
 </template>
 
@@ -18,6 +25,7 @@
 import {
   Menu as IconMenu,
   Setting,
+  List
 } from '@element-plus/icons-vue'
 
 </script>
