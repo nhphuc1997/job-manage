@@ -14,7 +14,7 @@ export const useAreaStore = defineStore('useAreaStore', {
       search: '',
       date: '',
       status: '',
-      area: '',
+      code: '',
     },
     data: {
       areas: [] as Area[],
@@ -22,11 +22,11 @@ export const useAreaStore = defineStore('useAreaStore', {
       newArea: {} as Area,
       editAttrArea: {} as Area,
       editStatusArea: { id: '', status: '' },
-      area: [] as any,
       listStatus: [
         { value: 'ACTIVE', label: 'active' },
         { value: 'INACTIVE', label: 'in active' },
-      ]
+      ],
+      zones: [] as Area[]
     },
     dialog: {
       createAreaVisible: false,
@@ -41,10 +41,9 @@ export const useAreaStore = defineStore('useAreaStore', {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
       }
-      if (this.filter.search !== '') query['filter'] = `title~'*${this.filter.search}*'`
+      if (this.filter.search !== '') query['filter'] = `name~'*${this.filter.search}*'`
       if (this.filter.status !== '') query['filter'] = `status~'${this.filter.status}'`
-      if (this.filter.area !== '') query['filter'] = `areaId~'${this.filter.area}'`
-      if (this.filter.date !== '') query['filter'] = `expiredDate`
+      if (this.filter.code !== '') query['filter'] = `code~'${this.filter.code}'`
 
       const areas: any = await doGET(`v1/api/job-manger/areas`, query)
       if (areas.code === '00') {
@@ -58,6 +57,10 @@ export const useAreaStore = defineStore('useAreaStore', {
 
       ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
       return
+    },
+    async fetchAllZones() {
+      const zones: any = await doGET(`v1/api/job-manger/areas`)
+      this.data.zones = zones?.data?.content
     },
     async openDialogEditJobStatus(row: any) {
       const { id } = row
@@ -129,7 +132,7 @@ export const useAreaStore = defineStore('useAreaStore', {
       this.filter.search = ''
       this.filter.date = ''
       this.filter.status = ''
-      this.filter.area = ''
+      this.filter.code = ''
       await this.fetchAreas()
     },
   }
