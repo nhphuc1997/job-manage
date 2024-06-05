@@ -17,7 +17,8 @@
       </el-col>
 
       <el-col :span="3">
-        <el-select v-model="jobConfirmStore.filter.status" placeholder="Trạng thái">
+        <el-select v-model="jobConfirmStore.filter.status" placeholder="Trạng thái"
+          @change="jobConfirmStore.fetchJobConfirm">
           <el-option v-for="item in jobConfirmStore.data.optionsStatus" :key="item.value" :label="item.label"
             :value="item.value" />
         </el-select>
