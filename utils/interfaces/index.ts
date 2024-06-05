@@ -40,3 +40,16 @@ export interface Resume {
   profileUrl: string,
   status: string
 }
+
+export interface ApplyJob {
+  createdAt: string,
+  updatedAt: string,
+  createdBy: string,
+  lastModifiedBy: string,
+  id: number,
+  resumeId: number,
+  jobId: number,
+  confirmUserId: number,
+  rejectComment: string | null,
+  status: string
+}
