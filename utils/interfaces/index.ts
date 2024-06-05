@@ -31,3 +31,12 @@ export interface Sms {
   receivedDate: string,
   createdDate: string
 }
+
+export interface Resume {
+  id: number,
+  userName: string,
+  fullName: string,
+  phoneNumber: string,
+  profileUrl: string,
+  status: string
+}
