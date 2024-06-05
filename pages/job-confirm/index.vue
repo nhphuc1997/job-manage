@@ -5,6 +5,7 @@
     <JobConfirmPagination />
 
     <JobConfirmDialogView />
+    <JobConfirmDialogEditStatus />
 
   </div>
 </template>
@@ -19,7 +20,7 @@ definePageMeta({
   layout: 'default'
 })
 
-const smsStore = useSmsStore()
-await smsStore.fetchSms()
+const jobConfirmStore = useJobConfirmStore()
+await jobConfirmStore.fetchJobConfirm()
 
 </script>

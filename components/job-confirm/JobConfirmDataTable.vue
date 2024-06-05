@@ -11,8 +11,11 @@
       <el-table-column prop="jobSummary" label="Tóm tắt " sortable />
       <el-table-column prop="createdAt" label="Ngày tạo" sortable />
       <el-table-column prop="status" label="Trạng thái" sortable />
-      <el-table-column align="center" width="80">
+      <el-table-column align="center" width="120">
         <template #default="scope">
+          <el-button type="success" plain :icon="SwitchFilled" size="small"
+            @click="jobConfirmStore.openDialogEdit(scope.row)" />
+
           <el-button plain :icon="ElIconView" size="small" @click="jobConfirmStore.openDialogView(scope.row)" />
         </template>
       </el-table-column>
@@ -21,5 +24,6 @@
 </template>
 
 <script lang="ts" setup>
+import { SwitchFilled } from '@element-plus/icons-vue'
 const jobConfirmStore = useJobConfirmStore()
 </script>

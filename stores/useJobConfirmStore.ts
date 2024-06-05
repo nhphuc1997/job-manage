@@ -1,5 +1,5 @@
 import type { Job, JobConfirm, Sms } from "~/utils/interfaces"
-import { doGET, doPOST } from "~/utils/apis"
+import { doGET, doPOST, doPUT } from "~/utils/apis"
 import { stringToDate } from "~/utils"
 
 export const useJobConfirmStore = defineStore('useJobConfirmStore', {
@@ -19,6 +19,11 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
     data: {
       jobConfirm: [] as JobConfirm[],
       viewJobConfirm: {} as JobConfirm,
+      editJobConfirm: {
+        id: '',
+        rejectComment: '',
+        status: ''
+      },
       optionsStatus: [
         { label: 'Chấp thuận', value: 'APPROVED' },
         { label: 'Từ chối', value: 'REJECT' },
@@ -27,6 +32,7 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
     },
     dialog: {
       viewJobConfirmVisible: false,
+      editJobConfirmVisible: false,
     }
   }),
   actions: {
@@ -61,6 +67,11 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       const job: any = await doGET(`v1/api/job-manger/jobConfirm/${id}`)
       this.data.viewJobConfirm = job.data
     },
+    async openDialogEdit(row: any) {
+      this.dialog.editJobConfirmVisible = true
+      const { id } = row
+      this.data.editJobConfirm.id = id
+    },
     async paginationSizeChange(size: number) {
       this.metadata.size = size
       await this.fetchJobConfirm()
@@ -77,5 +88,25 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       this.filter.status = ''
       await this.fetchJobConfirm()
     },
+    async updateJobConfirmStatus() {
+      const { status, rejectComment, id } = this.data.editJobConfirm
+      const job: any = await doPUT(`v1/api/job-manger/jobConfirm/${id}`, { status, rejectComment })
+
+      if (job.code === '00') {
+        ElNotification({ message: 'Cập nhập trạng thái xác nhận công việc thành công', type: 'success' })
+        this.dialog.editJobConfirmVisible = false
+        this.data.editJobConfirm = { id: '', rejectComment: '', status: '' }
+        await this.fetchJobConfirm()
+        return
+      }
+
+      if (job.code === '520') {
+        ElNotification({ message: 'Công việc không thể chuyển trạng thái mới', type: 'info' })
+        return
+      }
+
+      ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
+      return
+    }
   }
 })
