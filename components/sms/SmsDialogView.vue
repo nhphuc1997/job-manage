@@ -1,56 +1,31 @@
 <template>
-  <el-dialog v-model="jobStore.dialog.viewJobVisible" title="Chi tiết công việc" width="800">
-    <el-form :model="jobStore.data.viewJob">
+  <el-dialog v-model="smsStore.dialog.viewSmsVisible" title="Chi tiết sms" width="600">
+    <el-form :model="smsStore.data.viewSms">
       <el-form-item label="Id" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobStore.data.viewJob.id" autocomplete="off" />
+        <el-input disabled v-model="smsStore.data.viewSms.id" />
       </el-form-item>
 
-      <el-form-item label="Tên công việc" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobStore.data.viewJob.title" autocomplete="off" />
+      <el-form-item label="userId" :label-width="formLabelWidth">
+        <el-input disabled v-model="smsStore.data.viewSms.userId" />
       </el-form-item>
 
-      <el-form-item label="URL hình ảnh" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobStore.data.viewJob.imageUrl" autocomplete="off" />
+      <el-form-item label="userName" :label-width="formLabelWidth">
+        <el-input disabled v-model="smsStore.data.viewSms.userName" />
       </el-form-item>
 
-      <el-form-item label="Khu vực" :label-width="formLabelWidth">
-        <el-select disabled v-model="jobStore.data.viewJob.areaId">
-          <el-option v-for="item in jobStore.data.area" :key="item.value" :label="item.label" :value="item.value" />
-        </el-select>
+      <el-form-item label="content" :label-width="formLabelWidth">
+        <el-input disabled v-model="smsStore.data.viewSms.content" type="textarea" :rows="4" />
       </el-form-item>
 
-      <el-form-item label="Ngày hết hạn" :label-width="formLabelWidth">
-        <el-date-picker disabled style="width: 100%;" v-model="jobStore.data.viewJob.expiredDate" type="date" />
+      <el-form-item label="createdDate" :label-width="formLabelWidth">
+        <el-input disabled v-model="smsStore.data.viewSms.createdDate" />
       </el-form-item>
 
-      <el-form-item label="Tóm tắt công việc" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobStore.data.viewJob.summary" style="width: 100%" :rows="2" type="textarea" />
-      </el-form-item>
-
-      <el-form-item label="Mô tả công việc" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobStore.data.viewJob.description" style="width: 100%" :rows="2" type="textarea" />
-      </el-form-item>
-
-      <el-form-item label="Nội dung html" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobStore.data.viewJob.htmlContent" style="width: 100%" :rows="2" type="textarea" />
-      </el-form-item>
-
-      <el-form-item label="Tạo mới lúc" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobStore.data.viewJob.createdAt" style="width: 100%" :rows="2" />
-      </el-form-item>
-
-      <el-form-item label="Cập nhập lúc" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobStore.data.viewJob.updatedAt" style="width: 100%" :rows="2" />
-      </el-form-item>
-
-      <el-form-item label="Người tạo" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobStore.data.viewJob.createdBy" style="width: 100%" :rows="2" />
-      </el-form-item>
     </el-form>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
-const formLabelWidth = '140px'
-const jobStore = useJobStore()
+const formLabelWidth = '120px'
+const smsStore = useSmsStore()
 </script>
