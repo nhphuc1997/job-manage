@@ -42,27 +42,31 @@ export const useJobStore = defineStore('useJobStore', {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
       }
-      if (this.filter.search !== '') {
-        query['filter'] = `title~'*${this.filter.search}*'`
-      }
-      if (this.filter.status !== '') {
-        query['filter'] = `status~'${this.filter.status}'`
-      }
-      if (this.filter.area !== '') {
-        query['filter'] = `areaId~'${this.filter.area}'`
-      }
+      if (this.filter.search !== '') query['filter'] = `title~'*${this.filter.search}*'`
+      if (this.filter.status !== '') query['filter'] = `status~'${this.filter.status}'`
+      if (this.filter.area !== '') query['filter'] = `areaId~'${this.filter.area}'`
+      if (this.filter.date !== '') query['filter'] = `expiredDate`
+
       const jobs: any = await doGET(`v1/api/job-manger/jobs`, query)
-      this.data.jobs = jobs?.data?.content
-      this.metadata.size = jobs?.data?.size
-      this.metadata.page = jobs?.data?.number
-      this.metadata.totalElements = jobs?.data?.totalElements
-      this.metadata.currentPage = this.metadata.page + 1
+      if (jobs.code === '00') {
+        this.data.jobs = jobs?.data?.content
+        this.metadata.size = jobs?.data?.size
+        this.metadata.page = jobs?.data?.number
+        this.metadata.totalElements = jobs?.data?.totalElements
+        this.metadata.currentPage = this.metadata.page + 1
+        return
+      }
+
+      ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
+      return
     },
     async fetchArea() {
       const areas: any = await doGET(`v1/api/job-manger/areas`)
-      this.data.area = areas?.data.content
-        .filter((area: any) => area.status === 'ACTIVE')
-        .map((area: any) => ({ value: area.id, label: area.name }))
+      if (areas.code === '00') {
+        this.data.area = areas?.data.content
+          .filter((area: any) => area.status === 'ACTIVE')
+          .map((area: any) => ({ value: area.id, label: area.name }))
+      }
     },
     async openDialogEditJobStatus(row: any) {
       const { id } = row
@@ -76,7 +80,7 @@ export const useJobStore = defineStore('useJobStore', {
     async openDialogEditJobAttr(row: any) {
       const { id } = row
       this.dialog.editJobAttrVisible = true
-      const job: any = await doGET(`v1/api/job-manger/jobs/${id}`, this.data.editAttrJob)
+      const job: any = await doGET(`v1/api/job-manger/jobs/${id}`)
       this.data.editAttrJob = job.data
     },
     async openDialogViewJob(row: any) {
