@@ -3,10 +3,10 @@
     <el-row>
       <el-col :span="24">
         <div class="paginate">
-          <el-pagination v-model:current-page="jobStore.metadata.currentPage" v-model:page-size="jobStore.metadata.size"
+          <el-pagination v-model:current-page="areaStore.metadata.currentPage" v-model:page-size="areaStore.metadata.size"
             :page-sizes="[5, 10, 100]" layout="total, sizes, prev, pager, next, jumper"
-            :total="jobStore.metadata.totalElements" @size-change="jobStore.paginationSizeChange"
-            @current-change="jobStore.paginationPageChange" />
+            :total="areaStore.metadata.totalElements" @size-change="areaStore.paginationSizeChange"
+            @current-change="areaStore.paginationPageChange" />
         </div>
       </el-col>
     </el-row>
@@ -18,5 +18,5 @@
 </style>
 
 <script lang="ts" setup>
-const jobStore = useJobStore()
+const areaStore = useAreaStore()
 </script>

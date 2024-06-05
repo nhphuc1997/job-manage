@@ -1,4 +1,4 @@
-import type { Job } from "~/utils/interfaces"
+import type { Area, Job } from "~/utils/interfaces"
 import { doGET, doPATCH, doPOST, doPUT } from "~/utils/apis"
 import { stringToDate } from "~/utils"
 
@@ -17,10 +17,10 @@ export const useAreaStore = defineStore('useAreaStore', {
       area: '',
     },
     data: {
-      areas: [] as Job[],
-      viewArea: {} as Job,
-      newArea: {} as Job,
-      editAttrArea: {} as Job,
+      areas: [] as Area[],
+      viewArea: {} as Area,
+      newArea: {} as Area,
+      editAttrArea: {} as Area,
       editStatusArea: { id: '', status: '' },
       area: [] as any,
       listStatus: [
@@ -36,7 +36,7 @@ export const useAreaStore = defineStore('useAreaStore', {
     }
   }),
   actions: {
-    async fetchJobs() {
+    async fetchAreas() {
       const query: any = {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
@@ -58,14 +58,6 @@ export const useAreaStore = defineStore('useAreaStore', {
 
       ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
       return
-    },
-    async fetchArea() {
-      const areas: any = await doGET(`v1/api/job-manger/areas`)
-      if (areas.code === '00') {
-        this.data.area = areas?.data.content
-          .filter((area: any) => area.status === 'ACTIVE')
-          .map((area: any) => ({ value: area.id, label: area.name }))
-      }
     },
     async openDialogEditJobStatus(row: any) {
       const { id } = row
@@ -90,55 +82,46 @@ export const useAreaStore = defineStore('useAreaStore', {
     },
     async paginationSizeChange(size: number) {
       this.metadata.size = size
-      await this.fetchJobs()
+      await this.fetchAreas()
     },
     async paginationPageChange(page: number) {
       this.metadata.page = page
       this.metadata.currentPage - 1
-      await this.fetchJobs()
+      await this.fetchAreas()
     },
     async createJob() {
-      const payload = this.data.newArea
-      payload['expiredDate'] = stringToDate(payload['expiredDate'])
-      const areas: any = await doPOST(`v1/api/job-manger/areas`, this.data.newArea)
+      const { name, code } = this.data.newArea
+      const areas: any = await doPOST(`v1/api/job-manger/areas`, { name, code })
+
       if (areas.code === '00') {
-        ElNotification({ message: 'Tạo mới công việc thành công', type: 'success' })
-        this.data.newArea = {} as Job
+        ElNotification({ message: 'Tạo mới khu vực thành công', type: 'success' })
+        this.data.newArea = {} as Area
         this.dialog.createAreaVisible = false
-        await this.fetchJobs()
+        await this.fetchAreas()
         return
       }
     },
     async editAttrArea() {
-      const editAttrArea = this.data.editAttrArea
-      const { id, title, summary, description, htmlContent, imageUrl, areaId, expiredDate } = editAttrArea
-      const payload = {
-        title,
-        summary,
-        description,
-        htmlContent,
-        imageUrl,
-        areaId,
-        expiredDate: stringToDate(editAttrArea.expiredDate),
-      }
+      const { id, name, code } = this.data.editAttrArea
+      const job: any = await doPUT(`v1/api/job-manger/areas/${id}`, { name, code })
 
-      const job: any = await doPUT(`v1/api/job-manger/areas/${id}`, payload)
       if (job.code === '00') {
-        ElNotification({ message: 'Chỉnh sửa công việc thành công', type: 'success' })
-        this.data.editAttrArea = {} as Job
+        ElNotification({ message: 'Chỉnh sửa khu vực thành công', type: 'success' })
+        this.data.editAttrArea = {} as Area
         this.dialog.editAreaAttrVisible = false
-        await this.fetchJobs()
+        await this.fetchAreas()
         return
       }
     },
     async editStatusArea() {
       const { id, status } = this.data.editStatusArea
       const job: any = await doPATCH(`v1/api/job-manger/areas/${id}`, { status: status })
+
       if (job.code === '00') {
-        ElNotification({ message: 'Chỉnh sửa trạng thái công việc thành công', type: 'success' })
-        this.data.editAttrArea = {} as Job
+        ElNotification({ message: 'Chỉnh sửa trạng thái khu vực thành công', type: 'success' })
+        this.data.editAttrArea = {} as Area
         this.dialog.editAreaStatusVisible = false
-        await this.fetchJobs()
+        await this.fetchAreas()
         return
       }
     },
@@ -147,7 +130,7 @@ export const useAreaStore = defineStore('useAreaStore', {
       this.filter.date = ''
       this.filter.status = ''
       this.filter.area = ''
-      await this.fetchJobs()
+      await this.fetchAreas()
     },
   }
 })

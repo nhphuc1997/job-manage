@@ -13,3 +13,10 @@ export interface Job {
   expiredDate: string,
   status?: string,
 }
+
+export interface Area {
+  code: string,
+  name: string,
+  status: string,
+  id: string
+}

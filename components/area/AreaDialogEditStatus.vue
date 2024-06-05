@@ -1,17 +1,17 @@
 <template>
-  <el-dialog v-model="jobStore.dialog.editJobStatusVisible" title="Chỉnh sửa trạng thái công việc" width="450">
-    <el-form :model="jobStore.data.editStatusJob">
+  <el-dialog v-model="areaStore.dialog.editAreaStatusVisible" title="Chỉnh sửa trạng thái công việc" width="450">
+    <el-form :model="areaStore.data.editStatusArea">
 
       <el-form-item label="Id" :label-width="formLabelWidth">
-        <el-text type="info">{{ jobStore.data.editStatusJob.id }}</el-text>
+        <el-text type="info">{{ areaStore.data.editStatusArea.id }}</el-text>
       </el-form-item>
 
       <el-form-item label="Trạng thái" :label-width="formLabelWidth">
-        <el-select v-model="jobStore.data.editStatusJob.status">
+        <el-select v-model="areaStore.data.editStatusArea.status">
           <template>
-            <el-text>{{ jobStore.data.editStatusJob.status }}</el-text>
+            <el-text>{{ areaStore.data.editStatusArea.status }}</el-text>
           </template>
-          <el-option v-for="item in jobStore.data.listStatus" :key="item.value" :label="item.label"
+          <el-option v-for="item in areaStore.data.listStatus" :key="item.value" :label="item.label"
             :value="item.value" />
         </el-select>
       </el-form-item>
@@ -19,8 +19,8 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="jobStore.dialog.editJobStatusVisible = false">Huỷ</el-button>
-        <el-button type="primary" @click="jobStore.editStatusJob">
+        <el-button @click="areaStore.dialog.editAreaStatusVisible = false">Huỷ</el-button>
+        <el-button type="primary" @click="areaStore.editStatusArea">
           Chỉnh sửa
         </el-button>
       </div>
@@ -30,5 +30,5 @@
 
 <script lang="ts" setup>
 const formLabelWidth = '140px'
-const jobStore = useJobStore()
+const areaStore = useAreaStore()
 </script>

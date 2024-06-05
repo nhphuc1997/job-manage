@@ -22,8 +22,7 @@ definePageMeta({
   layout: 'default'
 })
 
-const jobStore = useJobStore()
-await jobStore.fetchJobs()
-await jobStore.fetchArea()
+const areaStore = useAreaStore()
+await areaStore.fetchAreas()
 
 </script>
