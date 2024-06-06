@@ -11,9 +11,7 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       currentPage: 0,
     },
     filter: {
-      employeeName: '',
-      userPhone: '',
-      jobFilter: '',
+      fulltext: '',
       status: ''
     },
     data: {
@@ -42,10 +40,10 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
         size: this.metadata.size ?? 10,
         sort: 'id,desc'
       }
-      if (this.filter.employeeName !== '') query['filter'] = `employeeName~'*${this.filter.employeeName}*'`
-      if (this.filter.userPhone !== '') query['filter'] = `userPhone~'*${this.filter.userPhone}*'`
-      if (this.filter.jobFilter !== '') {
-        query['filter'] = `jobTitle~'*${this.filter.jobFilter}*' or jobSummary~'*${this.filter.jobFilter}*'`
+      if (this.filter.fulltext !== '') {
+        const fulltext = this.filter.fulltext
+        query['filter'] =
+          `jobTitle~'*${fulltext}*' or jobSummary~'*${fulltext}*' or userPhone~'*${fulltext}*' or employeeName~'*${fulltext}*'`
       }
       if (this.filter.status !== '') query['filter'] = `status~'${this.filter.status}'`
 
@@ -83,9 +81,7 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       await this.fetchJobConfirm()
     },
     async resetFilter() {
-      this.filter.employeeName = ''
-      this.filter.userPhone = ''
-      this.filter.jobFilter = ''
+      this.filter.fulltext = ''
       this.filter.status = ''
       await this.fetchJobConfirm()
     },
