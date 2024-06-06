@@ -4,33 +4,33 @@
       <el-icon>
         <setting />
       </el-icon>
-      <template #title>Quản lí khu vực</template>
+      <template #title>Khu vực</template>
     </el-menu-item>
 
     <el-menu-item index="3" @click="navigateTo('/jobs')">
       <el-icon><icon-menu /></el-icon>
-      <template #title>Quản lí công việc</template>
+      <template #title>Công việc</template>
     </el-menu-item>
 
     <el-menu-item index="4" @click="navigateTo('/sms')">
       <el-icon>
         <list />
       </el-icon>
-      <template #title>Quản lí SMS</template>
+      <template #title>SMS</template>
     </el-menu-item>
 
     <el-menu-item index="5" @click="navigateTo('/resumes')">
       <el-icon>
         <list />
       </el-icon>
-      <template #title>Quản lí Resumes</template>
+      <template #title>Hồ sơ</template>
     </el-menu-item>
 
     <el-menu-item index="6" @click="navigateTo('/job-confirm')">
       <el-icon>
         <management />
       </el-icon>
-      <template #title>Quản lí phân bổ</template>
+      <template #title>Xác nhận công việc</template>
     </el-menu-item>
   </el-menu>
 </template>
