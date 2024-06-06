@@ -26,6 +26,7 @@ export const useResumeStore = defineStore('useResumeStore', {
       const query: any = {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
+        sort: 'id,desc'
       }
       if (this.filter.fulltext !== '') {
         const fulltext = this.filter.fulltext

@@ -39,6 +39,7 @@ export const useAreaStore = defineStore('useAreaStore', {
       const query: any = {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
+        sort: 'id,desc'
       }
       if (this.filter.search !== '') query['filter'] = `name~'*${this.filter.search}*'`
       if (this.filter.status !== '') query['filter'] = `status~'${this.filter.status}'`
