@@ -3,12 +3,16 @@
     <el-table ref="tableRef" row-key="date" :data="jobStore.data.jobs" style="width: 100%" :border="true" height="600">
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
       <el-table-column prop="title" label="Tên" sortable />
-      <el-table-column prop="summary" label="Tóm tắt" sortable />
-      <el-table-column prop="imageUrl" label="Hình ảnh Url" sortable>
+      <el-table-column prop="summary" label="Tóm tắt" sortable>
         <template #default="scope">
-          <el-text type="primary">
-            {{ scope.row.imageUrl }}
-          </el-text>
+          <el-text truncated>{{ scope.row.summary }}</el-text>
+        </template>
+      </el-table-column>
+      <el-table-column prop="imageUrl" label="Hình ảnh Url" sortable align="center">
+        <template #default="scope">
+          <el-button size="small" type="primary" round plain :icon="TopRight" @click="redirectTo(scope.row.imageUrl)">
+            Link
+          </el-button>
         </template>
       </el-table-column>
       <el-table-column prop="areaId" label="Khu vực" sortable align="center" />
@@ -45,5 +49,6 @@
 </template>
 
 <script lang="ts" setup>
+import { TopRight } from '@element-plus/icons-vue';
 const jobStore = useJobStore()
 </script>

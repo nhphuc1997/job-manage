@@ -29,8 +29,4 @@
 <script lang="ts" setup>
 import { TopRight } from '@element-plus/icons-vue';
 const resumeStore = useResumeStore()
-
-const redirectTo = (path: string) => {
-  return navigateTo({ path }, { open: { target: '_blank' } })
-}
 </script>
