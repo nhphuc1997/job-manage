@@ -1,32 +1,32 @@
 <template>
   <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="false">
-    <el-menu-item index="2" @click="navigateTo('/areas')">
+    <el-menu-item @click="navigateTo('/areas')" :class="route.path === '/areas' ? 'is-active' : ''">
       <el-icon>
         <setting />
       </el-icon>
       <template #title>Khu vực</template>
     </el-menu-item>
 
-    <el-menu-item index="3" @click="navigateTo('/jobs')">
+    <el-menu-item @click="navigateTo('/jobs')" :class="route.path === '/jobs' ? 'is-active' : ''">
       <el-icon><icon-menu /></el-icon>
       <template #title>Công việc</template>
     </el-menu-item>
 
-    <el-menu-item index="4" @click="navigateTo('/sms')">
+    <el-menu-item @click="navigateTo('/sms')" :class="route.path === '/sms' ? 'is-active' : ''">
       <el-icon>
         <list />
       </el-icon>
       <template #title>SMS</template>
     </el-menu-item>
 
-    <el-menu-item index="5" @click="navigateTo('/resumes')">
+    <el-menu-item @click="navigateTo('/resumes')" :class="route.path === '/resumes' ? 'is-active' : ''">
       <el-icon>
         <list />
       </el-icon>
       <template #title>Hồ sơ</template>
     </el-menu-item>
 
-    <el-menu-item index="6" @click="navigateTo('/job-confirm')">
+    <el-menu-item @click="navigateTo('/job-confirm')" :class="route.path === '/job-confirm' ? 'is-active' : ''">
       <el-icon>
         <management />
       </el-icon>
@@ -34,6 +34,13 @@
     </el-menu-item>
   </el-menu>
 </template>
+
+<style>
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 170px;
+  height: 100%;
+}
+</style>
 
 <script lang="ts" setup>
 import {
@@ -43,11 +50,6 @@ import {
   Management
 } from '@element-plus/icons-vue'
 
-</script>
+const route = useRoute()
 
-<style>
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  height: 100%;
-}
-</style>
+</script>
