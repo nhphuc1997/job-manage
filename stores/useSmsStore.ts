@@ -11,9 +11,7 @@ export const useSmsStore = defineStore('useSmsStore', {
       currentPage: 0,
     },
     filter: {
-      userId: '',
-      content: '',
-      userName: '',
+      fulltext: '',
       createdDate: ''
     },
     data: {
@@ -32,8 +30,9 @@ export const useSmsStore = defineStore('useSmsStore', {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
       }
-      if (this.filter.content !== '') query['filter'] = `content~'*${this.filter.content}*'`
-      if (this.filter.userName !== '') query['filter'] = `userName~'*${this.filter.userName}*'`
+      if (this.filter.fulltext !== '') {
+        query['filter'] = `content~'*${this.filter.fulltext}*' or userName~'*${this.filter.fulltext}*'`
+      }
       if (this.filter.createdDate !== '') {
         const fromDate = stringToDate(this.filter.createdDate[0])
         const toDate = stringToDate(this.filter.createdDate[1])
@@ -69,9 +68,7 @@ export const useSmsStore = defineStore('useSmsStore', {
       await this.fetchSms()
     },
     async resetFilter() {
-      this.filter.userId = ''
-      this.filter.content = ''
-      this.filter.userName = ''
+      this.filter.fulltext = ''
       this.filter.createdDate = ''
       await this.fetchSms()
     },

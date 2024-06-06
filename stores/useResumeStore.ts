@@ -10,8 +10,7 @@ export const useResumeStore = defineStore('useResumeStore', {
       currentPage: 0,
     },
     filter: {
-      name: '',
-      phoneNumber: '',
+      fulltext: '',
       status: ''
     },
     data: {
@@ -28,11 +27,10 @@ export const useResumeStore = defineStore('useResumeStore', {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
       }
-      if (this.filter.name !== '') {
-        query['filter'] = `fullName~'*${this.filter.name}*'`
-        query['filter'] = `userName~'*${this.filter.name}*'`
+      if (this.filter.fulltext !== '') {
+        const fulltext = this.filter.fulltext
+        query['filter'] = `fullName~'*${fulltext}*' or userName~'*${fulltext}*' or phoneNumber~'*${fulltext}*'`
       }
-      if (this.filter.phoneNumber !== '') query['filter'] = `phoneNumber~'*${this.filter.phoneNumber}*'`
       if (this.filter.status !== '') query['filter'] = `status~'*${this.filter.status}*'`
 
       const resumes: any = await doGET(`v1/api/job-manger/resumes`, query)
@@ -54,8 +52,7 @@ export const useResumeStore = defineStore('useResumeStore', {
       await this.fetchResumes()
     },
     async resetFilter() {
-      this.filter.name = ''
-      this.filter.phoneNumber = ''
+      this.filter.fulltext = ''
       this.filter.status = ''
       await this.fetchResumes()
     },
