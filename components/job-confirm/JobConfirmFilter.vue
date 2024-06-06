@@ -5,17 +5,7 @@
         <el-input v-model="jobConfirmStore.filter.employeeName" @change="jobConfirmStore.fetchJobConfirm"
           placeholder="Tìm kiếm tên" :suffix-icon="ElIconSearch" />
       </el-col>
-
-      <el-col :span="6">
-        <el-input v-model="jobConfirmStore.filter.userPhone" @change="jobConfirmStore.fetchJobConfirm"
-          placeholder="Tìm kiếm số điện thoại" :suffix-icon="ElIconSearch" />
-      </el-col>
-
-      <el-col :span="6">
-        <el-input v-model="jobConfirmStore.filter.jobFilter" @change="jobConfirmStore.fetchJobConfirm"
-          placeholder="Tìm kiếm nội dung công việc" :suffix-icon="ElIconSearch" />
-      </el-col>
-
+      
       <el-col :span="3">
         <el-select v-model="jobConfirmStore.filter.status" placeholder="Trạng thái"
           @change="jobConfirmStore.fetchJobConfirm">
