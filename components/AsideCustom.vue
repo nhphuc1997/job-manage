@@ -30,7 +30,7 @@
       <el-icon>
         <management />
       </el-icon>
-      <template #title>Xác nhận công việc</template>
+      <template #title>Xác nhận</template>
     </el-menu-item>
   </el-menu>
 </template>
