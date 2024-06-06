@@ -3,15 +3,22 @@
     <el-table ref="tableRef" row-key="date" :data="jobConfirmStore.data.jobConfirm" style="width: 100%" :border="true"
       height="600">
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
-      <el-table-column prop="resumeId" label="Id hồ sơ" sortable width="100" />
-      <el-table-column prop="status" label="Trạng thái" sortable />
-      <el-table-column prop="createdAt" label="Ngày tạo" sortable />
-      <el-table-column prop="employeeName" label="Tên nhân viên" />
-      <el-table-column prop="userPhone" label="Số điện thoại" />
-      <el-table-column prop="jobId" label="Mã công việc" />
-      <el-table-column prop="jobTitle" label="Tên công việc" />
-      <el-table-column prop="jobSummary" label="Tóm tắt " />
-      <el-table-column label="Xác nhận" align="center" width="100">
+      <el-table-column prop="createdAt" label="Ngày tạo" sortable width="200" />
+      <el-table-column prop="resumeId" label="Id hồ sơ" width="80" align="center" />
+      <el-table-column prop="jobId" label="Mã công việc" align="center" />
+      <el-table-column prop="employeeName" label="Tên nhân viên" align="center" />
+      <el-table-column prop="userPhone" label="Số điện thoại" align="center" />
+      <el-table-column prop="jobTitle" label="Tên công việc">
+        <template #default="scope">
+          <el-text truncated>{{ scope.row.jobTitle }}</el-text>
+        </template>
+      </el-table-column>
+      <el-table-column prop="jobSummary" label="Tóm tắt ">
+        <template #default="scope">
+          <el-text truncated>{{ scope.row.jobSummary }}</el-text>
+        </template>
+      </el-table-column>
+      <el-table-column label="Trạng thái" align="center" width="100">
         <template #default="scope">
           <el-row :gutter="4">
             <el-col :span="24">
