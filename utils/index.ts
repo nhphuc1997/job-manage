@@ -5,3 +5,4 @@ export const stringToDate = (str: string) => {
 }
 
 export const TTL_COOKIE = 6000
+export const LOADING_TIMEOUT = 1000

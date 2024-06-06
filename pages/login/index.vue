@@ -9,7 +9,7 @@
 
         <el-form v-model="authStore.data.login" label-position="left" label-width="auto">
           <el-form-item label="Tên đăng nhập">
-            <el-input v-model="authStore.data.login.username" type="password" autocomplete="off" placeholder="Admin" />
+            <el-input v-model="authStore.data.login.username" type="text" autocomplete="off" placeholder="Admin" />
           </el-form-item>
 
           <el-form-item label="Mật khẩu">
@@ -40,5 +40,7 @@ import { Connection } from '@element-plus/icons-vue';
 definePageMeta({
   layout: "auth"
 })
+
 const authStore = useAuthStore()
+
 </script>

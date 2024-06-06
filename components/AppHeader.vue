@@ -4,8 +4,17 @@
       <el-col :span="12" :offset="12">
         <div class="user-infor">
           <div class="avatar">
-            <el-avatar style="border: 1px solid var(--el-menu-border-color);" shape="square"
-              src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
+
+
+            <el-dropdown>
+              <el-avatar style="border: 1px solid var(--el-menu-border-color);" shape="square"
+                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item :icon="TopRight" @click="authStore.doLogout">Đăng xuất</el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
           </div>
         </div>
       </el-col>
@@ -26,3 +35,9 @@
   }
 }
 </style>
+
+<script lang="ts" setup>
+import { TopRight } from '@element-plus/icons-vue';
+
+const authStore = useAuthStore()
+</script>

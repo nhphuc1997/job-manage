@@ -29,7 +29,20 @@ export const useAuthStore = defineStore('useAuthStore', {
           name: authInfor.data.userName,
           role: authInfor.data.authorities
         }
+
+        this.data.login = {
+          username: '',
+          password: ''
+        }
+        ElNotification({ message: 'Đăng nhập thành công', type: 'success' })
+        return navigateTo('/areas')
       }
+    },
+    doLogout() {
+      const accessToken = useCookie("accessToken")
+      accessToken.value = undefined
+      ElNotification({ message: 'Đăng xuất thành công', type: 'success' })
+      return navigateTo('/login')
     }
   }
 })
