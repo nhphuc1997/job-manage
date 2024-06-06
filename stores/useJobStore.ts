@@ -41,11 +41,16 @@ export const useJobStore = defineStore('useJobStore', {
       const query: any = {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
+        sort: 'id,desc'
       }
       if (this.filter.search !== '') query['filter'] = `title~'*${this.filter.search}*'`
       if (this.filter.status !== '') query['filter'] = `status~'${this.filter.status}'`
       if (this.filter.area !== '') query['filter'] = `areaId~'${this.filter.area}'`
-      if (this.filter.date !== '') query['filter'] = `expiredDate`
+      if (this.filter.date !== '') {
+        const fromDate = stringToDate(this.filter.date[0])
+        const toDate = stringToDate(this.filter.date[1])
+        query['filter'] = `expiredDate>:'${fromDate}' and expiredDate<:'${toDate}'`
+      }
 
       const jobs: any = await doGET(`v1/api/job-manger/jobs`, query)
       if (jobs.code === '00') {

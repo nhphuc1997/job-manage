@@ -8,7 +8,8 @@
 
       <el-col :span="6">
         <el-date-picker v-model="jobStore.filter.date" type="daterange" range-separator="Đến"
-          start-placeholder="Ngày bắt đầu" end-placeholder="Ngày kết thúc" style="width: 95%;" />
+          start-placeholder="Ngày bắt đầu" end-placeholder="Ngày kết thúc" style="width: 95%;"
+          @change="jobStore.fetchJobs" />
       </el-col>
 
       <el-col :span="3">
