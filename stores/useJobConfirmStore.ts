@@ -22,10 +22,14 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
         rejectComment: '',
         status: ''
       },
-      optionsStatus: [
+      optionsForFilterStatus: [
         { label: 'Chấp thuận', value: 'APPROVED' },
         { label: 'Từ chối', value: 'REJECT' },
         { label: 'Chờ xử lí', value: 'PENDING' },
+      ],
+      optionsForEditStatus: [
+        { label: 'Chấp thuận', value: 'APPROVED' },
+        { label: 'Từ chối', value: 'REJECT' },
       ]
     },
     dialog: {

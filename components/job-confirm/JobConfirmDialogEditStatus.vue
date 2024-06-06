@@ -7,7 +7,7 @@
 
       <el-form-item label="Trạng thái" :label-width="formLabelWidth">
         <el-select v-model="jobConfirmStore.data.editJobConfirm.status">
-          <el-option v-for="item in jobConfirmStore.data.optionsStatus" :key="item.value" :label="item.label"
+          <el-option v-for="item in jobConfirmStore.data.optionsForEditStatus" :key="item.value" :label="item.label"
             :value="item.value" />
         </el-select>
       </el-form-item>

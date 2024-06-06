@@ -13,10 +13,15 @@
       <el-table-column prop="status" label="Trạng thái" sortable />
       <el-table-column align="center" width="120">
         <template #default="scope">
-          <el-button type="success" plain :icon="SwitchFilled" size="small"
-            @click="jobConfirmStore.openDialogEdit(scope.row)" />
-
-          <el-button plain :icon="ElIconView" size="small" @click="jobConfirmStore.openDialogView(scope.row)" />
+          <el-row :gutter="4">
+            <el-col :span="12">
+              <el-button v-if="scope.row.status === 'PENDING'" type="success" plain :icon="SwitchFilled" size="small"
+                @click="jobConfirmStore.openDialogEdit(scope.row)" />
+            </el-col>
+            <el-col :span="12">
+              <el-button plain :icon="ElIconView" size="small" @click="jobConfirmStore.openDialogView(scope.row)" />
+            </el-col>
+          </el-row>
         </template>
       </el-table-column>
     </el-table>
