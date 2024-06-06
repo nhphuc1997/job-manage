@@ -20,6 +20,8 @@ definePageMeta({
   layout: 'default',
   middleware: ['auth']
 })
+const loading = ElLoading.service({ lock: true })
+setTimeout(() => loading.close(), LOADING_TIMEOUT)
 
 const jobConfirmStore = useJobConfirmStore()
 await jobConfirmStore.fetchJobConfirm()

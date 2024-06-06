@@ -24,6 +24,9 @@ definePageMeta({
   middleware: ['auth']
 })
 
+const loading = ElLoading.service({ lock: true })
+setTimeout(() => loading.close(), LOADING_TIMEOUT)
+
 const jobStore = useJobStore()
 await jobStore.fetchJobs()
 await jobStore.fetchArea()

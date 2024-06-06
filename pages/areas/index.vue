@@ -22,6 +22,8 @@ definePageMeta({
   layout: 'default',
   middleware: ['auth']
 })
+const loading = ElLoading.service({ lock: true })
+setTimeout(() => loading.close(), LOADING_TIMEOUT)
 
 const areaStore = useAreaStore()
 await areaStore.fetchAreas()
