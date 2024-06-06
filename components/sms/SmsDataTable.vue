@@ -6,7 +6,9 @@
       <el-table-column prop="userName" label="Tên người dùng" sortable align="center" width="150" />
       <el-table-column prop="content" label="Nội dung" sortable align="center">
         <template #default="scope">
-          <el-text truncated>{{ scope.row.content }}</el-text>
+          <el-tooltip effect="dark" :content="scope.row.content" placement="top">
+            <el-text truncated>{{ scope.row.content }}</el-text>
+          </el-tooltip>
         </template>
       </el-table-column>
       <el-table-column prop="createdDate" label="Ngày tạo" sortable width="200" />

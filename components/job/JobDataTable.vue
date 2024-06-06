@@ -5,7 +5,9 @@
       <el-table-column prop="title" label="Tên" sortable />
       <el-table-column prop="summary" label="Tóm tắt" sortable>
         <template #default="scope">
-          <el-text truncated>{{ scope.row.summary }}</el-text>
+          <el-tooltip effect="dark" :content="scope.row.summary" placement="top">
+            <el-text truncated>{{ scope.row.summary }}</el-text>
+          </el-tooltip>
         </template>
       </el-table-column>
       <el-table-column prop="imageUrl" label="Hình ảnh Url" sortable align="center">

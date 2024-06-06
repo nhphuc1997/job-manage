@@ -10,12 +10,16 @@
       <el-table-column prop="userPhone" label="Số điện thoại" align="center" />
       <el-table-column prop="jobTitle" label="Tên công việc">
         <template #default="scope">
-          <el-text truncated>{{ scope.row.jobTitle }}</el-text>
+          <el-tooltip effect="dark" :content="scope.row.jobTitle" placement="top">
+            <el-text truncated>{{ scope.row.jobTitle }}</el-text>
+          </el-tooltip>
         </template>
       </el-table-column>
       <el-table-column prop="jobSummary" label="Tóm tắt ">
         <template #default="scope">
-          <el-text truncated>{{ scope.row.jobSummary }}</el-text>
+          <el-tooltip effect="dark" :content="scope.row.jobSummary" placement="top">
+            <el-text truncated>{{ scope.row.jobSummary }}</el-text>
+          </el-tooltip>
         </template>
       </el-table-column>
       <el-table-column label="Trạng thái" align="center" width="100">
@@ -23,13 +27,13 @@
           <el-row :gutter="4">
             <el-col :span="24">
               <div v-if="scope.row.status === 'PENDING'">
-                <el-button type="success" plain :icon="SwitchFilled" size="small"
+                <el-button type="warning" plain :icon="SwitchFilled" size="small"
                   @click="jobConfirmStore.openDialogEdit(scope.row)" />
               </div>
               <div v-else>
                 <el-button size="small" type="success" :icon="CircleCheckFilled" circle plain
                   v-if="scope.row.status === 'APPROVED'" />
-                <el-button size="small" type="warning" :icon="CircleCloseFilled" circle plain
+                <el-button size="small" type="danger" :icon="CircleCloseFilled" circle plain
                   v-if="scope.row.status === 'REJECT'" />
               </div>
             </el-col>
