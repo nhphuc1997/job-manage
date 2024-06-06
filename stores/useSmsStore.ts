@@ -37,7 +37,7 @@ export const useSmsStore = defineStore('useSmsStore', {
       if (this.filter.createdDate !== '') {
         const fromDate = stringToDate(this.filter.createdDate[0])
         const toDate = stringToDate(this.filter.createdDate[1])
-        query['filter'] = `createdDate:>'${fromDate}' and createdDate:>'${toDate}'`
+        query['filter'] = `createdDate>:'${fromDate}' and createdDate<:'${toDate}'`
       }
 
       const sms: any = await doGET(`v1/api/job-manger/sms`, query)

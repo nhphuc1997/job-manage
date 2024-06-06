@@ -3,7 +3,7 @@
     <el-row :gutter="12">
       <el-col :span="6">
         <el-input v-model="smsStore.filter.fulltext" @change="smsStore.fetchSms"
-          placeholder="Tìm kiếm tên người dùng / nội dung" :suffix-icon="ElIconSearch" />
+          placeholder="Tìm kiếm tên người dùng, nội dung" :suffix-icon="ElIconSearch" />
       </el-col>
 
       <el-col :span="6">
