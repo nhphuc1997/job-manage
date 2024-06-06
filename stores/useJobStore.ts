@@ -12,7 +12,7 @@ export const useJobStore = defineStore('useJobStore', {
       currentPage: 0,
     },
     filter: {
-      search: '',
+      fulltext: '',
       date: '',
       status: '',
       area: '',
@@ -43,7 +43,10 @@ export const useJobStore = defineStore('useJobStore', {
         size: this.metadata.size ?? 10,
         sort: 'id,desc'
       }
-      if (this.filter.search !== '') query['filter'] = `title~'*${this.filter.search}*'`
+      if (this.filter.fulltext !== '') {
+        const fulltext = this.filter.fulltext
+        query['filter'] = `title~'*${fulltext}*' or summary~'*${fulltext}*'`
+      }
       if (this.filter.status !== '') query['filter'] = `status~'${this.filter.status}'`
       if (this.filter.area !== '') query['filter'] = `areaId~'${this.filter.area}'`
       if (this.filter.date !== '') {
@@ -149,7 +152,7 @@ export const useJobStore = defineStore('useJobStore', {
       }
     },
     async resetFilter() {
-      this.filter.search = ''
+      this.filter.fulltext = ''
       this.filter.date = ''
       this.filter.status = ''
       this.filter.area = ''

@@ -2,14 +2,8 @@
   <div class="create">
     <el-row :gutter="12">
       <el-col :span="6">
-        <el-input v-model="jobStore.filter.search" @change="jobStore.fetchJobs" placeholder="Tìm kiếm"
+        <el-input v-model="jobStore.filter.fulltext" @change="jobStore.fetchJobs" placeholder="Tìm kiếm"
           :suffix-icon="ElIconSearch" />
-      </el-col>
-
-      <el-col :span="6">
-        <el-date-picker v-model="jobStore.filter.date" type="daterange" range-separator="Đến"
-          start-placeholder="Ngày hết hạn" end-placeholder="Ngày hết hạn" style="width: 95%;"
-          @change="jobStore.fetchJobs" />
       </el-col>
 
       <el-col :span="3">
@@ -23,6 +17,12 @@
         <el-select v-model="jobStore.filter.area" placeholder="Khu vực" @change="jobStore.fetchJobs">
           <el-option v-for="item in jobStore.data.area" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
+      </el-col>
+
+      <el-col :span="6">
+        <el-date-picker v-model="jobStore.filter.date" type="daterange" range-separator="Đến"
+          start-placeholder="Ngày hết hạn" end-placeholder="Ngày hết hạn" style="width: 95%;"
+          @change="jobStore.fetchJobs" />
       </el-col>
 
       <el-col :span="3">
