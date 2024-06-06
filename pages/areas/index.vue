@@ -19,7 +19,8 @@
 <script lang="ts" setup>
 
 definePageMeta({
-  layout: 'default'
+  layout: 'default',
+  middleware: ['auth']
 })
 
 const areaStore = useAreaStore()

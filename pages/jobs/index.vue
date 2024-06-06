@@ -20,7 +20,8 @@
 import { JobDataTable } from '#components'
 
 definePageMeta({
-  layout: 'default'
+  layout: 'default',
+  middleware: ['auth']
 })
 
 const jobStore = useJobStore()

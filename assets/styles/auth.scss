@@ -1,0 +1,31 @@
+.login-section {
+  width: 100%;
+  height: 100%;
+
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+
+    .form {
+      width: 500px;
+      border: 1px solid var(--el-menu-border-color);
+      padding: 32px;
+      border-radius: 8px;
+
+      .text-login {
+        width: 100%;
+        padding-bottom: 32px;
+      }
+    }
+
+    .submit-button-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+}
