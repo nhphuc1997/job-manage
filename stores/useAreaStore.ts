@@ -10,10 +10,9 @@ export const useAreaStore = defineStore('useAreaStore', {
       currentPage: 0,
     },
     filter: {
-      search: '',
+      fulltext: '',
       date: '',
       status: '',
-      code: '',
     },
     data: {
       areas: [] as Area[],
@@ -41,9 +40,11 @@ export const useAreaStore = defineStore('useAreaStore', {
         size: this.metadata.size ?? 10,
         sort: 'id,desc'
       }
-      if (this.filter.search !== '') query['filter'] = `name~'*${this.filter.search}*'`
+      if (this.filter.fulltext !== '') {
+        const fulltext = this.filter.fulltext
+        query['filter'] = `name~'*${fulltext}*' or code~'${fulltext}'`
+      }
       if (this.filter.status !== '') query['filter'] = `status~'${this.filter.status}'`
-      if (this.filter.code !== '') query['filter'] = `code~'${this.filter.code}'`
 
       const areas: any = await doGET(`v1/api/job-manger/areas`, query)
       if (areas.code === '00') {
@@ -129,10 +130,9 @@ export const useAreaStore = defineStore('useAreaStore', {
       }
     },
     async resetFilter() {
-      this.filter.search = ''
+      this.filter.fulltext = ''
       this.filter.date = ''
       this.filter.status = ''
-      this.filter.code = ''
       await this.fetchAreas()
     },
   }
