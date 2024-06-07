@@ -22,7 +22,7 @@ definePageMeta({
   layout: 'default',
   middleware: ['auth']
 })
-const loading = ElLoading.service({ lock: true, background: 'rgba(0, 0, 0, 0.7)' })
+const loading = ElLoading.service({ lock: true })
 
 const areaStore = useAreaStore()
 await areaStore.fetchAreas()
