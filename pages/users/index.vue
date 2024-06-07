@@ -20,9 +20,9 @@ definePageMeta({
 })
 
 const loading = ElLoading.service({ lock: true })
-setTimeout(() => loading.close(), LOADING_TIMEOUT)
 
 const userStore = useUserStore()
 await userStore.fetchUsers()
 
+loading.close()
 </script>

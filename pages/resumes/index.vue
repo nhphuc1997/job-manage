@@ -18,9 +18,9 @@ definePageMeta({
 })
 
 const loading = ElLoading.service({ lock: true })
-setTimeout(() => loading.close(), LOADING_TIMEOUT)
 
 const resumeStore = useResumeStore()
 await resumeStore.fetchResumes()
 
+loading.close()
 </script>
