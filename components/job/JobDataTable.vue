@@ -24,12 +24,12 @@
           <el-row>
             <el-col :span="12">
               <el-button v-if="scope.row.status === 'ACTIVE'" type="success" size="small" plain
-                :icon="ElIconWarningFilled" disabled>
-                {{ String(scope.row.status).toLowerCase() }}
+                :icon="ElIconWarningFilled">
+                {{ useCapitalize(scope.row.status) }}
               </el-button>
 
-              <el-button v-else type="info" size="small" plain :icon="ElIconWarnTriangleFilled" disabled>
-                {{ String(scope.row.status).toLowerCase() }}
+              <el-button v-else type="warning" size="small" plain :icon="ElIconWarnTriangleFilled">
+                {{ useCapitalize(scope.row.status) }}
               </el-button>
             </el-col>
 

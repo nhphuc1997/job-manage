@@ -1,6 +1,6 @@
 export const doGET = async (url: string, params?: any, query?: any) => {
   const accessToken = useCookie("accessToken")
-  const { data, error } = await useFetch(
+  const { data } = await useFetch(
     `http://18.141.39.162:8089/${url}`,
     {
       headers: {
@@ -14,17 +14,14 @@ export const doGET = async (url: string, params?: any, query?: any) => {
     }
   )
 
-  if (error.value?.message) {
-    return ElNotification(error.value?.message)
-  }
-
-  return data?.value
+  const result: any = data.value
+  if (result.code === '05') return navigateTo('/login')
+  return result
 }
-
 
 export const doPOST = async (url: string, payload: any) => {
   const accessToken = useCookie("accessToken")
-  const { data, error } = await useFetch(
+  const { data } = await useFetch(
     `http://18.141.39.162:8089/${url}`,
     {
       headers: {
@@ -37,16 +34,14 @@ export const doPOST = async (url: string, payload: any) => {
     }
   )
 
-  if (error.value?.message) {
-    return ElNotification(error.value?.message)
-  }
-
-  return data?.value
+  const result: any = data.value
+  if (result.code === '05') return navigateTo('/login')
+  return result
 }
 
 export const doPUT = async (url: string, payload: any) => {
   const accessToken = useCookie("accessToken")
-  const { data, error } = await useFetch(
+  const { data } = await useFetch(
     `http://18.141.39.162:8089/${url}`,
     {
       headers: {
@@ -59,16 +54,14 @@ export const doPUT = async (url: string, payload: any) => {
     }
   )
 
-  if (error.value?.message) {
-    return ElNotification(error.value?.message)
-  }
-
-  return data?.value
+  const result: any = data.value
+  if (result.code === '05') return navigateTo('/login')
+  return result
 }
 
 export const doPATCH = async (url: string, payload: any) => {
   const accessToken = useCookie("accessToken")
-  const { data, error } = await useFetch(
+  const { data } = await useFetch(
     `http://18.141.39.162:8089/${url}`,
     {
       headers: {
@@ -81,9 +74,7 @@ export const doPATCH = async (url: string, payload: any) => {
     }
   )
 
-  if (error.value?.message) {
-    return ElNotification(error.value?.message)
-  }
-
-  return data?.value
+  const result: any = data.value
+  if (result.code === '05') return navigateTo('/login')
+  return result
 }

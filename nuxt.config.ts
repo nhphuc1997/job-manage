@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   modules: [
     '@element-plus/nuxt',
     "@pinia/nuxt",
-    'dayjs-nuxt'
+    'dayjs-nuxt',
+    'nuxt-lodash'
   ],
   elementPlus: {},
   devtools: { enabled: false },
@@ -12,4 +13,5 @@ export default defineNuxtConfig({
     port: 9000
   },
   ssr: false,
+  lodash: {}
 })
