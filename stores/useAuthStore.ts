@@ -20,10 +20,12 @@ export const useAuthStore = defineStore('useAuthStore', {
 
       if (authInfor.code === '00') {
         const accessTokenCookie = useCookie('accessToken', { maxAge: TTL_COOKIE })
+        const userName = useCookie('userName', { maxAge: TTL_COOKIE })
         const refreshTokenCookie = useCookie('refreshToken', { maxAge: TTL_COOKIE })
 
         accessTokenCookie.value = String(authInfor?.data?.accessToken?.value)
         refreshTokenCookie.value = String(authInfor?.data?.refreshToken?.value)
+        userName.value = String(authInfor?.data?.userName)
 
         this.data.currentUser = {
           name: authInfor.data.userName,
