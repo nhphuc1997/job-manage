@@ -53,3 +53,15 @@ export interface JobConfirm {
   rejectComment: string | null,
   status: string
 }
+
+export interface User {
+  id: number,
+  username: string,
+  email: string,
+  phone: null | number,
+  description: null | number,
+  status: string,
+  authorities: any,
+  createdAt: number,
+  updatedAt: number
+}

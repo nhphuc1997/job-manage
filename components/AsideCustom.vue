@@ -32,6 +32,13 @@
       </el-icon>
       <template #title>Xác nhận</template>
     </el-menu-item>
+
+    <el-menu-item @click="navigateTo('/users')" :class="route.path === '/users' ? 'is-active' : ''">
+      <el-icon>
+        <management />
+      </el-icon>
+      <template #title>Người dùng</template>
+    </el-menu-item>
   </el-menu>
 </template>
 

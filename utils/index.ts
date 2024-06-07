@@ -8,5 +8,9 @@ export const redirectTo = (path: string) => {
   return navigateTo({ path }, { open: { target: '_blank' } })
 }
 
+export const timeStampToDate = (timestamp: number) => {
+  return dayjs(timestamp).format('DD/MM/YYYY hh:mm:ss').toString()
+}
+
 export const TTL_COOKIE = 6000
 export const LOADING_TIMEOUT = 500
