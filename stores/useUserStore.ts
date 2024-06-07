@@ -70,7 +70,6 @@ export const useUserStore = defineStore('useUserStore', {
       const { id } = row
       const job: any = await doGET(`v1/api/job-manger/managements/users/${id}`)
       job.data['authorities'] = job.data['authorities'].map((item: Record<string, any>) => item.code)
-      debugger
       this.data.viewUser = job.data
     },
     async paginationSizeChange(size: number) {
