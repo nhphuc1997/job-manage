@@ -56,7 +56,7 @@ export const useJobStore = defineStore('useJobStore', {
       }
 
       const jobs: any = await doGET(`v1/api/job-manger/jobs`, query)
-      if (jobs.code === '00') {
+      if (jobs?.code === '00') {
         this.data.jobs = jobs?.data?.content
         this.metadata.size = jobs?.data?.size
         this.metadata.page = jobs?.data?.number

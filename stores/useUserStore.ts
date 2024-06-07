@@ -53,7 +53,7 @@ export const useUserStore = defineStore('useUserStore', {
       }
 
       const users: any = await doGET(`v1/api/job-manger/managements/users`, query)
-      if (users.code === '00') {
+      if (users?.code === '00') {
         this.data.users = users?.data?.content
         this.metadata.size = users?.data?.size
         this.metadata.page = users?.data?.number

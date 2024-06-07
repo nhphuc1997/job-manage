@@ -35,7 +35,7 @@ export const useResumeStore = defineStore('useResumeStore', {
       if (this.filter.status !== '') query['filter'] = `status~'*${this.filter.status}*'`
 
       const resumes: any = await doGET(`v1/api/job-manger/resumes`, query)
-      if (resumes.code === '00') {
+      if (resumes?.code === '00') {
         this.data.resumes = resumes?.data?.content
         this.metadata.size = resumes?.data?.size
         this.metadata.page = resumes?.data?.number

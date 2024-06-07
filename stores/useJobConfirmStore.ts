@@ -52,7 +52,7 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       if (this.filter.status !== '') query['filter'] = `status~'${this.filter.status}'`
 
       const jobConfirm: any = await doGET(`v1/api/job-manger/jobConfirm`, query)
-      if (jobConfirm.code === '00') {
+      if (jobConfirm?.code === '00') {
         this.data.jobConfirm = jobConfirm?.data?.content
         this.metadata.size = jobConfirm?.data?.size
         this.metadata.page = jobConfirm?.data?.number

@@ -47,7 +47,7 @@ export const useAreaStore = defineStore('useAreaStore', {
       if (this.filter.status !== '') query['filter'] = `status~'${this.filter.status}'`
 
       const areas: any = await doGET(`v1/api/job-manger/areas`, query)
-      if (areas.code === '00') {
+      if (areas?.code === '00') {
         this.data.areas = areas?.data?.content
         this.metadata.size = areas?.data?.size
         this.metadata.page = areas?.data?.number

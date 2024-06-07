@@ -41,7 +41,7 @@ export const useSmsStore = defineStore('useSmsStore', {
       }
 
       const sms: any = await doGET(`v1/api/job-manger/sms`, query)
-      if (sms.code === '00') {
+      if (sms?.code === '00') {
         this.data.sms = sms?.data?.content
         this.metadata.size = sms?.data?.size
         this.metadata.page = sms?.data?.number
