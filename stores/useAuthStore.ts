@@ -1,4 +1,4 @@
-import { doPOST } from "~/utils/apis"
+import { doMethod } from "~/utils/apis"
 
 export const useAuthStore = defineStore('useAuthStore', {
   state: () => ({
@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('useAuthStore', {
   actions: {
     async doLogin() {
       const { username, password } = this.data.login
-      const authInfor: any = await doPOST(`v1/api/job-manger/users/authenticate`, { username, password })
+      const authInfor: any = await doMethod(`v1/api/job-manger/users/authenticate`, { username, password }, 'POST')
 
       if (authInfor.code === '00') {
         const accessTokenCookie = useCookie('accessToken', { maxAge: TTL_COOKIE })

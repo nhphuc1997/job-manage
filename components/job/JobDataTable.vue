@@ -2,11 +2,17 @@
   <div class="infor">
     <el-table ref="tableRef" row-key="date" :data="jobStore.data.jobs" style="width: 100%" :border="true" height="600">
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
-      <el-table-column prop="title" label="Tên" sortable />
+      <el-table-column prop="title" label="Tên công việc" sortable>
+        <template #default="scope">
+          <el-tooltip effect="dark" :content="scope.row.title" placement="top">
+            <el-text truncated>{{ useCapitalize(scope.row.title) }}</el-text>
+          </el-tooltip>
+        </template>
+      </el-table-column>
       <el-table-column prop="summary" label="Tóm tắt" sortable>
         <template #default="scope">
           <el-tooltip effect="dark" :content="scope.row.summary" placement="top">
-            <el-text truncated>{{ scope.row.summary }}</el-text>
+            <el-text truncated>{{ useCapitalize(scope.row.summary) }}</el-text>
           </el-tooltip>
         </template>
       </el-table-column>
