@@ -1,5 +1,5 @@
 import type { Job } from "~/utils/interfaces"
-import { doGET, doPATCH, doPOST, doPUT } from "~/utils/apis"
+import { doGET, doMethod } from "~/utils/apis"
 import { dayjs } from "element-plus"
 import { stringToDate } from "~/utils"
 
@@ -109,7 +109,7 @@ export const useJobStore = defineStore('useJobStore', {
     async createJob() {
       const payload = this.data.newJob
       payload['expiredDate'] = stringToDate(payload['expiredDate'])
-      const jobs: any = await doPOST(`v1/api/job-manger/jobs`, this.data.newJob)
+      const jobs: any = await doMethod(`v1/api/job-manger/jobs`, this.data.newJob, 'POST')
       if (jobs.code === '00') {
         ElNotification({ message: 'Tạo mới công việc thành công', type: 'success' })
         this.data.newJob = {} as Job
@@ -131,7 +131,7 @@ export const useJobStore = defineStore('useJobStore', {
         expiredDate: stringToDate(editAttrJob.expiredDate),
       }
 
-      const job: any = await doPUT(`v1/api/job-manger/jobs/${id}`, payload)
+      const job: any = await doMethod(`v1/api/job-manger/jobs/${id}`, payload, 'PUT')
       if (job.code === '00') {
         ElNotification({ message: 'Chỉnh sửa công việc thành công', type: 'success' })
         this.data.editAttrJob = {} as Job
@@ -142,7 +142,7 @@ export const useJobStore = defineStore('useJobStore', {
     },
     async editStatusJob() {
       const { id, status } = this.data.editStatusJob
-      const job: any = await doPATCH(`v1/api/job-manger/jobs/${id}`, { status: status })
+      const job: any = await doMethod(`v1/api/job-manger/jobs/${id}`, { status: status }, 'PATCH')
       if (job.code === '00') {
         ElNotification({ message: 'Chỉnh sửa trạng thái công việc thành công', type: 'success' })
         this.data.editAttrJob = {} as Job

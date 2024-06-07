@@ -1,5 +1,5 @@
 import type { Job, JobConfirm, Sms } from "~/utils/interfaces"
-import { doGET, doPOST, doPUT } from "~/utils/apis"
+import { doGET, doMethod } from "~/utils/apis"
 import { stringToDate } from "~/utils"
 
 export const useJobConfirmStore = defineStore('useJobConfirmStore', {
@@ -91,7 +91,7 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
     },
     async updateJobConfirmStatus() {
       const { status, rejectComment, id } = this.data.editJobConfirm
-      const job: any = await doPUT(`v1/api/job-manger/jobConfirm/${id}`, { status, rejectComment })
+      const job: any = await doMethod(`v1/api/job-manger/jobConfirm/${id}`, { status, rejectComment }, 'PUT')
 
       if (job.code === '00') {
         ElNotification({ message: 'Cập nhập trạng thái xác nhận công việc thành công', type: 'success' })

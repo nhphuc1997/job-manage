@@ -1,5 +1,5 @@
-import type { Job, Sms } from "~/utils/interfaces"
-import { doGET, doPOST } from "~/utils/apis"
+import type { Sms } from "~/utils/interfaces"
+import { doGET } from "~/utils/apis"
 import { stringToDate } from "~/utils"
 
 export const useSmsStore = defineStore('useSmsStore', {

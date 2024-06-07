@@ -1,5 +1,5 @@
 import type { Area } from "~/utils/interfaces"
-import { doGET, doPATCH, doPOST, doPUT } from "~/utils/apis"
+import { doGET, doMethod } from "~/utils/apis"
 
 export const useAreaStore = defineStore('useAreaStore', {
   state: () => ({
@@ -95,7 +95,7 @@ export const useAreaStore = defineStore('useAreaStore', {
     },
     async createJob() {
       const { name, code } = this.data.newArea
-      const areas: any = await doPOST(`v1/api/job-manger/areas`, { name, code })
+      const areas: any = await doMethod(`v1/api/job-manger/areas`, { name, code }, 'POST')
 
       if (areas.code === '00') {
         ElNotification({ message: 'Tạo mới khu vực thành công', type: 'success' })
@@ -107,7 +107,7 @@ export const useAreaStore = defineStore('useAreaStore', {
     },
     async editAttrArea() {
       const { id, name, code } = this.data.editAttrArea
-      const job: any = await doPUT(`v1/api/job-manger/areas/${id}`, { name, code })
+      const job: any = await doMethod(`v1/api/job-manger/areas/${id}`, { name, code }, 'PUT')
 
       if (job.code === '00') {
         ElNotification({ message: 'Chỉnh sửa khu vực thành công', type: 'success' })
@@ -119,7 +119,7 @@ export const useAreaStore = defineStore('useAreaStore', {
     },
     async editStatusArea() {
       const { id, status } = this.data.editStatusArea
-      const job: any = await doPATCH(`v1/api/job-manger/areas/${id}`, { status: status })
+      const job: any = await doMethod(`v1/api/job-manger/areas/${id}`, { status: status }, 'PATCH')
 
       if (job.code === '00') {
         ElNotification({ message: 'Chỉnh sửa trạng thái khu vực thành công', type: 'success' })
