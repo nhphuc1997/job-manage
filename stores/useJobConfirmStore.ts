@@ -1,6 +1,5 @@
-import type { Job, JobConfirm, Sms } from "~/utils/interfaces"
+import type { JobConfirm } from "~/utils/interfaces"
 import { doGET, doMethod } from "~/utils/apis"
-import { stringToDate } from "~/utils"
 
 export const useJobConfirmStore = defineStore('useJobConfirmStore', {
   state: () => ({

@@ -15,7 +15,7 @@ export const doGET = async (url: string, params?: any, query?: any) => {
   )
 
   if (status.value === 'error') {
-    ElNotification({ message: "Network error", type: 'error' })
+    ElNotification({ message: "Network error", type: 'error', duration: 0 })
     return
   }
 

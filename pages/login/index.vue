@@ -38,7 +38,8 @@
 <script lang="ts" setup>
 import { Connection } from '@element-plus/icons-vue';
 definePageMeta({
-  layout: "auth"
+  layout: 'auth',
+  // middleware: ['login']
 })
 
 const authStore = useAuthStore()
