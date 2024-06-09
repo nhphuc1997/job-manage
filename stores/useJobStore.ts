@@ -1,4 +1,4 @@
-import type { Job } from "~/utils/interfaces"
+import type { Area, Job } from "~/utils/interfaces"
 import { doGET, doMethod } from "~/utils/apis"
 import { dayjs } from "element-plus"
 import { stringToDate } from "~/utils"
@@ -89,7 +89,12 @@ export const useJobStore = defineStore('useJobStore', {
       const { id } = row
       this.dialog.editJobAttrVisible = true
       const job: any = await doGET(`v1/api/job-manger/jobs/${id}`)
+      const area: Area[] = this.data.area
+      const currentArea = area.find(item => item.id === job.data['areaId']) || { name: 'n/a' }
+
       this.data.editAttrJob = job.data
+      this.data.editAttrJob['expiredDate'] = dateFromString(job.data['expiredDate'])
+      this.data.editAttrJob['areaName'] = currentArea.name
     },
     async openDialogViewJob(row: any) {
       this.dialog.viewJobVisible = true

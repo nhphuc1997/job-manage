@@ -12,5 +12,9 @@ export const timeStampToDate = (timestamp: number) => {
   return dayjs(timestamp).format('DD/MM/YYYY hh:mm:ss').toString()
 }
 
+export const dateFromString = (str: string) => {
+  return dayjs(str, 'DD/MM/YYYY HH:mm:ss').toDate().toISOString()
+}
+
 export const TTL_COOKIE = 6000
 export const LOADING_TIMEOUT = 500

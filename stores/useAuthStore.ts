@@ -48,7 +48,7 @@ export const useAuthStore = defineStore('useAuthStore', {
       accessToken.value = undefined
       userName.value = undefined
       refreshTokenCookie.value = undefined
-
+      
       ElNotification({ message: 'Đăng xuất thành công', type: 'success' })
       return navigateTo('/login')
     }

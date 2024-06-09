@@ -16,8 +16,8 @@
       </el-form-item>
 
       <el-form-item label="Ngày hết hạn" :label-width="formLabelWidth">
-        <el-date-picker style="width: 100%;" v-model="jobStore.data.editAttrJob.expiredDate" type="date"
-          placeholder="Ngày hết hạn" />
+        <el-date-picker style="width: 100%;" v-model="jobStore.data.editAttrJob.expiredDate" type="datetime"
+          placeholder="Ngày hết hạn" format="DD/MM/YYYY HH:mm:ss" />
       </el-form-item>
 
       <el-form-item label="Tóm tắt công việc" :label-width="formLabelWidth">

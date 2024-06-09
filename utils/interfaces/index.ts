@@ -10,6 +10,7 @@ export interface Job {
   htmlContent?: string,
   imageUrl?: string,
   areaId?: string | number,
+  areaName?: string,
   expiredDate: string,
   status?: string,
 }
