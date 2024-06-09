@@ -122,6 +122,14 @@ export const useJobStore = defineStore('useJobStore', {
         await this.fetchJobs()
         return
       }
+
+      if (jobs.code === '100') {
+        ElNotification({ message: 'Tên công việc đã tồn tại, vui lòng kiểm tra lại thông tin', type: 'error' })
+        return
+      }
+
+      ElNotification({ message: 'Hệ thống tạm thời gián đoạn', type: 'error' })
+      return
     },
     async editAttrJob() {
       const editAttrJob = this.data.editAttrJob
@@ -144,6 +152,9 @@ export const useJobStore = defineStore('useJobStore', {
         await this.fetchJobs()
         return
       }
+
+      ElNotification({ message: 'Hệ thống tạm thời gián đoạn', type: 'error' })
+      return
     },
     async editStatusJob() {
       const { id, status } = this.data.editStatusJob
@@ -155,6 +166,9 @@ export const useJobStore = defineStore('useJobStore', {
         await this.fetchJobs()
         return
       }
+
+      ElNotification({ message: 'Hệ thống tạm thời gián đoạn', type: 'error' })
+      return
     },
     async resetFilter() {
       this.filter.fulltext = ''

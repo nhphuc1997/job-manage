@@ -12,9 +12,16 @@
       <template #title>Công việc</template>
     </el-menu-item>
 
+    <el-menu-item @click="navigateTo('/job-confirm')" :class="route.path === '/job-confirm' ? 'is-active' : ''">
+      <el-icon>
+        <TrendCharts />
+      </el-icon>
+      <template #title>Xác nhận</template>
+    </el-menu-item>
+
     <el-menu-item @click="navigateTo('/sms')" :class="route.path === '/sms' ? 'is-active' : ''">
       <el-icon>
-        <list />
+        <DataBoard />
       </el-icon>
       <template #title>SMS</template>
     </el-menu-item>
@@ -24,13 +31,6 @@
         <list />
       </el-icon>
       <template #title>Hồ sơ</template>
-    </el-menu-item>
-
-    <el-menu-item @click="navigateTo('/job-confirm')" :class="route.path === '/job-confirm' ? 'is-active' : ''">
-      <el-icon>
-        <management />
-      </el-icon>
-      <template #title>Xác nhận</template>
     </el-menu-item>
 
     <el-menu-item @click="navigateTo('/users')" :class="route.path === '/users' ? 'is-active' : ''">
@@ -54,7 +54,9 @@ import {
   Menu as IconMenu,
   Setting,
   List,
-  Management
+  Management,
+  TrendCharts,
+  DataBoard
 } from '@element-plus/icons-vue'
 
 const route = useRoute()

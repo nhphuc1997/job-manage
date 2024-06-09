@@ -24,7 +24,7 @@
         <template #default="scope">
           <el-row :gutter="4">
             <el-col :span="24">
-              <div v-if="scope.row.status !== 'PENDING'">
+              <div v-if="scope.row.status === 'PENDING'">
 
                 <el-popconfirm width="250" confirm-button-text="Đồng ý" cancel-button-text="Huỷ"
                   :title="`Chấp thuận công việc '${scope.row.jobTitle}'`"
