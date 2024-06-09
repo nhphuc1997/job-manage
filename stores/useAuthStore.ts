@@ -19,9 +19,9 @@ export const useAuthStore = defineStore('useAuthStore', {
       const authInfor: any = await doMethod(`v1/api/job-manger/users/authenticate`, { username, password }, 'POST')
 
       if (authInfor.code === '00') {
-        const accessTokenCookie = useCookie('accessToken', { maxAge: TTL_COOKIE })
-        const userName = useCookie('userName', { maxAge: TTL_COOKIE })
-        const refreshTokenCookie = useCookie('refreshToken', { maxAge: TTL_COOKIE })
+        const accessTokenCookie = useCookie('accessToken')
+        const userName = useCookie('userName')
+        const refreshTokenCookie = useCookie('refreshToken')
 
         accessTokenCookie.value = String(authInfor?.data?.accessToken?.value)
         refreshTokenCookie.value = String(authInfor?.data?.refreshToken?.value)
@@ -39,6 +39,9 @@ export const useAuthStore = defineStore('useAuthStore', {
         ElNotification({ message: 'Đăng nhập thành công', type: 'success' })
         return navigateTo('/areas')
       }
+
+      ElNotification({ message: 'Đăng nhập thất bại', type: 'error' })
+      return navigateTo('/')
     },
     doLogout() {
       const accessToken = useCookie("accessToken")
@@ -48,9 +51,9 @@ export const useAuthStore = defineStore('useAuthStore', {
       accessToken.value = undefined
       userName.value = undefined
       refreshTokenCookie.value = undefined
-      
+
       ElNotification({ message: 'Đăng xuất thành công', type: 'success' })
-      return navigateTo('/login')
+      return navigateTo('/')
     }
   }
 })

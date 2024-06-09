@@ -1,5 +1,10 @@
 export const doGET = async (url: string, params?: any, query?: any) => {
   const accessToken = useCookie("accessToken")
+
+  if (accessToken.value === null || accessToken.value === undefined) {
+    return navigateTo('/')
+  }
+
   const { data, status } = await useFetch(
     `http://18.141.39.162:8089/${url}`,
     {
@@ -20,7 +25,7 @@ export const doGET = async (url: string, params?: any, query?: any) => {
   }
 
   const result: any = data.value
-  if (result.code === '05') return navigateTo('/login')
+  if (result.code === '05') return navigateTo('/')
   return result
 }
 
@@ -45,6 +50,6 @@ export const doMethod = async (url: string, payload: any, method: 'POST' | 'PUT'
   }
 
   const result: any = data.value
-  if (result.code === '05') return navigateTo('/login')
+  if (result.code === '05') return navigateTo('/')
   return result
 }

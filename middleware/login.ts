@@ -6,5 +6,5 @@ export default defineNuxtRouteMiddleware(() => {
     router.back()
   }
 
-  router.push('/login')
+  router.push('/')
 })
