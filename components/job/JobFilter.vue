@@ -1,7 +1,7 @@
 <template>
   <div class="create">
     <el-row :gutter="12">
-      <el-col :span="6">
+      <el-col :span="5">
         <el-input v-model="jobStore.filter.fulltext" @change="jobStore.fetchJobs" placeholder="Tìm kiếm"
           :suffix-icon="ElIconSearch" />
       </el-col>
@@ -19,15 +19,17 @@
         </el-select>
       </el-col>
 
-      <el-col :span="6">
-        <el-date-picker v-model="jobStore.filter.date" type="daterange" range-separator="Đến"
+      <el-col :span="7">
+        <el-date-picker v-model="jobStore.filter.date" type="datetimerange" range-separator="Đến"
           start-placeholder="Ngày hết hạn" end-placeholder="Ngày hết hạn" style="width: 95%;"
-          @change="jobStore.fetchJobs" />
+          @change="jobStore.fetchJobs" format="DD-MM-YYYY HH:mm:ss" date-format="DD/MM/YYYY"
+          time-format="HH:mm:ss" />
       </el-col>
 
       <el-col :span="3">
-        <el-button @click="jobStore.resetFilter" plain style="width: 100%;" type="info" :icon="ElIconMug">Xoá bộ
-          lọc</el-button>
+        <el-button @click="jobStore.resetFilter" plain style="width: 100%;" type="info" :icon="ElIconMug">
+          Xoá bộ lọc
+        </el-button>
       </el-col>
 
       <el-col :span="3">

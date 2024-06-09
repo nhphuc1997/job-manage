@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="userStore.dialog.viewUserVisible" title="Chi tiết khu vực" width="400" align-top>
+  <el-dialog v-model="userStore.dialog.viewUserVisible" title="Chi tiết người dùng" width="600" align-top>
     <el-form :model="userStore.data.viewUser">
 
       <el-form-item label="Id" :label-width="formLabelWidth">
