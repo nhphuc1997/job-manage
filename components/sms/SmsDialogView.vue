@@ -5,19 +5,15 @@
         <el-input disabled v-model="smsStore.data.viewSms.id" />
       </el-form-item>
 
-      <el-form-item label="userId" :label-width="formLabelWidth">
-        <el-input disabled v-model="smsStore.data.viewSms.userId" />
-      </el-form-item>
-
-      <el-form-item label="userName" :label-width="formLabelWidth">
+      <el-form-item label="Tên người dùng" :label-width="formLabelWidth">
         <el-input disabled v-model="smsStore.data.viewSms.userName" />
       </el-form-item>
 
-      <el-form-item label="content" :label-width="formLabelWidth">
+      <el-form-item label="Nội dung" :label-width="formLabelWidth">
         <el-input disabled v-model="smsStore.data.viewSms.content" type="textarea" :rows="4" />
       </el-form-item>
 
-      <el-form-item label="createdDate" :label-width="formLabelWidth">
+      <el-form-item label="Mgày tạo" :label-width="formLabelWidth">
         <el-input disabled v-model="smsStore.data.viewSms.createdDate" />
       </el-form-item>
 

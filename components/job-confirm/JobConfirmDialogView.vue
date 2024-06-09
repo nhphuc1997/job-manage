@@ -6,18 +6,6 @@
         <el-input disabled v-model="jobConfirmStore.data.viewJobConfirm.id" />
       </el-form-item>
 
-      <el-form-item label="Id hồ sơ" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobConfirmStore.data.viewJobConfirm.resumeId" />
-      </el-form-item>
-
-      <el-form-item label="Id công việc" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobConfirmStore.data.viewJobConfirm.jobId" />
-      </el-form-item>
-
-      <el-form-item label="Id người xác nhận" :label-width="formLabelWidth">
-        <el-input disabled v-model="jobConfirmStore.data.viewJobConfirm.confirmUserId" />
-      </el-form-item>
-
       <el-form-item label="Lý do từ chối" :label-width="formLabelWidth">
         <el-input disabled v-model="jobConfirmStore.data.viewJobConfirm.rejectComment" />
       </el-form-item>

@@ -40,8 +40,9 @@ body {
   }
 
   .el-dialog {
-    // --el-dialog-padding-primary: 12px !important;
-    padding-left: 32px;
-    padding-right: 32px;
+    .el-dialog__body {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
   }
 }
