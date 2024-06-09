@@ -1,12 +1,13 @@
 <template>
-  <el-dialog v-model="jobConfirmStore.dialog.editJobConfirmVisible" title="Xác nhận công việc" width="600" align-top>
+  <el-dialog v-model="jobConfirmStore.dialog.editJobConfirmVisible" title="Xác nhận từ chối công việc" width="500"
+    align-top>
     <el-form :model="jobConfirmStore.data.editJobConfirm">
       <el-form-item label="Id" :label-width="formLabelWidth">
         <el-text>{{ jobConfirmStore.data.editJobConfirm.id }}</el-text>
       </el-form-item>
 
       <el-form-item label="Trạng thái" :label-width="formLabelWidth">
-        <el-select v-model="jobConfirmStore.data.editJobConfirm.status">
+        <el-select v-model="jobConfirmStore.data.editJobConfirm.status" disabled>
           <el-option v-for="item in jobConfirmStore.data.optionsForEditStatus" :key="item.value" :label="item.label"
             :value="item.value" />
         </el-select>

@@ -20,12 +20,21 @@
           </el-tooltip>
         </template>
       </el-table-column>
-      <el-table-column label="Trạng thái" align="center" width="100">
+      <el-table-column label="Trạng thái" align="center" width="150">
         <template #default="scope">
           <el-row :gutter="4">
             <el-col :span="24">
-              <div v-if="scope.row.status === 'PENDING'">
-                <el-button type="warning" plain :icon="SwitchFilled" size="small"
+              <div v-if="scope.row.status !== 'PENDING'">
+
+                <el-popconfirm width="250" confirm-button-text="Đồng ý" cancel-button-text="Huỷ"
+                  :title="`Chấp thuận công việc '${scope.row.jobTitle}'`"
+                  @confirm="jobConfirmStore.updateApproveJob(scope.row)">
+                  <template #reference>
+                    <el-button plain type="success" size="small" :icon="CircleCheckFilled" />
+                  </template>
+                </el-popconfirm>
+
+                <el-button type="danger" plain :icon="CircleCloseFilled" size="small"
                   @click="jobConfirmStore.openDialogEdit(scope.row)" />
               </div>
               <div v-else>
@@ -52,6 +61,11 @@
 </template>
 
 <script lang="ts" setup>
-import { SwitchFilled, CircleCheckFilled, CircleCloseFilled } from '@element-plus/icons-vue'
+import {
+  SwitchFilled,
+  CircleCheckFilled,
+  CircleCloseFilled,
+  Finished
+} from '@element-plus/icons-vue'
 const jobConfirmStore = useJobConfirmStore()
 </script>

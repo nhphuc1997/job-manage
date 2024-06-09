@@ -27,7 +27,6 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
         { label: 'Chờ xử lí', value: 'PENDING' },
       ],
       optionsForEditStatus: [
-        { label: 'Chấp thuận', value: 'APPROVED' },
         { label: 'Từ chối', value: 'REJECT' },
       ]
     },
@@ -73,6 +72,7 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       this.dialog.editJobConfirmVisible = true
       const { id } = row
       this.data.editJobConfirm.id = id
+      this.data.editJobConfirm.status = 'REJECT'
     },
     async paginationSizeChange(size: number) {
       this.metadata.size = size
@@ -101,6 +101,26 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       }
 
       if (job.code === '520') {
+        ElNotification({ message: 'Công việc không thể chuyển trạng thái mới', type: 'info' })
+        return
+      }
+
+      ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
+      return
+    },
+    async updateApproveJob(row: any) {
+      const { id } = row
+      const jobConfirm: any = await doMethod(`v1/api/job-manger/jobConfirm/${id}`, { status: 'APPROVED' }, 'PUT')
+
+      if (jobConfirm.code === '00') {
+        ElNotification({ message: 'Cập nhập trạng thái xác nhận công việc thành công', type: 'success' })
+        this.dialog.editJobConfirmVisible = false
+        this.data.editJobConfirm = { id: '', rejectComment: '', status: '' }
+        await this.fetchJobConfirm()
+        return
+      }
+
+      if (jobConfirm.code === '520') {
         ElNotification({ message: 'Công việc không thể chuyển trạng thái mới', type: 'info' })
         return
       }
