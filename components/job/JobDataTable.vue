@@ -23,7 +23,7 @@
           </el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="areaName" label="Khu vực" sortable align="center" />
+      <el-table-column prop="areaName" label="Khu vực" sortable />
       <el-table-column prop="expiredDate" label="Ngày hết hạn" sortable />
       <el-table-column prop="status" label="Trạng thái" sortable align="center">
         <template #default="scope">

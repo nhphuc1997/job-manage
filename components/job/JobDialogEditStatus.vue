@@ -1,5 +1,6 @@
 <template>
-  <el-dialog v-model="jobStore.dialog.editJobStatusVisible" title="Chỉnh sửa trạng thái công việc" width="450">
+  <el-dialog v-model="jobStore.dialog.editJobStatusVisible" title="Chỉnh sửa trạng thái công việc" width="500"
+    align-top>
     <el-form :model="jobStore.data.editStatusJob">
 
       <el-form-item label="Id" :label-width="formLabelWidth">

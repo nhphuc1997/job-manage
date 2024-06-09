@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="areaStore.dialog.editAreaStatusVisible" title="Chỉnh sửa trạng thái công việc" width="450">
+  <el-dialog v-model="areaStore.dialog.editAreaStatusVisible" title="Chỉnh sửa trạng thái công việc" width="600" align-top>
     <el-form :model="areaStore.data.editStatusArea">
 
       <el-form-item label="Id" :label-width="formLabelWidth">

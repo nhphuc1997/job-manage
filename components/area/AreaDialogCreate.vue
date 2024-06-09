@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="areaStore.dialog.createAreaVisible" title="Khởi tạo khu vực" width="600">
+  <el-dialog v-model="areaStore.dialog.createAreaVisible" title="Khởi tạo khu vực" width="600" align-top>
     <el-form :model="areaStore.data.newArea">
       <el-form-item label="Tên" :label-width="formLabelWidth">
         <el-input v-model="areaStore.data.newArea.name" autocomplete="off" placeholder="Tên khu vực" />

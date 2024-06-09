@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="jobStore.dialog.viewJobVisible" title="Chi tiết công việc" width="800">
+  <el-dialog v-model="jobStore.dialog.viewJobVisible" title="Chi tiết công việc" width="800" align-center>
     <el-form :model="jobStore.data.viewJob">
       <el-form-item label="Id" :label-width="formLabelWidth">
         <el-input disabled v-model="jobStore.data.viewJob.id" autocomplete="off" />

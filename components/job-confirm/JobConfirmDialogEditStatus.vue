@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="jobConfirmStore.dialog.editJobConfirmVisible" title="Xác nhận công việc" width="600">
+  <el-dialog v-model="jobConfirmStore.dialog.editJobConfirmVisible" title="Xác nhận công việc" width="600" align-top>
     <el-form :model="jobConfirmStore.data.editJobConfirm">
       <el-form-item label="Id" :label-width="formLabelWidth">
         <el-text>{{ jobConfirmStore.data.editJobConfirm.id }}</el-text>

@@ -38,4 +38,10 @@ body {
   .el-menu-item {
     padding: 0px 20px;
   }
+
+  .el-dialog {
+    // --el-dialog-padding-primary: 12px !important;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
 }

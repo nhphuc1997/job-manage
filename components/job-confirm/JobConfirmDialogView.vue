@@ -1,5 +1,6 @@
 <template>
-  <el-dialog v-model="jobConfirmStore.dialog.viewJobConfirmVisible" title="Chi tiết xác nhận công việc" width="800">
+  <el-dialog v-model="jobConfirmStore.dialog.viewJobConfirmVisible" title="Chi tiết xác nhận công việc" width="800"
+    align-top>
     <el-form :model="jobConfirmStore.data.viewJobConfirm">
       <el-form-item label="Id" :label-width="formLabelWidth">
         <el-input disabled v-model="jobConfirmStore.data.viewJobConfirm.id" />

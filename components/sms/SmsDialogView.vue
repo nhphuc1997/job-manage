@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="smsStore.dialog.viewSmsVisible" title="Chi tiết sms" width="600">
+  <el-dialog v-model="smsStore.dialog.viewSmsVisible" title="Chi tiết sms" width="600" align-top>
     <el-form :model="smsStore.data.viewSms">
       <el-form-item label="Id" :label-width="formLabelWidth">
         <el-input disabled v-model="smsStore.data.viewSms.id" />

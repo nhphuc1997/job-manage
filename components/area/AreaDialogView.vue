@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="areaStore.dialog.viewAreaVisible" title="Chi tiết khu vực" width="400">
+  <el-dialog v-model="areaStore.dialog.viewAreaVisible" title="Chi tiết khu vực" width="600" align-top>
     <el-form :model="areaStore.data.viewArea">
 
       <el-form-item label="Id" :label-width="formLabelWidth">
