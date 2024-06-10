@@ -27,5 +27,12 @@
       justify-content: flex-end;
       align-items: center;
     }
+
+    @media only screen and (max-width: 768px) {
+      .form {
+        width: 80% !important;
+        padding: 10px;
+      }
+    }
   }
 }

@@ -9,12 +9,24 @@
         <el-input disabled v-model="smsStore.data.viewSms.userName" />
       </el-form-item>
 
+      <el-form-item label="Tên người gửi" :label-width="formLabelWidth">
+        <el-input disabled v-model="smsStore.data.viewSms.senderName" />
+      </el-form-item>
+
+      <el-form-item label="SĐT gửi" :label-width="formLabelWidth">
+        <el-input disabled v-model="smsStore.data.viewSms.senderPhone" />
+      </el-form-item>
+
       <el-form-item label="Nội dung" :label-width="formLabelWidth">
         <el-input disabled v-model="smsStore.data.viewSms.content" type="textarea" :rows="4" />
       </el-form-item>
 
-      <el-form-item label="Mgày tạo" :label-width="formLabelWidth">
+      <el-form-item label="Ngày tạo" :label-width="formLabelWidth">
         <el-input disabled v-model="smsStore.data.viewSms.createdDate" />
+      </el-form-item>
+
+      <el-form-item label="Ngày nhận" :label-width="formLabelWidth">
+        <el-input disabled v-model="smsStore.data.viewSms.receivedDate" />
       </el-form-item>
 
     </el-form>
