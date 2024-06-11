@@ -6,11 +6,11 @@
       <el-table-column prop="username" label="Tên người dùng" sortable />
       <el-table-column prop="email" label="Email" sortable />
       <el-table-column prop="phone" label="Số điện thoại" sortable />
-      <el-table-column prop="status" label="Trạng thái" align="center">
+      <el-table-column prop="status" label="Trạng thái" width="200" sortable>
         <template #default="scope">
-          <el-button size="small" :type="scope.row.status === 'ACTIVE' ? 'success' : 'warning'" round plain>
-            {{ String(scope.row.status).toLowerCase() }}
-          </el-button>
+          <el-tag size="small" :type="scope.row.status === 'ACTIVE' ? 'success' : 'danger'">
+            {{ parseStatus(scope.row.status) }}
+          </el-tag>
         </template>
       </el-table-column>
       <el-table-column align="center" width="150">
@@ -24,4 +24,11 @@
 
 <script lang="ts" setup>
 const userStore = useUserStore()
+
+const parseStatus = (type: string) => {
+  return {
+    ACTIVE: 'Đang hoạt động',
+    INACTIVE: 'Không hoạt động',
+  }[type]
+}
 </script>

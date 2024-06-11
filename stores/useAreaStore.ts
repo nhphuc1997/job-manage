@@ -21,8 +21,8 @@ export const useAreaStore = defineStore('useAreaStore', {
       editAttrArea: {} as Area,
       editStatusArea: { id: '', status: '' },
       listStatus: [
-        { value: 'ACTIVE', label: 'active' },
-        { value: 'INACTIVE', label: 'in active' },
+        { value: 'ACTIVE', label: 'Đang hoạt động' },
+        { value: 'INACTIVE', label: 'Không hoạt động' },
       ],
       zones: [] as Area[]
     },

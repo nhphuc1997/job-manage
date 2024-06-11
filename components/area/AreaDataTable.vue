@@ -9,19 +9,18 @@
         <template #default="scope">
           <el-row>
             <el-col :span="12">
-              <el-button v-if="scope.row.status === 'ACTIVE'" type="success" size="small" plain
-                :icon="ElIconWarningFilled" disabled>
-                {{ String(scope.row.status).toLowerCase() }}
-              </el-button>
-
-              <el-button v-else type="info" size="small" plain :icon="ElIconWarnTriangleFilled" disabled>
-                {{ String(scope.row.status).toLowerCase() }}
-              </el-button>
+              <div class="flex-start">
+                <el-tag :type="scope.row.status === 'ACTIVE' ? 'success' : 'danger'" size="small">
+                  {{ parseStatus(scope.row.status) }}
+                </el-tag>
+              </div>
             </el-col>
 
             <el-col :span="12">
-              <el-button type="primary" :icon="ElIconEditPen" size="small" plain
-                @click="areaStore.openDialogEditJobStatus(scope.row)" />
+              <div class="flex-end">
+                <el-button type="primary" :icon="ElIconEditPen" size="small" plain
+                  @click="areaStore.openDialogEditJobStatus(scope.row)" />
+              </div>
             </el-col>
           </el-row>
         </template>
@@ -38,4 +37,11 @@
 
 <script lang="ts" setup>
 const areaStore = useAreaStore()
+
+const parseStatus = (type: string) => {
+  return {
+    ACTIVE: 'Đang hoạt động',
+    INACTIVE: 'Không hoạt động',
+  }[type]
+}
 </script>

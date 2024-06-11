@@ -25,12 +25,12 @@
       </el-table-column>
       <el-table-column prop="areaName" label="Khu vực" sortable />
       <el-table-column prop="expiredDate" label="Ngày hết hạn" sortable />
-      <el-table-column prop="status" label="Trạng thái" sortable align="center" width="200">
+      <el-table-column prop="status" label="Trạng thái" sortable align="center" width="190">
         <template #default="scope">
           <el-row>
             <el-col :span="12">
               <div class="flex-start">
-                <el-tag :type="scope.row.status === 'ACTIVE' ? 'success' : 'danger'" size="small" effect="plain">
+                <el-tag :type="scope.row.status === 'ACTIVE' ? 'success' : 'danger'" size="small">
                   {{ parseStatus(scope.row.status) }}
                 </el-tag>
               </div>

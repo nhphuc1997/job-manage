@@ -38,7 +38,7 @@
                   @click="jobConfirmStore.openDialogEdit(scope.row)" />
               </div>
               <div v-else>
-                <el-tag size="small" :type="scope.row.status === 'APPROVED' ? 'success' : 'danger'" effect="plain">
+                <el-tag size="small" :type="scope.row.status === 'APPROVED' ? 'success' : 'danger'">
                   {{ parseStatus(scope.row.status) }}
                 </el-tag>
               </div>

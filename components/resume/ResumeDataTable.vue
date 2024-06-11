@@ -16,7 +16,7 @@
       <el-table-column prop="status" label="Trạng thái" sortable width="200">
         <template #default="scope">
           <el-text>
-            <el-tag size="small" :type="scope.row.status === 'FULL_UPDATED' ? 'success' : 'warning'" effect="plain">
+            <el-tag size="small" :type="scope.row.status === 'FULL_UPDATED' ? 'success' : 'warning'">
               {{ parseStatus(scope.row.status) }}
             </el-tag>
           </el-text>

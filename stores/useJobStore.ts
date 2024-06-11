@@ -25,8 +25,8 @@ export const useJobStore = defineStore('useJobStore', {
       editStatusJob: { id: '', status: '' },
       area: [] as any,
       listStatus: [
-        { value: 'ACTIVE', label: 'active' },
-        { value: 'INACTIVE', label: 'in active' },
+        { value: 'ACTIVE', label: 'Đang hoạt động' },
+        { value: 'INACTIVE', label: 'Không hoạt động' },
       ]
     },
     dialog: {
