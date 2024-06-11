@@ -25,23 +25,22 @@
       </el-table-column>
       <el-table-column prop="areaName" label="Khu vực" sortable />
       <el-table-column prop="expiredDate" label="Ngày hết hạn" sortable />
-      <el-table-column prop="status" label="Trạng thái" sortable align="center">
+      <el-table-column prop="status" label="Trạng thái" sortable align="center" width="200">
         <template #default="scope">
           <el-row>
             <el-col :span="12">
-              <el-button v-if="scope.row.status === 'ACTIVE'" type="success" size="small" plain
-                :icon="ElIconWarningFilled">
-                {{ useCapitalize(scope.row.status) }}
-              </el-button>
-
-              <el-button v-else type="warning" size="small" plain :icon="ElIconWarnTriangleFilled">
-                {{ useCapitalize(scope.row.status) }}
-              </el-button>
+              <div class="flex-start">
+                <el-tag :type="scope.row.status === 'ACTIVE' ? 'success' : 'danger'" size="small" effect="plain">
+                  {{ parseStatus(scope.row.status) }}
+                </el-tag>
+              </div>
             </el-col>
 
             <el-col :span="12">
-              <el-button type="primary" :icon="ElIconEditPen" size="small" plain
-                @click="jobStore.openDialogEditJobStatus(scope.row)" />
+              <div class="flex-end">
+                <el-button type="primary" :icon="ElIconEditPen" size="small" plain
+                  @click="jobStore.openDialogEditJobStatus(scope.row)" />
+              </div>
             </el-col>
           </el-row>
         </template>
@@ -59,4 +58,11 @@
 <script lang="ts" setup>
 import { TopRight } from '@element-plus/icons-vue';
 const jobStore = useJobStore()
+
+const parseStatus = (type: string) => {
+  return {
+    ACTIVE: 'Đang hoạt động',
+    INACTIVE: 'Không hoạt động',
+  }[type]
+}
 </script>

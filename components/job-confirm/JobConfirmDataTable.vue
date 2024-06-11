@@ -20,7 +20,7 @@
           </el-tooltip>
         </template>
       </el-table-column>
-      <el-table-column label="Trạng thái" align="center" width="150">
+      <el-table-column label="Trạng thái" width="150" align="center">
         <template #default="scope">
           <el-row :gutter="4">
             <el-col :span="24">
@@ -38,10 +38,9 @@
                   @click="jobConfirmStore.openDialogEdit(scope.row)" />
               </div>
               <div v-else>
-                <el-button size="small" type="success" :icon="CircleCheckFilled" circle plain
-                  v-if="scope.row.status === 'APPROVED'" />
-                <el-button size="small" type="danger" :icon="CircleCloseFilled" circle plain
-                  v-if="scope.row.status === 'REJECT'" />
+                <el-tag size="small" :type="scope.row.status === 'APPROVED' ? 'success' : 'danger'" effect="plain">
+                  {{ parseStatus(scope.row.status) }}
+                </el-tag>
               </div>
             </el-col>
           </el-row>
@@ -62,10 +61,15 @@
 
 <script lang="ts" setup>
 import {
-  SwitchFilled,
   CircleCheckFilled,
   CircleCloseFilled,
-  Finished
 } from '@element-plus/icons-vue'
 const jobConfirmStore = useJobConfirmStore()
+
+const parseStatus = (type: string) => {
+  return {
+    REJECT: 'Từ chối',
+    APPROVED: 'Đồng ý',
+  }[type]
+}
 </script>

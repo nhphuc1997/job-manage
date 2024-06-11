@@ -13,12 +13,12 @@
           </el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="status" label="Trạng thái" sortable width="200" align="center">
+      <el-table-column prop="status" label="Trạng thái" sortable width="200">
         <template #default="scope">
           <el-text>
-            <el-button plain size="small" :type="scope.row.status === 'FULL_UPDATED' ? 'success' : 'warning'" round>
-              {{ String(scope.row.status).toLowerCase() }}
-            </el-button>
+            <el-tag size="small" :type="scope.row.status === 'FULL_UPDATED' ? 'success' : 'warning'" effect="plain">
+              {{ parseStatus(scope.row.status) }}
+            </el-tag>
           </el-text>
         </template>
       </el-table-column>
@@ -29,4 +29,11 @@
 <script lang="ts" setup>
 import { TopRight } from '@element-plus/icons-vue';
 const resumeStore = useResumeStore()
+
+const parseStatus = (type: string) => {
+  return {
+    FULL_UPDATED: 'Cập nhập đầy đủ',
+    NEED_UPDATE: 'Cần cập nhập',
+  }[type]
+}
 </script>
