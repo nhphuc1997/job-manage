@@ -41,9 +41,16 @@ body {
   }
 
   .el-dialog {
+    padding: 32px;
+    border-radius: 8px;
+
+    .el-dialog__header {
+      padding-bottom: 8px;
+    }
+
     .el-dialog__body {
-      padding-left: 32px;
-      padding-right: 32px;
+      // padding-left: 32px;
+      // padding-right: 32px;
     }
   }
 }
