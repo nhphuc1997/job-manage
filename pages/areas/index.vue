@@ -8,7 +8,6 @@
     <AreaDialogCreate />
     <AreaDialogEdit />
     <AreaDialogEditStatus />
-    <AreaDrawerFilter />
 
   </div>
 </template>
