@@ -1,11 +1,16 @@
-import type { Area, Job } from "~/utils/interfaces"
+import type { Area, Job, JobConfirm } from "~/utils/interfaces"
 import { doGET, doMethod } from "~/utils/apis"
-import { dayjs } from "element-plus"
 import { stringToDate } from "~/utils"
 
 export const useJobStore = defineStore('useJobStore', {
   state: () => ({
     metadata: {
+      page: 0,
+      size: 10,
+      totalElements: 0,
+      currentPage: 0,
+    },
+    metadataJobAppy: {
       page: 0,
       size: 10,
       totalElements: 0,
@@ -17,16 +22,28 @@ export const useJobStore = defineStore('useJobStore', {
       status: '',
       area: '',
     },
+    filterUserApplyJob: {
+      fulltext: '',
+      status: '',
+      date: ''
+    },
     data: {
       jobs: [] as Job[],
+      usersApply: [] as JobConfirm[],
       viewJob: {} as Job,
       newJob: {} as Job,
       editAttrJob: {} as Job,
       editStatusJob: { id: '', status: '' },
       area: [] as any,
+      detailTabPanelActive: 'tab-first',
       listStatus: [
         { value: 'ACTIVE', label: 'Đang hoạt động' },
         { value: 'INACTIVE', label: 'Không hoạt động' },
+      ],
+      listStatusJobConfirm: [
+        { value: 'REJECT', label: 'Từ chối' },
+        { value: 'APPROVED', label: 'Chấp thuận' },
+        { value: 'PENDING', label: 'Chờ xử lí' },
       ]
     },
     dialog: {
@@ -62,6 +79,37 @@ export const useJobStore = defineStore('useJobStore', {
         this.metadata.page = jobs?.data?.number
         this.metadata.totalElements = jobs?.data?.totalElements
         this.metadata.currentPage = this.metadata.page + 1
+        return
+      }
+
+      ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
+      return
+    },
+    async fetchUsersApplyJob() {
+      const { id } = this.data.viewJob
+      const query: any = {
+        page: this.metadataJobAppy.page >= 1 ? this.metadataJobAppy.page - 1 : 0,
+        size: this.metadataJobAppy.size ?? 10,
+        sort: 'id,desc',
+        filter: `jobId:'${id}'`
+      }
+
+      if (this.filterUserApplyJob.fulltext !== '') {
+        const fulltext = this.filterUserApplyJob.fulltext
+        query['filter'] += `and (employeeName~'*${fulltext}*' or userPhone~'*${fulltext}*')`
+      }
+      if (this.filterUserApplyJob.status !== '') {
+        query['filter'] += `and (status~'${this.filterUserApplyJob.status}')`
+      }
+      if (this.filterUserApplyJob.date !== '') {
+        const fromDate = stringToDate(this.filterUserApplyJob.date[0])
+        const toDate = stringToDate(this.filterUserApplyJob.date[1])
+        query['filter'] += `and (createdAt>:'${fromDate}' and createdAt<:'${toDate}')`
+      }
+
+      const jobsConfirm = await doGET('v1/api/job-manger/jobConfirm', query)
+      if (jobsConfirm?.code === '00') {
+        this.data.usersApply = jobsConfirm?.data?.content
         return
       }
 
@@ -176,6 +224,13 @@ export const useJobStore = defineStore('useJobStore', {
       this.filter.status = ''
       this.filter.area = ''
       await this.fetchJobs()
+    },
+    async resetFilterUsersApply() {
+      this.filterUserApplyJob.fulltext = ''
+      this.filterUserApplyJob.date = ''
+      this.filterUserApplyJob.status = ''
+      // this.data.detailTabPanelActive = 'tab-first'
+      await this.fetchUsersApplyJob()
     },
   }
 })

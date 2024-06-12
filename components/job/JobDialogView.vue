@@ -1,6 +1,7 @@
 <template>
-  <el-dialog v-model="jobStore.dialog.viewJobVisible" title="Chi tiết công việc" width="800" align-center> 
-    <el-tabs v-model="activeTab" @tab-click="changeTab">
+  <el-dialog v-model="jobStore.dialog.viewJobVisible" title="Chi tiết công việc" width="800" align-center
+    @close="jobStore.resetFilterUsersApply()">
+    <el-tabs v-model="jobStore.data.detailTabPanelActive" @tab-click="tabChange">
       <el-tab-pane label="Thông tin" name="tab-first">
         <el-form :model="jobStore.data.viewJob">
           <el-form-item label="Id" :label-width="formLabelWidth">
@@ -54,7 +55,9 @@
       </el-tab-pane>
 
       <el-tab-pane label="Danh sách ứng tuyển" name="tab-second">
-        2
+        <JobUserApplyFilter />
+        <JobUserApplyData />
+        <JobUserApplyPagination />
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
@@ -65,7 +68,15 @@ import type { TabsPaneContext } from 'element-plus';
 
 const formLabelWidth = '140'
 const jobStore = useJobStore()
-const activeTab = ref("tab-first")
 
-const changeTab = (tab: TabsPaneContext, event: Event) => console.log(tab, event)
+const tabChange = async (tab: TabsPaneContext) => {
+  if (tab.props.name === 'tab-second') {
+    await jobStore.fetchUsersApplyJob()
+    jobStore.data.detailTabPanelActive = 'tab-second'
+    return
+  }
+
+  jobStore.data.detailTabPanelActive = 'tab-first'
+  return
+}
 </script>
