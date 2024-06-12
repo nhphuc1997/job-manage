@@ -77,6 +77,7 @@ const tabChange = async (tab: TabsPaneContext) => {
   }
 
   jobStore.data.detailTabPanelActive = 'tab-first'
+  jobStore.resetFilterUsersApply()
   return
 }
 </script>

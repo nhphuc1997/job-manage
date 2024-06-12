@@ -28,6 +28,7 @@ export const useJobStore = defineStore('useJobStore', {
       date: ''
     },
     data: {
+      loading: true,
       jobs: [] as Job[],
       usersApply: [] as JobConfirm[],
       viewJob: {} as Job,
@@ -58,7 +59,7 @@ export const useJobStore = defineStore('useJobStore', {
       const query: any = {
         page: this.metadata.page >= 1 ? this.metadata.page - 1 : 0,
         size: this.metadata.size ?? 10,
-        sort: 'id,desc'
+        sort: 'id,asc'
       }
       if (this.filter.fulltext !== '') {
         const fulltext = this.filter.fulltext
@@ -86,6 +87,7 @@ export const useJobStore = defineStore('useJobStore', {
       return
     },
     async fetchUsersApplyJob() {
+      this.data.loading = true
       const { id } = this.data.viewJob
       const query: any = {
         page: this.metadataJobAppy.page >= 1 ? this.metadataJobAppy.page - 1 : 0,
@@ -110,10 +112,12 @@ export const useJobStore = defineStore('useJobStore', {
       const jobsConfirm = await doGET('v1/api/job-manger/jobConfirm', query)
       if (jobsConfirm?.code === '00') {
         this.data.usersApply = jobsConfirm?.data?.content
+        this.data.loading = false
         return
       }
 
       ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
+      this.data.loading = false
       return
     },
     async fetchArea() {
@@ -229,7 +233,7 @@ export const useJobStore = defineStore('useJobStore', {
       this.filterUserApplyJob.fulltext = ''
       this.filterUserApplyJob.date = ''
       this.filterUserApplyJob.status = ''
-      // this.data.detailTabPanelActive = 'tab-first'
+      this.data.detailTabPanelActive = 'tab-first'
       await this.fetchUsersApplyJob()
     },
   }
