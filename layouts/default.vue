@@ -5,11 +5,6 @@
         <AppHeader />
       </el-header>
       <el-container class="section-container">
-
-        <el-aside width="170px">
-          <AsideCustom />
-        </el-aside>
-
         <el-main>
           <slot />
         </el-main>
@@ -17,3 +12,10 @@
     </el-container>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+import { ElButton, ElDrawer } from 'element-plus'
+
+const visible = ref(false)
+</script>
