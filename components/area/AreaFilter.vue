@@ -29,10 +29,6 @@
 <style lang="scss" scoped>
 @import url('element-plus/theme-chalk/display.css');
 @import url('/assets/styles/job.scss');
-
-.el-drawer__header {
-  margin-bottom: unset;
-}
 </style>
 
 <script lang="ts" setup>
