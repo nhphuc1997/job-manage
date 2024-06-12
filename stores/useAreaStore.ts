@@ -31,6 +31,9 @@ export const useAreaStore = defineStore('useAreaStore', {
       editAreaAttrVisible: false,
       editAreaStatusVisible: false,
       viewAreaVisible: false,
+    },
+    drawer: {
+      filterArea: false
     }
   }),
   actions: {

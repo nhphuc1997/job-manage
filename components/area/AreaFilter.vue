@@ -23,15 +23,28 @@
           :icon="ElIconWindPower">Tạo khu vực</el-button>
       </el-col>
     </el-row>
+
+    <el-row :gutter="4" class="hidden-sm-and-up">
+      <el-col :span="24" class="flex-end">
+        <el-button type="primary" plain :icon="Filter" @click="areaStore.drawer.filterArea = true" />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import url('element-plus/theme-chalk/display.css');
 @import url('/assets/styles/job.scss');
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 </style>
 
 <script lang="ts" setup>
+import { Filter } from '@element-plus/icons-vue'
 
 const areaStore = useAreaStore()
 areaStore.fetchAllZones()

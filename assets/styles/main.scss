@@ -70,4 +70,13 @@ body {
   .px-4 {
     padding: 4px 0px;
   }
+
+  .el-drawer {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    .el-drawer__header {
+      margin-bottom: unset;
+    }
+  }
 }
