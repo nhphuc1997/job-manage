@@ -17,10 +17,3 @@
     </el-container>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-import { ElButton, ElDrawer } from 'element-plus'
-
-const visible = ref(false)
-</script>

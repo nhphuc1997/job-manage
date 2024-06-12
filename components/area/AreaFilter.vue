@@ -1,6 +1,6 @@
 <template>
   <div class="create">
-    <el-row :gutter="4">
+    <el-row :gutter="4" class="hidden-sm-and-down">
       <el-col :xs="24" :sm="24" :md="6" :lg="6" class="px-4">
         <el-input v-model="areaStore.filter.fulltext" @change="areaStore.fetchAreas"
           placeholder="Tìm kiếm tên, mã khu vực" :suffix-icon="ElIconSearch" />
@@ -26,7 +26,18 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+@import url('element-plus/theme-chalk/display.css');
+@import url('/assets/styles/job.scss');
+
+.el-drawer__header {
+  margin-bottom: unset;
+}
+</style>
+
 <script lang="ts" setup>
+
 const areaStore = useAreaStore()
 areaStore.fetchAllZones()
+
 </script>
