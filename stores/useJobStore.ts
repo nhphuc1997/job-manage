@@ -52,6 +52,9 @@ export const useJobStore = defineStore('useJobStore', {
       editJobAttrVisible: false,
       editJobStatusVisible: false,
       viewJobVisible: false,
+    },
+    drawer: {
+      filterJob: false
     }
   }),
   actions: {
