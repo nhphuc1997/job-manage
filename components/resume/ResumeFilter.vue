@@ -22,7 +22,7 @@
 
   <!-- mobie -->
   <div class="create hidden-sm-and-up">
-    <el-row :gutter="10" class="hidden-sm-and-up">
+    <el-row :gutter="10">
       <el-col :span="24" class="flex-end">
         <el-button type="primary" plain :icon="Filter" @click="resumeStore.drawer.filterResume = true" />
       </el-col>

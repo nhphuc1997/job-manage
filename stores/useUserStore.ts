@@ -30,6 +30,9 @@ export const useUserStore = defineStore('useUserStore', {
     },
     dialog: {
       viewUserVisible: false,
+    },
+    drawer: {
+      filterUser: false
     }
   }),
   actions: {
