@@ -79,4 +79,18 @@ body {
       margin-bottom: unset;
     }
   }
+
+  .el-statistic {
+    padding: 4px;
+
+    .el-statistic__head {
+      margin-bottom: unset;
+      text-align: left;
+    }
+
+    .el-statistic__content {
+      font-size: unset;
+      text-align: left;
+    }
+  }
 }

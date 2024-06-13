@@ -1,11 +1,42 @@
 <template>
   <div class="header">
     <el-row :gutter="8">
-      <el-col :span="12" :offset="12">
+      <el-col :span="12" style="display: flex; justify-content: flex-start; align-items: center;">
+        <el-statistic :value="areaStore.metadata.totalElements">
+          <template #title>
+            <el-text size="small">Tổng khu vực</el-text>
+            <el-icon style="vertical-align: -0.125em">
+              <CaretTop style="color: green;" />
+            </el-icon>
+          </template>
+        </el-statistic>
+
+        <el-divider direction="vertical" border-style="dashed" />
+
+        <el-statistic :value="jobStore.metadata.totalElements" class="">
+          <template #title>
+            <el-text size="small">Tổng công việc</el-text>
+            <el-icon style="vertical-align: -0.125em">
+              <CaretTop style="color: green;" />
+            </el-icon>
+          </template>
+        </el-statistic>
+
+        <el-divider direction="vertical" border-style="dashed" />
+
+        <el-statistic :value="userStore.metadata.totalElements">
+          <template #title>
+            <el-text size="small">Tổng người dùng</el-text>
+            <el-icon style="vertical-align: -0.125em">
+              <CaretTop style="color: green;" />
+            </el-icon>
+          </template>
+        </el-statistic>
+      </el-col>
+
+      <el-col :span="12">
         <div class="user-infor">
           <div class="avatar">
-
-
             <el-dropdown>
               <el-avatar style="border: 1px solid var(--el-menu-border-color);" shape="square"
                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
@@ -41,13 +72,24 @@
       padding: 4px 0px;
     }
   }
+
+  .spacing-4 {
+    padding: 0 4rem;
+  }
 }
 </style>
 
 <script lang="ts" setup>
-import { TopRight, User } from '@element-plus/icons-vue';
+import { TopRight, User, Coordinate, CaretTop } from '@element-plus/icons-vue';
 
 const authStore = useAuthStore()
+const areaStore = useAreaStore()
+const jobStore = useJobStore()
+const userStore = useUserStore()
+
 const usernameCookie: any = useCookie('userName')
 const userName = usernameCookie.value
+
+jobStore.fetchJobs()
+userStore.fetchUsers()
 </script>
