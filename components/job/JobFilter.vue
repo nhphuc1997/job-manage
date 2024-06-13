@@ -54,13 +54,6 @@
             :suffix-icon="ElIconSearch" />
         </el-col>
 
-        <el-col :span="24" class="px-4">
-          <el-date-picker v-model="jobStore.filter.date" type="datetimerange" range-separator="Đến"
-            start-placeholder="Ngày hết hạn" end-placeholder="Ngày hết hạn" style="width: 95%;"
-            @change="jobStore.fetchJobs" format="DD-MM-YYYY HH:mm:ss" date-format="DD/MM/YYYY" time-format="HH:mm:ss" />
-        </el-col>
-
-
         <el-col :span="12" class="px-4">
           <el-select v-model="jobStore.filter.status" placeholder="Trạng thái" @change="jobStore.fetchJobs">
             <el-option v-for="item in jobStore.data.listStatus" :key="item.value" :label="item.label"
