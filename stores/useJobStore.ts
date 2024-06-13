@@ -115,6 +115,10 @@ export const useJobStore = defineStore('useJobStore', {
       const jobsConfirm = await doGET('v1/api/job-manger/jobConfirm', query)
       if (jobsConfirm?.code === '00') {
         this.data.usersApply = jobsConfirm?.data?.content
+        this.metadataJobAppy.size = jobsConfirm?.data?.size
+        this.metadataJobAppy.page = jobsConfirm?.data?.number
+        this.metadataJobAppy.totalElements = jobsConfirm?.data?.totalElements
+        this.metadataJobAppy.currentPage = this.metadataJobAppy.page + 1
         this.data.loading = false
         return
       }
@@ -161,10 +165,19 @@ export const useJobStore = defineStore('useJobStore', {
       this.metadata.size = size
       await this.fetchJobs()
     },
+    async paginationUserApplySizeChange(size: number) {
+      this.metadataJobAppy.size = size
+      await this.fetchUsersApplyJob()
+    },
     async paginationPageChange(page: number) {
       this.metadata.page = page
       this.metadata.currentPage - 1
       await this.fetchJobs()
+    },
+    async paginationUserApplyPageChange(page: number) {
+      this.metadataJobAppy.page = page
+      this.metadataJobAppy.currentPage - 1
+      await this.fetchUsersApplyJob()
     },
     async createJob() {
       const payload = this.data.newJob

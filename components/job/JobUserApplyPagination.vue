@@ -6,7 +6,8 @@
           <el-pagination v-model:current-page="jobStore.metadataJobAppy.currentPage"
             v-model:page-size="jobStore.metadataJobAppy.size" :page-sizes="[5, 10, 100]"
             layout="total, sizes, prev, pager, next, jumper" :total="jobStore.metadataJobAppy.totalElements"
-            @size-change="jobStore.paginationSizeChange" @current-change="jobStore.paginationPageChange" />
+            @size-change="jobStore.paginationUserApplySizeChange"
+            @current-change="jobStore.paginationUserApplyPageChange" />
         </div>
       </el-col>
     </el-row>
