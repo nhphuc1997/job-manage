@@ -20,6 +20,9 @@ export const useResumeStore = defineStore('useResumeStore', {
         { label: 'Need updated', value: 'NEED_UPDATE' },
       ]
     },
+    drawer: {
+      filterResume: false
+    }
   }),
   actions: {
     async fetchResumes() {
