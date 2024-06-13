@@ -14,13 +14,13 @@
         </el-select>
       </el-col>
 
-      <el-col :span="2" :offset="11">
+      <el-col :span="3" :offset="9">
         <el-button @click="areaStore.resetFilter" plain style="width: 100%;" type="info" :icon="ElIconMug">
           Xoá bộ lọc
         </el-button>
       </el-col>
 
-      <el-col :span="2">
+      <el-col :span="3">
         <el-button @click="areaStore.dialog.createAreaVisible = true" plain style="width: 100%;" type="success"
           :icon="ElIconWindPower">Tạo khu vực</el-button>
       </el-col>
