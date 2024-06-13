@@ -1,7 +1,6 @@
 <template>
   <div class="infor">
-    <el-table ref="tableRef" row-key="date" :data="jobStore.data.jobs" style="width: 100%" :border="true"
-      height="500">
+    <el-table ref="tableRef" row-key="date" :data="jobStore.data.jobs" :border="true" height="500">
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
       <el-table-column prop="title" label="Tên công việc" sortable>
         <template #default="scope">

@@ -10,7 +10,8 @@
         </div>
 
         <div class="paginate hidden-md-and-up">
-          <el-pagination layout="prev, pager, next" :total="areaStore.metadata.totalElements" />
+          <el-pagination layout="prev, pager, next" :total="areaStore.metadata.totalElements"
+            @current-change="areaStore.paginationPageChange" />
         </div>
       </el-col>
     </el-row>

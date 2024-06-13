@@ -10,7 +10,8 @@
         </div>
 
         <div class="paginate hidden-md-and-up">
-          <el-pagination layout="prev, pager, next" :total="jobStore.metadata.totalElements" />
+          <el-pagination layout="prev, pager, next" :total="jobStore.metadata.totalElements"
+            @current-change="jobStore.paginationPageChange" />
         </div>
       </el-col>
     </el-row>
