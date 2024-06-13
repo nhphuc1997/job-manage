@@ -15,8 +15,9 @@
       </el-col>
 
       <el-col :span="2" :offset="11">
-        <el-button @click="areaStore.resetFilter" plain style="width: 100%;" type="info" :icon="ElIconMug">Xoá bộ
-          lọc</el-button>
+        <el-button @click="areaStore.resetFilter" plain style="width: 100%;" type="info" :icon="ElIconMug">
+          Xoá bộ lọc
+        </el-button>
       </el-col>
 
       <el-col :span="2">

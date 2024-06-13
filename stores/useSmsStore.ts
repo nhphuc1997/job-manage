@@ -22,6 +22,9 @@ export const useSmsStore = defineStore('useSmsStore', {
     dialog: {
       createSmsVisible: false,
       viewSmsVisible: false,
+    },
+    drawer: {
+      filterArea: false
     }
   }),
   actions: {
