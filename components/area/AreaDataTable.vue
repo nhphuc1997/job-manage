@@ -1,7 +1,7 @@
 <template>
   <div class="infor">
     <el-table ref="tableRef" row-key="date" :data="areaStore.data.areas" style="width: 100%" :border="true"
-      height="500">
+      height="600">
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
       <el-table-column prop="name" label="Tên" sortable />
       <el-table-column prop="code" label="Code" sortable />
