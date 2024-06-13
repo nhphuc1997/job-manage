@@ -70,6 +70,7 @@ const parseStatus = (type: string) => {
   return {
     REJECT: 'Từ chối',
     APPROVED: 'Đồng ý',
+    PENDING: 'Chờ chấp thuận',
   }[type]
 }
 </script>
