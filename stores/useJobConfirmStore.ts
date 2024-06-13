@@ -33,6 +33,9 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
     dialog: {
       viewJobConfirmVisible: false,
       editJobConfirmVisible: false,
+    },
+    drawer: {
+      filterJobConfirm: false
     }
   }),
   actions: {

@@ -9,7 +9,7 @@
             @size-change="areaStore.paginationSizeChange" @current-change="areaStore.paginationPageChange" class="" />
         </div>
 
-        <div class="paginate hidden-md-and-up">
+        <div class="paginate hidden-sm-and-up">
           <el-pagination layout="prev, pager, next" :total="areaStore.metadata.totalElements"
             @current-change="areaStore.paginationPageChange" />
         </div>

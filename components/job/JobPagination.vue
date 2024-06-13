@@ -9,7 +9,7 @@
             @current-change="jobStore.paginationPageChange" />
         </div>
 
-        <div class="paginate hidden-md-and-up">
+        <div class="paginate hidden-sm-and-up">
           <el-pagination layout="prev, pager, next" :total="jobStore.metadata.totalElements"
             @current-change="jobStore.paginationPageChange" />
         </div>
