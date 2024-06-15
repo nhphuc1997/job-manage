@@ -19,7 +19,8 @@ export const useResumeStore = defineStore('useResumeStore', {
       optionsStatus: [
         { label: 'Full updated', value: 'FULL_UPDATED' },
         { label: 'Need updated', value: 'NEED_UPDATE' },
-      ]
+      ],
+      detailTabPanelActive: 'tab-first'
     },
     dialog: {
       viewResumeVisible: false,
@@ -76,6 +77,9 @@ export const useResumeStore = defineStore('useResumeStore', {
       this.filter.fulltext = ''
       this.filter.status = ''
       await this.fetchResumes()
+    },
+    async resetTab() {
+      this.data.detailTabPanelActive = 'tab-first'
     },
   }
 })
