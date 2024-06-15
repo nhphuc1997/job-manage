@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="jobStore.dialog.createJobVisible" title="Khởi tạo công việc" width="800" align-top
+  <el-dialog v-model="jobStore.dialog.createJobVisible" title="Khởi tạo công việc" width="800" align-center
     @close="jobStore.makeFreshJob">
     <el-form :model="jobStore.data.newJob">
       <el-form-item label="Tên công việc" :label-width="formLabelWidth">
