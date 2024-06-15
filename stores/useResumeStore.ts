@@ -15,10 +15,14 @@ export const useResumeStore = defineStore('useResumeStore', {
     },
     data: {
       resumes: [] as Resume[],
+      viewResume: {} as Resume,
       optionsStatus: [
         { label: 'Full updated', value: 'FULL_UPDATED' },
         { label: 'Need updated', value: 'NEED_UPDATE' },
       ]
+    },
+    dialog: {
+      viewResumeVisible: false,
     },
     drawer: {
       filterResume: false
@@ -50,9 +54,22 @@ export const useResumeStore = defineStore('useResumeStore', {
       ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
       return
     },
+    async openDialogView(row: any) {
+      this.dialog.viewResumeVisible = true
+      const { id } = row
+      const resume: any = await doGET(`v1/api/job-manger/resumes/${id}`)
+      if (resume?.code === '00') {
+        this.data.viewResume = resume.data
+        return
+      }
+    },
     async paginationPageChange(page: number) {
       this.metadata.page = page
       this.metadata.currentPage - 1
+      await this.fetchResumes()
+    },
+    async paginationSizeChange(size: number) {
+      this.metadata.size = size
       await this.fetchResumes()
     },
     async resetFilter() {

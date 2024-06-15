@@ -72,8 +72,12 @@ export const useUserStore = defineStore('useUserStore', {
       this.dialog.viewUserVisible = true
       const { id } = row
       const job: any = await doGET(`v1/api/job-manger/managements/users/${id}`)
-      job.data['authorities'] = job.data['authorities'].map((item: Record<string, any>) => item.code)
-      this.data.viewUser = job.data
+
+      if (job?.code === '00') {
+        job.data['authorities'] = job.data['authorities'].map((item: Record<string, any>) => item.code)
+        this.data.viewUser = job.data
+        return
+      }
     },
     async paginationSizeChange(size: number) {
       this.metadata.size = size

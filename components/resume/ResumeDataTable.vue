@@ -22,6 +22,11 @@
           </el-text>
         </template>
       </el-table-column>
+      <el-table-column align="center" width="150">
+        <template #default="scope">
+          <el-button plain :icon="ElIconView" size="small" @click="resumeStore.openDialogView" />
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
