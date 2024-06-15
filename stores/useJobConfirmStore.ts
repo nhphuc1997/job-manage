@@ -1,4 +1,4 @@
-import type { JobConfirm } from "~/utils/interfaces"
+import type { Job, JobConfirm, Resume } from "~/utils/interfaces"
 import { doGET, doMethod } from "~/utils/apis"
 
 export const useJobConfirmStore = defineStore('useJobConfirmStore', {
@@ -16,6 +16,9 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
     data: {
       jobConfirm: [] as JobConfirm[],
       viewJobConfirm: {} as JobConfirm,
+      viewJob: {} as Job,
+      viewResume: {} as Resume,
+      detailTabPanelActive: 'tab-first',
       editJobConfirm: {
         id: '',
         rejectComment: '',
@@ -68,8 +71,18 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
     async openDialogView(row: any) {
       this.dialog.viewJobConfirmVisible = true
       const { id } = row
-      const job: any = await doGET(`v1/api/job-manger/jobConfirm/${id}`)
-      this.data.viewJobConfirm = job.data
+      const jobConfirm: any = await doGET(`v1/api/job-manger/jobConfirm/${id}`)
+
+      if (jobConfirm?.code === '00') {
+        const { jobId, resumeId } = jobConfirm.data
+        const job: any = await doGET(`v1/api/job-manger/jobs/${jobId}`)
+        const resume: any = await doGET(`v1/api/job-manger/resumes/${resumeId}`)
+
+        this.data.viewJobConfirm = jobConfirm.data
+        this.data.viewJob = job.data
+        this.data.viewResume = resume.data
+        return
+      }
     },
     async openDialogEdit(row: any) {
       this.dialog.editJobConfirmVisible = true
@@ -93,9 +106,9 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
     },
     async updateJobConfirmStatus() {
       const { status, rejectComment, id } = this.data.editJobConfirm
-      const job: any = await doMethod(`v1/api/job-manger/jobConfirm/${id}`, { status, rejectComment }, 'PUT')
+      const jobConfirm: any = await doMethod(`v1/api/job-manger/jobConfirm/${id}`, { status, rejectComment }, 'PUT')
 
-      if (job.code === '00') {
+      if (jobConfirm.code === '00') {
         ElNotification({ message: 'Cập nhập trạng thái xác nhận công việc thành công', type: 'success' })
         this.dialog.editJobConfirmVisible = false
         this.data.editJobConfirm = { id: '', rejectComment: '', status: '' }
@@ -103,7 +116,7 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
         return
       }
 
-      if (job.code === '520') {
+      if (jobConfirm.code === '520') {
         ElNotification({ message: 'Công việc không thể chuyển trạng thái mới', type: 'info' })
         return
       }
