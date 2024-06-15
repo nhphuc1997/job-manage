@@ -61,7 +61,6 @@ export const doUpload = async (url: string, payload: any) => {
     {
       headers: {
         "Accept-Language": "en-US",
-        // "Content-Type": "multipart/form-data",
         "Authorization": `Bearer ${accessToken.value}`,
       },
       method: 'POST',
