@@ -45,7 +45,32 @@ export const doMethod = async (url: string, payload: any, method: 'POST' | 'PUT'
   )
 
   if (status.value === 'error') {
-    ElNotification({ message: "Network error", type: 'error' })
+    ElNotification({ message: "Network error", type: 'error', duration: 0 })
+    return
+  }
+
+  const result: any = data.value
+  if (result.code === '05') return navigateTo('/')
+  return result
+}
+
+export const doUpload = async (url: string, payload: any) => {
+  const accessToken = useCookie("accessToken")
+  const { data, status } = await useFetch(
+    `http://18.141.39.162:8089/${url}`,
+    {
+      headers: {
+        "Accept-Language": "en-US",
+        // "Content-Type": "multipart/form-data",
+        "Authorization": `Bearer ${accessToken.value}`,
+      },
+      method: 'POST',
+      body: payload,
+    }
+  )
+
+  if (status.value === 'error') {
+    ElNotification({ message: "Network error", type: 'error', duration: 0 })
     return
   }
 

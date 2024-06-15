@@ -1,6 +1,7 @@
 import type { Area, Job, JobConfirm } from "~/utils/interfaces"
-import { doGET, doMethod } from "~/utils/apis"
+import { doGET, doMethod, doUpload } from "~/utils/apis"
 import { stringToDate } from "~/utils"
+import type { UploadFile } from "element-plus"
 
 export const useJobStore = defineStore('useJobStore', {
   state: () => ({
@@ -45,7 +46,8 @@ export const useJobStore = defineStore('useJobStore', {
         { value: 'REJECT', label: 'Từ chối' },
         { value: 'APPROVED', label: 'Chấp thuận' },
         { value: 'PENDING', label: 'Chờ xử lí' },
-      ]
+      ],
+      file: {} as UploadFile
     },
     dialog: {
       createJobVisible: false,
@@ -251,11 +253,24 @@ export const useJobStore = defineStore('useJobStore', {
       this.filterUserApplyJob.fulltext = ''
       this.filterUserApplyJob.date = ''
       this.filterUserApplyJob.status = ''
-      // this.data.detailTabPanelActive = 'tab-first'
       await this.fetchUsersApplyJob()
     },
     makeFreshJob() {
       this.data.newJob = {} as Job
-    }
+    },
+    removeFile() {
+      this.data.file = {} as UploadFile
+      this.data.newJob.imageUrl = ''
+    },
+    async uploadFile(file: any) {
+      let data = new FormData()
+      data.append('file', file.raw)
+      const fileUpload = await doUpload('v1/api/job-manger/document/uploads', data)
+      if (fileUpload.code === '00') {
+        ElMessage({ message: 'Upload hình ảnh thành công', type: 'success', plain: true })
+        this.data.newJob.imageUrl = fileUpload.data
+        return
+      }
+    },
   }
 })

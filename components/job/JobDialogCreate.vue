@@ -6,8 +6,17 @@
         <el-input v-model="jobStore.data.newJob.title" autocomplete="off" placeholder="Tên công việc" />
       </el-form-item>
 
-      <el-form-item label="URL hình ảnh" :label-width="formLabelWidth">
-        <el-input v-model="jobStore.data.newJob.imageUrl" autocomplete="off" placeholder="URL hình ảnh" />
+      <el-form-item label="Url hình ảnh" :label-width="formLabelWidth">
+        <el-input v-model="jobStore.data.newJob.imageUrl" disabled placeholder="Url hình ảnh" />
+      </el-form-item>
+
+      <el-form-item label="" :label-width="formLabelWidth">
+        <el-upload :limit="1" list-type="picture-card" :auto-upload="false" :on-remove="jobStore.removeFile"
+          :on-change="jobStore.uploadFile">
+          <el-icon>
+            <Plus />
+          </el-icon>
+        </el-upload>
       </el-form-item>
 
       <el-form-item label="Khu vực" :label-width="formLabelWidth">
@@ -48,8 +57,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { Job } from '~/utils/interfaces';
+import { Plus } from '@element-plus/icons-vue'
 
 const formLabelWidth = '140px'
 const jobStore = useJobStore()
+const accessToken = useCookie("accessToken")
+
 </script>

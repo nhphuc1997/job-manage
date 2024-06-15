@@ -135,6 +135,7 @@ const jobConfirmStore = useJobConfirmStore()
 const usernameCookie: any = useCookie('userName')
 const userName = usernameCookie.value
 
+areaStore.fetchAreas()
 jobStore.fetchJobs()
 userStore.fetchUsers()
 resumesStore.fetchResumes()
