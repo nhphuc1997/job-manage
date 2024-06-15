@@ -76,7 +76,7 @@
             <el-collapse-item :name="item.key" v-for="item in KEYS_RESUME ">
               <template #title>
                 <el-icon size="16">
-                  <ElIconFiles />
+                  <ElIconPlatform />
                 </el-icon>
                 <el-badge type="primary" :value="resumeStore.data.certs[item.key].length" :offset="[10, 15]">
                   <el-text class="text-intro">{{ item.name }}</el-text>
@@ -105,7 +105,6 @@
 <style lang="scss" scoped>
 .text-intro {
   padding-left: 8px;
-  font-weight: bold;
 }
 
 .image {
