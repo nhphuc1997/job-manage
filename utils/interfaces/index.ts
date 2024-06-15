@@ -34,12 +34,20 @@ export interface Sms {
 }
 
 export interface Resume {
+  createdAt: string,
+  updatedAt: string,
+  createdBy: null | string,
+  lastModifiedBy: null | string,
   id: number,
   userName: string,
   fullName: string,
   phoneNumber: string,
+  dateOfBird: null | string,
+  address: string,
   profileUrl: string,
-  status: string
+  userId: number,
+  status: string,
+  photos: Array<any>
 }
 
 export interface JobConfirm {

@@ -3,6 +3,8 @@
     <ResumeFilter />
     <ResumeDataTable />
     <ResumePagination />
+
+    <ResumeDialogView />
   </div>
 </template>
 
