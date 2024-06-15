@@ -17,10 +17,20 @@ export const useResumeStore = defineStore('useResumeStore', {
       resumes: [] as Resume[],
       viewResume: {} as Resume,
       optionsStatus: [
-        { label: 'Full updated', value: 'FULL_UPDATED' },
-        { label: 'Need updated', value: 'NEED_UPDATE' },
+        { label: 'Cập nhập đầy đủ', value: 'FULL_UPDATED' },
+        { label: 'Cần cập nhập', value: 'NEED_UPDATE' },
       ],
-      detailTabPanelActive: 'tab-first'
+      detailTabPanelActive: 'tab-first',
+      certs: {
+        HEALTH_CERT: [] as Array<any>,
+        ID_FRONT: [] as Array<any>,
+        ID_PHOTO_CC: [] as Array<any>,
+        TPS2: [] as Array<any>,
+        ID_BACK: [] as Array<any>,
+        PASSPORT: [] as Array<any>,
+        OTHER: [] as Array<any>,
+        EXTRA_INFO: {} as any
+      }
     },
     dialog: {
       viewResumeVisible: false,
@@ -61,6 +71,20 @@ export const useResumeStore = defineStore('useResumeStore', {
       const resume: any = await doGET(`v1/api/job-manger/resumes/${id}`)
       if (resume?.code === '00') {
         this.data.viewResume = resume.data
+        const photos = resume.data.photos
+
+        this.data.certs.EXTRA_INFO = {
+          createdDate: photos[0].createdDate,
+          createdBy: photos[0].createdBy,
+          status: photos[0].status,
+        }
+
+        const keys: any = ['HEALTH_CERT', 'ID_FRONT', 'ID_BACK', 'ID_PHOTO_CC', 'PASSPORT', 'TPS2', 'OTHER']
+        keys.map((key: 'HEALTH_CERT' | 'ID_FRONT' | 'ID_BACK' | 'ID_PHOTO_CC' | 'PASSPORT' | 'TPS2' | 'OTHER') => {
+          this.data.certs[key] = photos
+            .filter((photo: Record<string, any>) => photo.resumeType === key)
+            .map((photo: Record<string, any>) => photo.url)
+        })
         return
       }
     },

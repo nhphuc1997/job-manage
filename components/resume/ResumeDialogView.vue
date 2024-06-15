@@ -27,38 +27,72 @@
           <el-form-item label="Địa chỉ" :label-width="formLabelWidth">
             <el-input disabled v-model="resumeStore.data.viewResume.address" />
           </el-form-item>
-
-          <el-form-item label="Tạo lúc" :label-width="formLabelWidth">
-            <el-input disabled v-model="resumeStore.data.viewResume.createdAt" />
-          </el-form-item>
-
-          <el-form-item label="Chỉnh sửa lúc" :label-width="formLabelWidth">
-            <el-input disabled v-model="resumeStore.data.viewResume.updatedAt" />
-          </el-form-item>
-
-          <el-form-item label="Tạo bởi" :label-width="formLabelWidth">
-            <el-input disabled v-model="resumeStore.data.viewResume.createdBy" />
-          </el-form-item>
-
-          <el-form-item label="Lần cuối chỉnh sửa" :label-width="formLabelWidth">
-            <el-input disabled v-model="resumeStore.data.viewResume.lastModifiedBy" />
-          </el-form-item>
         </el-form>
       </el-tab-pane>
 
-      <el-tab-pane label="Giấy tờ" name="tab-second">
-        <div class="demo-collapse">
+      <el-tab-pane :label="`Giấy tờ ${resumeStore.data.viewResume.fullName ?? 'n/a'}`" name="tab-second">
+        <div class="collapse">
           <el-collapse accordion>
             <el-collapse-item name="1">
               <template #title>
                 <el-icon size="16">
                   <ElIconFiles />
                 </el-icon>
-                <el-text class="text-intro">Thông tin cá nhân</el-text>
+                <el-badge type="primary" :value="1" :offset="[10, 15]">
+                  <el-text class="text-intro">Hồ sơ cá nhân</el-text>
+                </el-badge>
               </template>
 
-              <div>
-                1
+              <div class="flex">
+                <el-row :gutter="10">
+                  <el-col :span="10">
+                    <el-image class="image" :src="resumeStore.data.viewResume.profileUrl" :zoom-rate="1.2" :max-scale="7"
+                      :min-scale="0.2" :initial-index="4" fit="cover"
+                      :preview-src-list="[resumeStore.data.viewResume.profileUrl]" />
+                  </el-col>
+                  <el-col :span="14">
+                    <el-descriptions :column="1" size="small">
+                      <el-descriptions-item label="Tạo lúc">
+                        <el-tag>{{ resumeStore.data.viewResume.createdAt }}</el-tag>
+                      </el-descriptions-item>
+
+                      <el-descriptions-item label="Tạo bởi">
+                        <el-tag>{{ resumeStore.data.viewResume.createdBy }}</el-tag>
+                      </el-descriptions-item>
+
+                      <el-descriptions-item label="Chỉnh sửa">
+                        <el-tag>{{ resumeStore.data.viewResume.updatedAt }}</el-tag>
+                      </el-descriptions-item>
+
+                      <el-descriptions-item label="Lần cuối chỉnh sửa bởi:">
+                        <el-tag>{{ resumeStore.data.viewResume.lastModifiedBy }}</el-tag>
+                      </el-descriptions-item>
+                    </el-descriptions>
+                  </el-col>
+                </el-row>
+              </div>
+            </el-collapse-item>
+
+            <el-collapse-item :name="item.key" v-for="item in KEYS_RESUME ">
+              <template #title>
+                <el-icon size="16">
+                  <ElIconFiles />
+                </el-icon>
+                <el-badge type="primary" :value="resumeStore.data.certs[item.key].length" :offset="[10, 15]">
+                  <el-text class="text-intro">{{ item.name }}</el-text>
+                </el-badge>
+              </template>
+              <div class="flex">
+                <el-row :gutter="10">
+                  <el-col :span="10">
+                    <el-image class="image" :src="resumeStore.data.certs[item.key][0]" :zoom-rate="1.2" :max-scale="7"
+                      :min-scale="0.2" :initial-index="4" fit="cover"
+                      :preview-src-list="resumeStore.data.certs[item.key]" />
+                  </el-col>
+                  <el-col :span="14">
+                    <ResumeExtraInfo />
+                  </el-col>
+                </el-row>
               </div>
             </el-collapse-item>
           </el-collapse>
@@ -71,6 +105,22 @@
 <style lang="scss" scoped>
 .text-intro {
   padding-left: 8px;
+  font-weight: bold;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+}
+
+.flex {
+  width: 100%;
+}
+
+.el-badge__content.is-fixed {
+  top: 12px;
 }
 </style>
 

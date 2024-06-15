@@ -74,3 +74,13 @@ export interface User {
   createdAt: number,
   updatedAt: number
 }
+
+export type KeyResume = [
+  { key: 'HEALTH_CERT', name: 'Chứng chỉ sức khỏe' },
+  { key: 'ID_FRONT', name: 'Mặt trước căn cước' },
+  { key: 'ID_BACK', name: 'Mặt sau căn cước' },
+  { key: 'ID_PHOTO_CC', name: 'Căn cước' },
+  { key: 'PASSPORT', name: 'Hộ chiếu' },
+  { key: 'TPS2', name: 'TPS2' },
+  { key: 'OTHER', name: 'Chứng chỉ khác' }
+]
