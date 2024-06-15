@@ -1,7 +1,8 @@
 <template>
   <div class="header">
     <el-row :gutter="8">
-      <el-col :xs="24" :md="12" class="flex hidden-sm-and-down">
+      <el-col :md="2" class=" hidden-sm-and-down" />
+      <el-col :xs="24" :md="20" class="flex hidden-sm-and-down">
         <el-statistic :value="areaStore.metadata.totalElements">
           <template #title>
             <el-text size="small">Tổng khu vực</el-text>
@@ -40,10 +41,31 @@
             </el-icon>
           </template>
         </el-statistic>
+        <el-divider direction="vertical" />
+
+        <el-statistic :value="smsStore.metadata.totalElements">
+          <template #title>
+            <el-text size="small">Tổng SMS</el-text>
+            <el-icon style="vertical-align: -0.125em">
+              <CaretTop style="color: green;" />
+            </el-icon>
+          </template>
+        </el-statistic>
+        <el-divider direction="vertical" />
+
+        <el-statistic :value="jobConfirmStore.metadata.totalElements">
+          <template #title>
+            <el-text size="small">Tổng hồ sơ xác nhận</el-text>
+            <el-icon style="vertical-align: -0.125em">
+              <CaretTop style="color: green;" />
+            </el-icon>
+          </template>
+        </el-statistic>
+        <el-divider direction="vertical" />
 
       </el-col>
 
-      <el-col :xs="24" :md="12">
+      <el-col :xs="24" :md="2">
         <div class="user-infor">
           <div class="avatar">
             <el-dropdown>
@@ -90,7 +112,7 @@
 
   .flex {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
   }
 }
@@ -98,12 +120,17 @@
 
 <script lang="ts" setup>
 import { TopRight, User, CaretTop } from '@element-plus/icons-vue';
+import { ElLoading } from 'element-plus'
+
+const loading = ElLoading.service({ lock: true })
 
 const authStore = useAuthStore()
 const areaStore = useAreaStore()
 const jobStore = useJobStore()
 const userStore = useUserStore()
 const resumesStore = useResumeStore()
+const smsStore = useSmsStore()
+const jobConfirmStore = useJobConfirmStore()
 
 const usernameCookie: any = useCookie('userName')
 const userName = usernameCookie.value
@@ -111,4 +138,8 @@ const userName = usernameCookie.value
 jobStore.fetchJobs()
 userStore.fetchUsers()
 resumesStore.fetchResumes()
+smsStore.fetchSms()
+jobConfirmStore.fetchJobConfirm()
+
+loading.close()
 </script>
