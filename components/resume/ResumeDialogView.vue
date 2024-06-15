@@ -45,12 +45,12 @@
 
               <div class="flex">
                 <el-row :gutter="10">
-                  <el-col :span="10">
+                  <el-col :span="4">
                     <el-image class="image" :src="resumeStore.data.viewResume.profileUrl" :zoom-rate="1.2" :max-scale="7"
                       :min-scale="0.2" :initial-index="4" fit="cover"
                       :preview-src-list="[resumeStore.data.viewResume.profileUrl]" />
                   </el-col>
-                  <el-col :span="14">
+                  <el-col :span="20">
                     <el-descriptions :column="1" size="small">
                       <el-descriptions-item label="Tạo lúc">
                         <el-tag>{{ resumeStore.data.viewResume.createdAt }}</el-tag>
@@ -73,6 +73,7 @@
               </div>
             </el-collapse-item>
 
+            <!-- Giấy tờ -->
             <el-collapse-item :name="item.key" v-for="item in KEYS_RESUME ">
               <template #title>
                 <el-icon size="16">
@@ -84,13 +85,9 @@
               </template>
               <div class="flex">
                 <el-row :gutter="10">
-                  <el-col :span="10">
-                    <el-image class="image" :src="resumeStore.data.certs[item.key][0]" :zoom-rate="1.2" :max-scale="7"
-                      :min-scale="0.2" :initial-index="4" fit="cover"
-                      :preview-src-list="resumeStore.data.certs[item.key]" />
-                  </el-col>
-                  <el-col :span="14">
-                    <ResumeExtraInfo />
+                  <el-col :span="4" v-for="photo in resumeStore.data.certs[item.key]">
+                    <el-image class="image" :src="photo" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
+                      :initial-index="4" fit="cover" :preview-src-list="[photo]" />
                   </el-col>
                 </el-row>
               </div>
