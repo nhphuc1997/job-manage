@@ -54,10 +54,10 @@
         <el-image class="image-wrapper" :src="jobStore.data.viewJob.imageUrl" fit="fill">
           <template #error>
             <div class="error-image">
-              <el-icon>
+              <el-icon size="32px">
                 <Picture />
               </el-icon>
-              <el-text>URL hình ảnh không hợp lệ</el-text>
+              <el-text style="padding-left: 8px;">URL hình ảnh không hợp lệ</el-text>
             </div>
           </template>
         </el-image>
