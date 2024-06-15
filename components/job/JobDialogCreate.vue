@@ -11,8 +11,8 @@
       </el-form-item>
 
       <el-form-item label="" :label-width="formLabelWidth">
-        <el-upload :limit="1" list-type="picture-card" :auto-upload="false" :on-remove="jobStore.removeFile"
-          :on-change="jobStore.uploadFile">
+        <el-upload :limit="1" list-type="picture-card" :auto-upload="false" :on-remove="jobStore.removeFileCreateJob"
+          :on-change="jobStore.uploadFileCreateJob">
           <el-icon>
             <Plus />
           </el-icon>
@@ -61,6 +61,5 @@ import { Plus } from '@element-plus/icons-vue'
 
 const formLabelWidth = '140px'
 const jobStore = useJobStore()
-const accessToken = useCookie("accessToken")
 
 </script>

@@ -6,7 +6,16 @@
       </el-form-item>
 
       <el-form-item label="URL hình ảnh" :label-width="formLabelWidth">
-        <el-input v-model="jobStore.data.editAttrJob.imageUrl" autocomplete="off" placeholder="URL hình ảnh" />
+        <el-input v-model="jobStore.data.editAttrJob.imageUrl" autocomplete="off" placeholder="URL hình ảnh" disabled />
+      </el-form-item>
+
+      <el-form-item label="" :label-width="formLabelWidth">
+        <el-upload v-model:file-list="jobStore.data.fileListEditJob" :limit="1" list-type="picture-card"
+          :auto-upload="false" :on-remove="jobStore.removeFileEditJob" :on-change="jobStore.uploadFileEditJob">
+          <el-icon>
+            <Plus />
+          </el-icon>
+        </el-upload>
       </el-form-item>
 
       <el-form-item label="Khu vực" :label-width="formLabelWidth">
@@ -47,6 +56,16 @@
 </template>
 
 <script lang="ts" setup>
+import { Plus } from '@element-plus/icons-vue'
+
 const formLabelWidth = '140px'
 const jobStore = useJobStore()
+
+const fileList = [
+  {
+    name: 'element-plus-logo.svg',
+    url: 'https://element-plus.org/images/element-plus-logo.svg',
+  },
+]
+
 </script>

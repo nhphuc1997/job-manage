@@ -1,7 +1,7 @@
 import type { Area, Job, JobConfirm } from "~/utils/interfaces"
 import { doGET, doMethod, doUpload } from "~/utils/apis"
 import { stringToDate } from "~/utils"
-import type { UploadFile } from "element-plus"
+import type { UploadFile, UploadUserFile } from "element-plus"
 
 export const useJobStore = defineStore('useJobStore', {
   state: () => ({
@@ -47,7 +47,8 @@ export const useJobStore = defineStore('useJobStore', {
         { value: 'APPROVED', label: 'Chấp thuận' },
         { value: 'PENDING', label: 'Chờ xử lí' },
       ],
-      file: {} as UploadFile
+      file: {} as UploadFile,
+      fileListEditJob: [{}] as UploadUserFile[]
     },
     dialog: {
       createJobVisible: false,
@@ -141,10 +142,7 @@ export const useJobStore = defineStore('useJobStore', {
       const { id } = row
       this.dialog.editJobStatusVisible = true
       const job: any = await doGET(`v1/api/job-manger/jobs/${id}`)
-      this.data.editStatusJob = {
-        id: job.data.id,
-        status: job.data.status,
-      }
+      this.data.editStatusJob = { id: job.data.id, status: job.data.status }
     },
     async openDialogEditJobAttr(row: any) {
       const { id } = row
@@ -156,6 +154,7 @@ export const useJobStore = defineStore('useJobStore', {
       this.data.editAttrJob = job.data
       this.data.editAttrJob['expiredDate'] = dateFromString(job.data['expiredDate'])
       this.data.editAttrJob['areaName'] = currentArea.name
+      this.data.fileListEditJob = [{ name: '', url: job.data.imageUrl }]
     },
     async openDialogViewJob(row: any) {
       this.dialog.viewJobVisible = true
@@ -259,17 +258,33 @@ export const useJobStore = defineStore('useJobStore', {
     makeFreshJob() {
       this.data.newJob = {} as Job
     },
-    removeFile() {
+    removeFileCreateJob() {
       this.data.file = {} as UploadFile
       this.data.newJob.imageUrl = ''
     },
-    async uploadFile(file: any) {
+    async uploadFileCreateJob(file: any) {
       let data = new FormData()
       data.append('file', file.raw)
       const fileUpload = await doUpload('v1/api/job-manger/document/uploads', data)
+
       if (fileUpload.code === '00') {
         ElMessage({ message: 'Upload hình ảnh thành công', type: 'success', plain: true })
         this.data.newJob.imageUrl = fileUpload.data
+        return
+      }
+    },
+    removeFileEditJob() {
+      this.data.file = {} as UploadFile
+      this.data.editAttrJob.imageUrl = ''
+    },
+    async uploadFileEditJob(file: any) {
+      let data = new FormData()
+      data.append('file', file.raw)
+      const fileUpload = await doUpload('v1/api/job-manger/document/uploads', data)
+
+      if (fileUpload.code === '00') {
+        ElMessage({ message: 'Upload hình ảnh thành công', type: 'success', plain: true })
+        this.data.editAttrJob.imageUrl = fileUpload.data
         return
       }
     },
