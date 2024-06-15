@@ -67,6 +67,16 @@ export const useResumeStore = defineStore('useResumeStore', {
     },
     async openDialogView(row: any) {
       this.dialog.viewResumeVisible = true
+      this.data.certs = {
+        HEALTH_CERT: [],
+        ID_FRONT: [],
+        ID_PHOTO_CC: [],
+        TPS2: [],
+        ID_BACK: [],
+        PASSPORT: [],
+        OTHER: [],
+        EXTRA_INFO: {}
+      }
       const { id } = row
       const resume: any = await doGET(`v1/api/job-manger/resumes/${id}`)
       if (resume?.code === '00') {

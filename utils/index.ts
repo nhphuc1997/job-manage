@@ -21,11 +21,11 @@ export const TTL_COOKIE = 6000
 export const LOADING_TIMEOUT = 500
 
 export const KEYS_RESUME: KeyResume = [
-  { key: 'HEALTH_CERT', name: 'Chứng chỉ sức khỏe' },
+  { key: 'HEALTH_CERT', name: 'Giấy khám sức khỏe' },
   { key: 'ID_FRONT', name: 'Mặt trước căn cước' },
   { key: 'ID_BACK', name: 'Mặt sau căn cước' },
-  { key: 'ID_PHOTO_CC', name: 'Căn cước' },
+  { key: 'ID_PHOTO_CC', name: 'Căn cước photo công chứng' },
   { key: 'PASSPORT', name: 'Hộ chiếu' },
-  { key: 'TPS2', name: 'TPS2' },
-  { key: 'OTHER', name: 'Chứng chỉ khác' },
+  { key: 'TPS2', name: 'Giấy Tư Pháp Số 2' },
+  { key: 'OTHER', name: 'Giấy tờ khác' },
 ]

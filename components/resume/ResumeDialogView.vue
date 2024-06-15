@@ -30,7 +30,7 @@
         </el-form>
       </el-tab-pane>
 
-      <el-tab-pane :label="`Giấy tờ ${resumeStore.data.viewResume.fullName ?? 'n/a'}`" name="tab-second">
+      <el-tab-pane :label="`Giấy tờ`" name="tab-second">
         <div class="collapse">
           <el-collapse accordion>
             <el-collapse-item name="1">
@@ -39,7 +39,7 @@
                   <ElIconFiles />
                 </el-icon>
                 <el-badge type="primary" :value="1" :offset="[10, 15]">
-                  <el-text class="text-intro">Hồ sơ cá nhân</el-text>
+                  <el-text class="text-intro">Ảnh chân dung</el-text>
                 </el-badge>
               </template>
 
