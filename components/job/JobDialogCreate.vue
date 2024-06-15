@@ -1,5 +1,6 @@
 <template>
-  <el-dialog v-model="jobStore.dialog.createJobVisible" title="Khởi tạo công việc" width="800" align-top>
+  <el-dialog v-model="jobStore.dialog.createJobVisible" title="Khởi tạo công việc" width="800" align-top
+    @close="jobStore.makeFreshJob">
     <el-form :model="jobStore.data.newJob">
       <el-form-item label="Tên công việc" :label-width="formLabelWidth">
         <el-input v-model="jobStore.data.newJob.title" autocomplete="off" placeholder="Tên công việc" />
@@ -47,6 +48,8 @@
 </template>
 
 <script lang="ts" setup>
+import type { Job } from '~/utils/interfaces';
+
 const formLabelWidth = '140px'
 const jobStore = useJobStore()
 </script>

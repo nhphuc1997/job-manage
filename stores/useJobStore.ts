@@ -193,10 +193,12 @@ export const useJobStore = defineStore('useJobStore', {
 
       if (jobs.code === '100') {
         ElNotification({ message: 'Tên công việc đã tồn tại, vui lòng kiểm tra lại thông tin', type: 'error' })
+        this.data.newJob = {} as Job
         return
       }
 
       ElNotification({ message: 'Hệ thống tạm thời gián đoạn', type: 'error' })
+      this.data.newJob = {} as Job
       return
     },
     async editAttrJob() {
@@ -249,8 +251,11 @@ export const useJobStore = defineStore('useJobStore', {
       this.filterUserApplyJob.fulltext = ''
       this.filterUserApplyJob.date = ''
       this.filterUserApplyJob.status = ''
-      this.data.detailTabPanelActive = 'tab-first'
+      // this.data.detailTabPanelActive = 'tab-first'
       await this.fetchUsersApplyJob()
     },
+    makeFreshJob() {
+      this.data.newJob = {} as Job
+    }
   }
 })
