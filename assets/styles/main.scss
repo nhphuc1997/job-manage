@@ -90,7 +90,8 @@ body {
 
     .el-statistic__content {
       font-size: unset;
-      text-align: left;
+      text-align: center;
+      color: var(--el-color-success);
     }
   }
 }

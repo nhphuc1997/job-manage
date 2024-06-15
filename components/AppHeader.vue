@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <el-row :gutter="8">
-      <el-col :span="12" style="display: flex; justify-content: flex-start; align-items: center;">
+      <el-col :xs="24" :md="12" class="flex hidden-sm-and-down">
         <el-statistic :value="areaStore.metadata.totalElements">
           <template #title>
             <el-text size="small">Tổng khu vực</el-text>
@@ -10,8 +10,7 @@
             </el-icon>
           </template>
         </el-statistic>
-
-        <el-divider direction="vertical" border-style="dashed" />
+        <el-divider direction="vertical" />
 
         <el-statistic :value="jobStore.metadata.totalElements" class="">
           <template #title>
@@ -21,8 +20,7 @@
             </el-icon>
           </template>
         </el-statistic>
-
-        <el-divider direction="vertical" border-style="dashed" />
+        <el-divider direction="vertical" />
 
         <el-statistic :value="userStore.metadata.totalElements">
           <template #title>
@@ -32,9 +30,20 @@
             </el-icon>
           </template>
         </el-statistic>
+        <el-divider direction="vertical" />
+
+        <el-statistic :value="resumesStore.metadata.totalElements">
+          <template #title>
+            <el-text size="small">Tổng hồ sơ</el-text>
+            <el-icon style="vertical-align: -0.125em">
+              <CaretTop style="color: green;" />
+            </el-icon>
+          </template>
+        </el-statistic>
+
       </el-col>
 
-      <el-col :span="12">
+      <el-col :xs="24" :md="12">
         <div class="user-infor">
           <div class="avatar">
             <el-dropdown>
@@ -62,6 +71,8 @@
 </template>
 
 <style lang="scss" scoped>
+@import url('element-plus/theme-chalk/display.css');
+
 .header {
   .user-infor {
     display: flex;
@@ -76,20 +87,28 @@
   .spacing-4 {
     padding: 0 4rem;
   }
+
+  .flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
 </style>
 
 <script lang="ts" setup>
-import { TopRight, User, Coordinate, CaretTop } from '@element-plus/icons-vue';
+import { TopRight, User, CaretTop } from '@element-plus/icons-vue';
 
 const authStore = useAuthStore()
 const areaStore = useAreaStore()
 const jobStore = useJobStore()
 const userStore = useUserStore()
+const resumesStore = useResumeStore()
 
 const usernameCookie: any = useCookie('userName')
 const userName = usernameCookie.value
 
 jobStore.fetchJobs()
 userStore.fetchUsers()
+resumesStore.fetchResumes()
 </script>
