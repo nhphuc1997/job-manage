@@ -12,10 +12,6 @@
             <el-input disabled v-model="jobStore.data.viewJob.title" autocomplete="off" />
           </el-form-item>
 
-          <el-form-item label="URL hình ảnh" :label-width="formLabelWidth">
-            <el-input disabled v-model="jobStore.data.viewJob.imageUrl" autocomplete="off" />
-          </el-form-item>
-
           <el-form-item label="Khu vực" :label-width="formLabelWidth">
             <el-select disabled v-model="jobStore.data.viewJob.areaId">
               <el-option v-for="item in jobStore.data.area" :key="item.value" :label="item.label" :value="item.value" />
@@ -54,7 +50,20 @@
         </el-form>
       </el-tab-pane>
 
-      <el-tab-pane label="Danh sách ứng tuyển" name="tab-second">
+      <el-tab-pane label="Hình ảnh" name="tab-second" class="image">
+        <el-image class="image-wrapper" :src="jobStore.data.viewJob.imageUrl" fit="fill">
+          <template #error>
+            <div class="error-image">
+              <el-icon>
+                <Picture />
+              </el-icon>
+              <el-text>URL hình ảnh không hợp lệ</el-text>
+            </div>
+          </template>
+        </el-image>
+      </el-tab-pane>
+
+      <el-tab-pane label="Danh sách ứng tuyển" name="tab-third">
         <JobUserApplyFilter />
         <JobUserApplyData />
         <JobUserApplyPagination />
@@ -63,16 +72,38 @@
   </el-dialog>
 </template>
 
+<style lang="scss" scoped>
+.image {
+  width: 100%;
+
+  .image-wrapper {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+
+    .error-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 398px;
+      border-radius: 8px;
+      border: 1px solid #dcdfe6;
+    }
+  }
+}
+</style>
+
 <script lang="ts" setup>
 import type { TabsPaneContext } from 'element-plus';
+import { Picture } from '@element-plus/icons-vue'
 
 const formLabelWidth = '140'
 const jobStore = useJobStore()
 
 const tabChange = async (tab: TabsPaneContext) => {
-  if (tab.props.name === 'tab-second') {
+  if (tab.props.name === 'tab-third') {
     await jobStore.fetchUsersApplyJob()
-    jobStore.data.detailTabPanelActive = 'tab-second'
+    jobStore.data.detailTabPanelActive = 'tab-third'
     return
   }
 

@@ -253,6 +253,7 @@ export const useJobStore = defineStore('useJobStore', {
       this.filterUserApplyJob.fulltext = ''
       this.filterUserApplyJob.date = ''
       this.filterUserApplyJob.status = ''
+      this.data.detailTabPanelActive = 'tab-first'
       await this.fetchUsersApplyJob()
     },
     makeFreshJob() {
