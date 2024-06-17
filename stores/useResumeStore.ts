@@ -88,6 +88,11 @@ export const useResumeStore = defineStore('useResumeStore', {
         this.data.viewResume = resume.data
         const photos = resume.data.photos
 
+        if (photos.length <= 0) {
+          this.loading.view = false
+          return
+        }
+
         this.data.certs.EXTRA_INFO = {
           createdDate: photos[0].createdDate,
           createdBy: photos[0].createdBy,
