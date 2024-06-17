@@ -38,6 +38,9 @@ export const useResumeStore = defineStore('useResumeStore', {
     },
     drawer: {
       filterResume: false
+    },
+    loading: {
+      view: false,
     }
   }),
   actions: {
@@ -68,6 +71,7 @@ export const useResumeStore = defineStore('useResumeStore', {
     },
     async openDialogView(row: any) {
       this.dialog.viewResumeVisible = true
+      this.loading.view = true
       this.data.certs = {
         HEALTH_CERT: [],
         ID_FRONT: [],
@@ -96,8 +100,13 @@ export const useResumeStore = defineStore('useResumeStore', {
             .filter((photo: Record<string, any>) => photo.resumeType === key)
             .map((photo: Record<string, any>) => photo.url)
         })
+
+        this.loading.view = false
         return
       }
+
+      this.loading.view = false
+      return
     },
     async paginationPageChange(page: number) {
       this.metadata.page = page

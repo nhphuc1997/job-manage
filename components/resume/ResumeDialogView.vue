@@ -1,7 +1,7 @@
 <template>
   <el-dialog v-model="resumeStore.dialog.viewResumeVisible" title="Chi tiết hồ sơ" width="800" align-top
     @close="resumeStore.resetTab">
-    <el-tabs v-model="resumeStore.data.detailTabPanelActive">
+    <el-tabs v-loading="resumeStore.loading.view" v-model="resumeStore.data.detailTabPanelActive">
       <el-tab-pane label="Thông tin" name="tab-first">
         <el-form :model="resumeStore.data.viewResume">
           <el-form-item label="Id" :label-width="formLabelWidth">
@@ -46,8 +46,8 @@
               <div class="flex">
                 <el-row :gutter="10">
                   <el-col :span="4">
-                    <el-image class="image" :src="resumeStore.data.viewResume.profileUrl" :zoom-rate="1.2" :max-scale="7"
-                      :min-scale="0.2" :initial-index="4" fit="cover"
+                    <el-image class="image" :src="resumeStore.data.viewResume.profileUrl" :zoom-rate="1.2"
+                      :max-scale="7" :min-scale="0.2" :initial-index="4" fit="cover"
                       :preview-src-list="[resumeStore.data.viewResume.profileUrl]" />
                   </el-col>
                   <el-col :span="20">
