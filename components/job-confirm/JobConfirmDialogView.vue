@@ -88,8 +88,8 @@
           </el-descriptions-item>
 
           <el-descriptions-item label="Trạng thái:">
-            <el-tag :type="parseElTagStatus(jobConfirmStore.data.viewResume.status)">
-              {{ parseStatus(jobConfirmStore.data.viewResume.status) }}
+            <el-tag :type="parseElTagResumeStatus(jobConfirmStore.data.viewResume.status)">
+              {{ parseResumeStatus(jobConfirmStore.data.viewResume.status) }}
             </el-tag>
           </el-descriptions-item>
         </el-descriptions>
@@ -129,23 +129,4 @@
 <script lang="ts" setup>
 const formLabelWidth = '140px'
 const jobConfirmStore = useJobConfirmStore()
-
-const parseStatus = (type: string) => {
-  return {
-    FULL_INFO: 'Đủ thông tin',
-    NEED_ADDITIONAL_INFO: 'Thiếu thông tin bổ sung',
-    NEED_MANDATORY_INFO: 'Thiếu thông tin bắt buộc'
-  }[type]
-}
-
-const parseElTagStatus = (type: string): any => {
-  if (type) {
-    return {
-      FULL_INFO: 'success',
-      NEED_ADDITIONAL_INFO: 'warning',
-      NEED_MANDATORY_INFO: 'danger'
-    }[type]
-  }
-  return 'info'
-}
 </script>

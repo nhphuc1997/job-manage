@@ -16,8 +16,8 @@
       <el-table-column prop="status" label="Trạng thái" sortable width="200">
         <template #default="scope">
           <el-text>
-            <el-tag size="small" :type="scope.row.status === 'FULL_UPDATED' ? 'success' : 'warning'">
-              {{ parseStatus(scope.row.status) }}
+            <el-tag size="small" :type="parseElTagResumeStatus(scope.row.status)">
+              {{ parseResumeStatus(scope.row.status) }}
             </el-tag>
           </el-text>
         </template>
@@ -34,12 +34,4 @@
 <script lang="ts" setup>
 import { TopRight } from '@element-plus/icons-vue';
 const resumeStore = useResumeStore()
-
-const parseStatus = (type: string) => {
-  return {
-    FULL_INFO: 'Đủ thông tin',
-    NEED_ADDITIONAL_INFO: 'Thiếu thông tin bổ sung',
-    NEED_MANDATORY_INFO: 'Thiếu thông tin bắt buộc'
-  }[type]
-}
 </script>

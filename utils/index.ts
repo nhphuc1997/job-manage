@@ -29,3 +29,22 @@ export const KEYS_RESUME: KeyResume = [
   { key: 'TPS2', name: 'Giấy Tư Pháp Số 2' },
   { key: 'OTHER', name: 'Giấy tờ khác' },
 ]
+
+export const parseElTagResumeStatus = (type: string): any => {
+  if (type) {
+    return {
+      FULL_INFO: 'success',
+      NEED_ADDITIONAL_INFO: 'warning',
+      NEED_MANDATORY_INFO: 'danger'
+    }[type]
+  }
+  return 'info'
+}
+
+export const parseResumeStatus = (type: string): any => {
+  return {
+    FULL_INFO: 'Đủ thông tin',
+    NEED_ADDITIONAL_INFO: 'Thiếu thông tin bổ sung',
+    NEED_MANDATORY_INFO: 'Thiếu thông tin bắt buộc'
+  }[type]
+}
