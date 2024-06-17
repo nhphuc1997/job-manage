@@ -48,3 +48,18 @@ export const parseResumeStatus = (type: string): any => {
     NEED_MANDATORY_INFO: 'Thiếu thông tin bắt buộc'
   }[type]
 }
+
+export const parseStatusV1 = (type: string) => {
+  return {
+    ACTIVE: 'Đang hoạt động',
+    INACTIVE: 'Không hoạt động',
+  }[type]
+}
+
+export const parseStatusV2 = (type: string) => {
+  return {
+    REJECT: 'Từ chối',
+    APPROVED: 'Đồng ý',
+    PENDING: 'Chờ chấp thuận',
+  }[type]
+}

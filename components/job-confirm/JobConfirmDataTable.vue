@@ -39,7 +39,7 @@
               </div>
               <div v-else>
                 <el-tag size="small" :type="scope.row.status === 'APPROVED' ? 'success' : 'danger'">
-                  {{ parseStatus(scope.row.status) }}
+                  {{ parseStatusV2(scope.row.status) }}
                 </el-tag>
               </div>
             </el-col>
@@ -60,17 +60,6 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  CircleCheckFilled,
-  CircleCloseFilled,
-} from '@element-plus/icons-vue'
+import { CircleCheckFilled, CircleCloseFilled } from '@element-plus/icons-vue'
 const jobConfirmStore = useJobConfirmStore()
-
-const parseStatus = (type: string) => {
-  return {
-    REJECT: 'Từ chối',
-    APPROVED: 'Đồng ý',
-    PENDING: 'Chờ chấp thuận',
-  }[type]
-}
 </script>

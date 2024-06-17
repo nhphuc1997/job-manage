@@ -31,7 +31,7 @@
             <el-col :span="12">
               <div class="flex-start">
                 <el-tag :type="scope.row.status === 'ACTIVE' ? 'success' : 'danger'" size="small">
-                  {{ parseStatus(scope.row.status) }}
+                  {{ parseStatusV1(scope.row.status) }}
                 </el-tag>
               </div>
             </el-col>
@@ -59,10 +59,5 @@
 import { TopRight } from '@element-plus/icons-vue';
 const jobStore = useJobStore()
 
-const parseStatus = (type: string) => {
-  return {
-    ACTIVE: 'Đang hoạt động',
-    INACTIVE: 'Không hoạt động',
-  }[type]
-}
+
 </script>

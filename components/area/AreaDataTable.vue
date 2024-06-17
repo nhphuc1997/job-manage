@@ -11,7 +11,7 @@
             <el-col :span="12">
               <div class="flex-start">
                 <el-tag :type="scope.row.status === 'ACTIVE' ? 'success' : 'danger'" size="small">
-                  {{ parseStatus(scope.row.status) }}
+                  {{ parseStatusV1(scope.row.status) }}
                 </el-tag>
               </div>
             </el-col>
@@ -37,11 +37,4 @@
 
 <script lang="ts" setup>
 const areaStore = useAreaStore()
-
-const parseStatus = (type: string) => {
-  return {
-    ACTIVE: 'Đang hoạt động',
-    INACTIVE: 'Không hoạt động',
-  }[type]
-}
 </script>

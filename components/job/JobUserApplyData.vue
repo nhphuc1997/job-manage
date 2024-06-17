@@ -8,13 +8,13 @@
         <template #default="scope">
           <div v-if="scope.row.status !== 'PENDING'">
             <el-tag size="small" :type="scope.row.status === 'APPROVED' ? 'success' : 'danger'">
-              {{ parseStatus(scope.row.status) }}
+              {{ parseStatusV2(scope.row.status) }}
             </el-tag>
           </div>
 
           <div v-else>
             <el-tag size="small" type="warning">
-              {{ parseStatus(scope.row.status) }}
+              {{ parseStatusV2(scope.row.status) }}
             </el-tag>
           </div>
         </template>
@@ -34,11 +34,5 @@
 
 <script lang="ts" setup>
 const jobStore = useJobStore()
-const parseStatus = (type: string) => {
-  return {
-    REJECT: 'Từ chối',
-    APPROVED: 'Đồng ý',
-    PENDING: 'Chờ chấp thuận',
-  }[type]
-}
+
 </script>
