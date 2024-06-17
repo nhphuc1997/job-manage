@@ -1,7 +1,7 @@
 <template>
   <el-dialog v-model="jobConfirmStore.dialog.viewJobConfirmVisible" title="Chi tiết xác nhận" width="800" align-top>
     <el-tabs v-model="jobConfirmStore.data.detailTabPanelActive" class="demo-tabs">
-      <el-tab-pane label="Xác nhận" name="tab-first">
+      <el-tab-pane v-loading="jobConfirmStore.data.loading" label="Xác nhận" name="tab-first">
         <el-form :model="jobConfirmStore.data.viewJobConfirm">
           <el-form-item label="Id" :label-width="formLabelWidth">
             <el-input disabled v-model="jobConfirmStore.data.viewJobConfirm.id" />
