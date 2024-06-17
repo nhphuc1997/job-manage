@@ -33,6 +33,9 @@ export const useUserStore = defineStore('useUserStore', {
     },
     drawer: {
       filterUser: false
+    },
+    loading: {
+      view: false
     }
   }),
   actions: {
@@ -70,12 +73,14 @@ export const useUserStore = defineStore('useUserStore', {
     },
     async openDialogView(row: any) {
       this.dialog.viewUserVisible = true
+      this.loading.view = true
       const { id } = row
       const job: any = await doGET(`v1/api/job-manger/managements/users/${id}`)
 
       if (job?.code === '00') {
         job.data['authorities'] = job.data['authorities'].map((item: Record<string, any>) => item.code)
         this.data.viewUser = job.data
+        this.loading.view = false
         return
       }
     },

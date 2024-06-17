@@ -1,6 +1,6 @@
 <template>
   <el-dialog v-model="userStore.dialog.viewUserVisible" title="Chi tiết người dùng" width="600" align-top>
-    <el-form :model="userStore.data.viewUser">
+    <el-form v-loading="userStore.loading.view" :model="userStore.data.viewUser">
 
       <el-form-item label="Id" :label-width="formLabelWidth">
         <el-input disabled v-model="userStore.data.viewUser.id" />
