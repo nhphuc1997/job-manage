@@ -25,6 +25,9 @@ export const useSmsStore = defineStore('useSmsStore', {
     },
     drawer: {
       filterArea: false
+    },
+    loading: {
+      view: false
     }
   }),
   actions: {
@@ -58,9 +61,18 @@ export const useSmsStore = defineStore('useSmsStore', {
     },
     async openDialogViewJob(row: any) {
       this.dialog.viewSmsVisible = true
+      this.loading.view = true
       const { id } = row
       const job: any = await doGET(`v1/api/job-manger/sms/${id}`)
-      this.data.viewSms = job.data
+
+      if (job.code === '00') {
+        this.data.viewSms = job.data
+        this.loading.view = false
+        return
+      }
+
+      this.loading.view = false
+      return
     },
     async paginationSizeChange(size: number) {
       this.metadata.size = size
