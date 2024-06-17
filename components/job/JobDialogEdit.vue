@@ -1,6 +1,6 @@
 <template>
   <el-dialog v-model="jobStore.dialog.editJobAttrVisible" title="Chỉnh sửa công việc" width="800" align-top>
-    <el-form :model="jobStore.data.editAttrJob">
+    <el-form v-loading="jobStore.loading.edit" :model="jobStore.data.editAttrJob">
       <el-form-item label="Tên công việc" :label-width="formLabelWidth">
         <el-input v-model="jobStore.data.editAttrJob.title" autocomplete="off" placeholder="Tên công việc" />
       </el-form-item>

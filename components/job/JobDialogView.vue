@@ -1,7 +1,7 @@
 <template>
-  <el-dialog v-model="jobStore.dialog.viewJobVisible" title="Chi tiết công việc" width="800" align-center
+  <el-dialog v-model="jobStore.dialog.viewJobVisible" title="Chi tiết công việc" width="800" align-top
     @close="jobStore.resetFilterUsersApply()">
-    <el-tabs v-model="jobStore.data.detailTabPanelActive" @tab-click="tabChange">
+    <el-tabs v-loading="jobStore.loading.view" v-model="jobStore.data.detailTabPanelActive" @tab-click="tabChange">
       <el-tab-pane label="Thông tin" name="tab-first">
         <el-form :model="jobStore.data.viewJob">
           <el-form-item label="Id" :label-width="formLabelWidth">

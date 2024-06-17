@@ -58,6 +58,10 @@ export const useJobStore = defineStore('useJobStore', {
     },
     drawer: {
       filterJob: false
+    },
+    loading: {
+      view: false,
+      edit: false
     }
   }),
   actions: {
@@ -145,22 +149,42 @@ export const useJobStore = defineStore('useJobStore', {
       this.data.editStatusJob = { id: job.data.id, status: job.data.status }
     },
     async openDialogEditJobAttr(row: any) {
-      const { id } = row
+      this.loading.edit = true
       this.dialog.editJobAttrVisible = true
-      const job: any = await doGET(`v1/api/job-manger/jobs/${id}`)
-      const area: Area[] = this.data.area
-      const currentArea = area.find(item => item.id === job.data['areaId']) || { name: 'n/a' }
 
-      this.data.editAttrJob = job.data
-      this.data.editAttrJob['expiredDate'] = dateFromString(job.data['expiredDate'])
-      this.data.editAttrJob['areaName'] = currentArea.name
-      this.data.fileListEditJob = [{ name: '', url: job.data.imageUrl }]
+      const { id } = row
+      const job: any = await doGET(`v1/api/job-manger/jobs/${id}`)
+
+      if (job.code === '00') {
+        const area: Area[] = this.data.area
+        const currentArea = area.find(item => item.id === job.data['areaId']) || { name: 'n/a' }
+
+        this.data.editAttrJob = job.data
+        this.data.editAttrJob['expiredDate'] = dateFromString(job.data['expiredDate'])
+        this.data.editAttrJob['areaName'] = currentArea.name
+        this.data.fileListEditJob = [{ name: '', url: job.data.imageUrl }]
+        this.loading.edit = false
+        return
+      }
+
+      this.loading.edit = false
+      return
+
     },
     async openDialogViewJob(row: any) {
+      this.loading.view = true
       this.dialog.viewJobVisible = true
       const { id } = row
       const job: any = await doGET(`v1/api/job-manger/jobs/${id}`)
-      this.data.viewJob = job.data
+
+      if (job.code === '00') {
+        this.data.viewJob = job.data
+        this.loading.view = false
+        return
+      }
+
+      this.loading.view = false
+      return
     },
     async paginationSizeChange(size: number) {
       this.metadata.size = size
