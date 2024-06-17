@@ -80,21 +80,20 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
     },
     async openDialogView(row: any) {
       this.dialog.viewJobConfirmVisible = true
+      this.data.certs = {
+        HEALTH_CERT: [],
+        ID_FRONT: [],
+        ID_PHOTO_CC: [],
+        TPS2: [],
+        ID_BACK: [],
+        PASSPORT: [],
+        OTHER: [],
+        EXTRA_INFO: {}
+      }
       const { id } = row
       const jobConfirm: any = await doGET(`v1/api/job-manger/jobConfirm/${id}`)
 
       if (jobConfirm?.code === '00') {
-        this.data.certs = {
-          HEALTH_CERT: [],
-          ID_FRONT: [],
-          ID_PHOTO_CC: [],
-          TPS2: [],
-          ID_BACK: [],
-          PASSPORT: [],
-          OTHER: [],
-          EXTRA_INFO: {}
-        }
-
         const { jobId, resumeId } = jobConfirm.data
         const job: any = await doGET(`v1/api/job-manger/jobs/${jobId}`)
         const resume: any = await doGET(`v1/api/job-manger/resumes/${resumeId}`)
