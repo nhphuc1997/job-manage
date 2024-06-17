@@ -17,8 +17,9 @@ export const useResumeStore = defineStore('useResumeStore', {
       resumes: [] as Resume[],
       viewResume: {} as Resume,
       optionsStatus: [
-        { label: 'Cập nhập đầy đủ', value: 'FULL_UPDATED' },
-        { label: 'Cần cập nhập', value: 'NEED_UPDATE' },
+        { label: 'Thiếu thông tin bắt buộc', value: 'NEED_MANDATORY_INFO' },
+        { label: 'Thiếu thông tin bổ sung', value: 'NEED_ADDITIONAL_INFO' },
+        { label: 'Đủ thông tin', value: 'FULL_INFO' },
       ],
       detailTabPanelActive: 'tab-first',
       certs: {
