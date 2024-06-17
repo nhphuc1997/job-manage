@@ -1,6 +1,6 @@
 <template>
   <el-dialog v-model="areaStore.dialog.editAreaAttrVisible" title="Chỉnh sửa công việc" width="600" align-top>
-    <el-form :model="areaStore.data.editAttrArea">
+    <el-form v-loading="areaStore.data.loadingEdit" :model="areaStore.data.editAttrArea">
       <el-form-item label="Tên công việc" :label-width="formLabelWidth">
         <el-input v-model="areaStore.data.editAttrArea.name" autocomplete="off" placeholder="Tên công việc" />
       </el-form-item>

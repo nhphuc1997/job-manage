@@ -15,6 +15,8 @@ export const useAreaStore = defineStore('useAreaStore', {
       status: '',
     },
     data: {
+      loadingView: false,
+      loadingEdit: false,
       areas: [] as Area[],
       viewArea: {} as Area,
       newArea: {} as Area,
@@ -76,16 +78,34 @@ export const useAreaStore = defineStore('useAreaStore', {
       }
     },
     async openDialogEditJobAttr(row: any) {
-      const { id } = row
       this.dialog.editAreaAttrVisible = true
+      this.data.loadingEdit = true
+      const { id } = row
       const job: any = await doGET(`v1/api/job-manger/areas/${id}`)
-      this.data.editAttrArea = job.data
+
+      if (job.code === '00') {
+        this.data.loadingEdit = false
+        this.data.editAttrArea = job.data
+        return
+      }
+
+      this.data.loadingEdit = false
+      return
     },
     async openDialogViewJob(row: any) {
       this.dialog.viewAreaVisible = true
+      this.data.loadingView = true
       const { id } = row
       const job: any = await doGET(`v1/api/job-manger/areas/${id}`)
-      this.data.viewArea = job.data
+
+      if (job.code === '00') {
+        this.data.loadingView = false
+        this.data.viewArea = job.data
+        return
+      }
+
+      this.data.loadingView = false
+      return
     },
     async paginationSizeChange(size: number) {
       this.metadata.size = size

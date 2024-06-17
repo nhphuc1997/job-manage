@@ -1,6 +1,6 @@
 <template>
   <el-dialog v-model="areaStore.dialog.viewAreaVisible" title="Chi tiết khu vực" width="600" align-top>
-    <el-form :model="areaStore.data.viewArea">
+    <el-form v-loading="areaStore.data.loadingView" :model="areaStore.data.viewArea">
 
       <el-form-item label="Id" :label-width="formLabelWidth">
         <el-input disabled v-model="areaStore.data.viewArea.id" />
