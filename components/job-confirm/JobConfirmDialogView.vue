@@ -79,6 +79,29 @@
             <el-tag>{{ jobConfirmStore.data.viewResume.phoneNumber }}</el-tag>
           </el-descriptions-item>
         </el-descriptions>
+
+        <div>
+          <el-collapse accordion>
+            <el-collapse-item :name="item.key" v-for="item in KEYS_RESUME ">
+              <template #title>
+                <el-icon size="16">
+                  <ElIconPlatform />
+                </el-icon>
+                <el-badge type="primary" :value="jobConfirmStore.data.certs[item.key].length" :offset="[10, 15]">
+                  <el-text class="text-intro">{{ item.name }}</el-text>
+                </el-badge>
+              </template>
+              <div class="flex">
+                <el-row :gutter="10">
+                  <el-col :span="4" v-for="photo in jobConfirmStore.data.certs[item.key]">
+                    <el-image class="image" :src="photo" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
+                      :initial-index="4" fit="cover" :preview-src-list="[photo]" />
+                  </el-col>
+                </el-row>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
       </el-tab-pane>
 
     </el-tabs>

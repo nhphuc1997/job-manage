@@ -31,7 +31,17 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       ],
       optionsForEditStatus: [
         { label: 'Từ chối', value: 'REJECT' },
-      ]
+      ],
+      certs: {
+        HEALTH_CERT: [] as Array<any>,
+        ID_FRONT: [] as Array<any>,
+        ID_PHOTO_CC: [] as Array<any>,
+        TPS2: [] as Array<any>,
+        ID_BACK: [] as Array<any>,
+        PASSPORT: [] as Array<any>,
+        OTHER: [] as Array<any>,
+        EXTRA_INFO: {} as any
+      }
     },
     dialog: {
       viewJobConfirmVisible: false,
@@ -74,9 +84,28 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       const jobConfirm: any = await doGET(`v1/api/job-manger/jobConfirm/${id}`)
 
       if (jobConfirm?.code === '00') {
+        this.data.certs = {
+          HEALTH_CERT: [],
+          ID_FRONT: [],
+          ID_PHOTO_CC: [],
+          TPS2: [],
+          ID_BACK: [],
+          PASSPORT: [],
+          OTHER: [],
+          EXTRA_INFO: {}
+        }
+
         const { jobId, resumeId } = jobConfirm.data
         const job: any = await doGET(`v1/api/job-manger/jobs/${jobId}`)
         const resume: any = await doGET(`v1/api/job-manger/resumes/${resumeId}`)
+
+        const photos = resume.data.photos
+        const keys: any = ['HEALTH_CERT', 'ID_FRONT', 'ID_BACK', 'ID_PHOTO_CC', 'PASSPORT', 'TPS2', 'OTHER']
+        keys.map((key: 'HEALTH_CERT' | 'ID_FRONT' | 'ID_BACK' | 'ID_PHOTO_CC' | 'PASSPORT' | 'TPS2' | 'OTHER') => {
+          this.data.certs[key] = photos
+            .filter((photo: Record<string, any>) => photo.resumeType === key)
+            .map((photo: Record<string, any>) => photo.url)
+        })
 
         this.data.viewJobConfirm = jobConfirm.data
         this.data.viewJob = job.data
