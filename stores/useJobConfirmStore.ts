@@ -14,7 +14,7 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
       status: ''
     },
     data: {
-      loading: false,
+      // loading: false,
       jobConfirm: [] as JobConfirm[],
       viewJobConfirm: {} as JobConfirm,
       viewJob: {} as Job,
@@ -50,6 +50,9 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
     },
     drawer: {
       filterJobConfirm: false
+    },
+    loading: {
+      view: false
     }
   }),
   actions: {
@@ -92,7 +95,7 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
         EXTRA_INFO: {}
       }
       this.data.detailTabPanelActive = 'tab-first'
-      this.data.loading = true
+      this.loading.view = true
       const { id } = row
       const jobConfirm: any = await doGET(`v1/api/job-manger/jobConfirm/${id}`)
 
@@ -112,11 +115,11 @@ export const useJobConfirmStore = defineStore('useJobConfirmStore', {
         this.data.viewJobConfirm = jobConfirm.data
         this.data.viewJob = job.data
         this.data.viewResume = resume.data
-        this.data.loading = false
+        this.loading.view = false
         return
       }
 
-      this.data.loading = false
+      this.loading.view = false
     },
     async openDialogEdit(row: any) {
       this.dialog.editJobConfirmVisible = true
