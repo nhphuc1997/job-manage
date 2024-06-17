@@ -37,7 +37,7 @@ const resumeStore = useResumeStore()
 
 const parseStatus = (type: string) => {
   return {
-    FULL_UPDATED: 'Đủ thông tin',
+    FULL_INFO: 'Đủ thông tin',
     NEED_ADDITIONAL_INFO: 'Thiếu thông tin bổ sung',
     NEED_MANDATORY_INFO: 'Thiếu thông tin bắt buộc'
   }[type]
