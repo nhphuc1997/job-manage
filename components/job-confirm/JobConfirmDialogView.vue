@@ -39,6 +39,14 @@
             {{ jobConfirmStore.data.viewJob.id }}
           </el-descriptions-item>
 
+          <el-descriptions-item label="Tóm tắt:" :span="3">
+            <el-text>{{ jobConfirmStore.data.viewJob.summary }}</el-text>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="Mô tả:" :span="3">
+            <el-text>{{ jobConfirmStore.data.viewJob.description }}</el-text>
+          </el-descriptions-item>
+
           <el-descriptions-item label="Khu vực:">
             <el-tag>
               {{ jobConfirmStore.data.viewJob.areaName }}
