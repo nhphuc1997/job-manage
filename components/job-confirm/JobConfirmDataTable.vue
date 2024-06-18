@@ -3,9 +3,9 @@
     <el-table ref="tableRef" row-key="date" :data="jobConfirmStore.data.jobConfirm" style="width: 100%" :border="true"
       height="600">
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
+      <el-table-column prop="employeeName" label="Tên nhân viên" />
+      <el-table-column prop="userPhone" label="Số điện thoại" />
       <el-table-column prop="createdAt" label="Ngày tạo" sortable width="200" />
-      <el-table-column prop="employeeName" label="Tên nhân viên" align="center" />
-      <el-table-column prop="userPhone" label="Số điện thoại" align="center" />
       <el-table-column prop="jobTitle" label="Tên công việc">
         <template #default="scope">
           <el-tooltip effect="dark" :content="scope.row.jobTitle" placement="top">

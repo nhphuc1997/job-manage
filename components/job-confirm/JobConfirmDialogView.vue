@@ -34,9 +34,21 @@
       </el-tab-pane>
 
       <el-tab-pane label="Công việc" name="tab-second">
-        <el-descriptions :column="3">
-          <el-descriptions-item label="Id:" :span="3">
-            {{ jobConfirmStore.data.viewJob.id }}
+        <el-descriptions :column="1">
+          <el-descriptions-item label="Khu vực:">
+            <el-tag>
+              {{ jobConfirmStore.data.viewJob.title }}
+            </el-tag>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="Khu vực:">
+            <el-tag>
+              {{ jobConfirmStore.data.viewJob.areaName }}
+            </el-tag>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="Ngày hết hạn:">
+            <el-tag>{{ jobConfirmStore.data.viewJob.expiredDate }}</el-tag>
           </el-descriptions-item>
 
           <el-descriptions-item label="Tóm tắt:" :span="3">
@@ -47,21 +59,6 @@
             <el-text>{{ jobConfirmStore.data.viewJob.description }}</el-text>
           </el-descriptions-item>
 
-          <el-descriptions-item label="Khu vực:">
-            <el-tag>
-              {{ jobConfirmStore.data.viewJob.areaName }}
-            </el-tag>
-          </el-descriptions-item>
-
-          <el-descriptions-item label="Tên công việc:">
-            <el-tag>
-              {{ jobConfirmStore.data.viewJob.title }}
-            </el-tag>
-          </el-descriptions-item>
-
-          <el-descriptions-item label="Ngày hết hạn:">
-            <el-tag>{{ jobConfirmStore.data.viewJob.expiredDate }}</el-tag>
-          </el-descriptions-item>
         </el-descriptions>
       </el-tab-pane>
 
