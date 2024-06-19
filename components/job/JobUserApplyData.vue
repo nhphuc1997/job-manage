@@ -1,7 +1,6 @@
 <template>
   <div class="users-wrapper">
-    <el-table v-loading="jobStore.data.loading" :data="jobStore.data.usersApply" style="width: 100%; height: 300px;"
-      border>
+    <el-table v-loading="jobStore.data.loading" :data="jobStore.data.usersApply" max-height="300" border>
       <el-table-column prop="employeeName" label="Tên" sortable />
       <el-table-column prop="userPhone" label="SĐT" sortable />
       <el-table-column prop="status" label="Trạng thái" sortable>
