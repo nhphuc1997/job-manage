@@ -1,6 +1,6 @@
 <template>
   <div class="infor">
-    <el-table ref="tableRef" row-key="date" :data="jobConfirmStore.data.jobConfirm" border max-height="500">
+    <el-table ref="tableRef" row-key="date" :data="jobConfirmStore.data.jobConfirm"  border max-height="500">
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
       <el-table-column prop="employeeName" label="Tên nhân viên" />
       <el-table-column prop="userPhone" label="Số điện thoại" />
@@ -29,11 +29,11 @@
                   :title="`Chấp thuận công việc '${scope.row.jobTitle}'`"
                   @confirm="jobConfirmStore.updateApproveJob(scope.row)">
                   <template #reference>
-                    <el-button plain type="success" size="small" :icon="CircleCheckFilled" />
+                    <el-button plain type="success" size="small" :icon="ElIconCircleCheckFilled" />
                   </template>
                 </el-popconfirm>
 
-                <el-button type="danger" plain :icon="CircleCloseFilled" size="small"
+                <el-button type="danger" plain :icon="ElIconCircleCheckFilled" size="small"
                   @click="jobConfirmStore.openDialogEdit(scope.row)" />
               </div>
               <div v-else>

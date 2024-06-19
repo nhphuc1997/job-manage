@@ -18,7 +18,7 @@
       </el-table-column>
       <el-table-column prop="imageUrl" label="Hình ảnh Url" sortable align="center">
         <template #default="scope">
-          <el-button size="small" type="primary" round plain :icon="TopRight" @click="redirectTo(scope.row.imageUrl)">
+          <el-button size="small" type="primary" round plain :icon="ElIconTopRight" @click="redirectTo(scope.row.imageUrl)">
             Link
           </el-button>
         </template>
@@ -56,8 +56,5 @@
 </template>
 
 <script lang="ts" setup>
-import { TopRight } from '@element-plus/icons-vue';
 const jobStore = useJobStore()
-
-
 </script>
