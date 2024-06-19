@@ -1,6 +1,6 @@
 <template>
   <div class="infor">
-    <el-table :data="areaStore.data.areas" border max-height="600">
+    <el-table :data="areaStore.data.areas" border max-height="500">
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
       <el-table-column prop="name" label="Tên" sortable />
       <el-table-column prop="code" label="Code" sortable />

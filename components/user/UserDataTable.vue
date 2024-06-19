@@ -1,6 +1,6 @@
 <template>
   <div class="infor">
-    <el-table ref="tableRef" row-key="date" :data="userStore.data.users" border max-height="600">
+    <el-table ref="tableRef" row-key="date" :data="userStore.data.users" border max-height="500">
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
       <el-table-column prop="username" label="Tên người dùng" sortable />
       <el-table-column prop="email" label="Email" sortable />
