@@ -4,6 +4,7 @@
     <category-data-table />
     <category-pagination />
     <category-dialog-view />
+    <category-dialog-create />
   </div>
 </template>
 

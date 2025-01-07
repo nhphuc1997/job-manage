@@ -15,9 +15,11 @@ export const useCategoryStore = defineStore('useCategoryStore', {
     data: {
       categories: [] as Category[],
       viewCategory: {} as Category,
+      newCategory: {} as Category,
     },
     dialog: {
       viewCategoryVisible: false,
+      createCategoryVisible: false,
     },
     loading: {
       view: false
@@ -49,6 +51,8 @@ export const useCategoryStore = defineStore('useCategoryStore', {
       const { id } = row
       await doMethod(`super-market/backend/category/${id}`, null, 'DELETE');
       await this.fetchEntity()
+    },
+    async createEntity() {
     },
     async openDialogView(row: any) {
       this.dialog.viewCategoryVisible = true
