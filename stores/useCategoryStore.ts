@@ -1,4 +1,4 @@
-import { doGET } from "~/utils/apis"
+import { doGET, doMethod } from "~/utils/apis"
 import type { Category } from "~/utils/interfaces"
 
 export const useCategoryStore = defineStore('useCategoryStore', {
@@ -24,7 +24,7 @@ export const useCategoryStore = defineStore('useCategoryStore', {
     }
   }),
   actions: {
-    async fetchCategory() {
+    async fetchEntity() {
       const query: any = {
         limit: this.metadata.size,
         page: this.metadata.page,
@@ -45,6 +45,11 @@ export const useCategoryStore = defineStore('useCategoryStore', {
       ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
       return
     },
+    async removeEntity(row: any) {
+      const { id } = row
+      await doMethod(`super-market/backend/category/${id}`, null, 'DELETE');
+      await this.fetchEntity()
+    },
     async openDialogView(row: any) {
       this.dialog.viewCategoryVisible = true
       this.loading.view = true
@@ -59,16 +64,12 @@ export const useCategoryStore = defineStore('useCategoryStore', {
     },
     async paginationSizeChange(size: number) {
       this.metadata.size = size
-      await this.fetchCategory()
+      await this.fetchEntity()
     },
     async paginationPageChange(page: number) {
       this.metadata.page = page
       this.metadata.currentPage - 1
-      await this.fetchCategory()
-    },
-    async resetFilter() {
-      this.filter.fulltext = ''
-      await this.fetchCategory()
-    },
+      await this.fetchEntity()
+    }
   }
 })

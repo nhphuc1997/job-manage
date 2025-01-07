@@ -26,15 +26,15 @@ export const doGET = async (url: string, params?: any, query?: any) => {
   return result
 }
 
-export const doMethod = async (url: string, payload: any, method: 'POST' | 'PUT' | 'PATCH') => {
-  const accessToken = useCookie("accessToken")
+export const doMethod = async (url: string, payload: any, method: 'POST' | 'PUT' | 'PATCH' | 'DELETE') => {
+  // const accessToken = useCookie("accessToken")
   const { data, status } = await useFetch(
-    `http://18.141.39.162:8089/${url}`,
+    `http://localhost:3001/${url}`,
     {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${accessToken.value}`,
+        // "Authorization": `Bearer ${accessToken.value}`,
       },
       method: method,
       body: payload,
@@ -47,7 +47,6 @@ export const doMethod = async (url: string, payload: any, method: 'POST' | 'PUT'
   }
 
   const result: any = data.value
-  if (result.code === '05') return navigateTo('/')
   return result
 }
 

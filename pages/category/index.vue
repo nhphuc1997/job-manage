@@ -18,6 +18,6 @@ definePageMeta({
 })
 const loading = ElLoading.service({ lock: true })
 const userStore = useCategoryStore()
-await userStore.fetchCategory()
+await userStore.fetchEntity()
 loading.close()
 </script>

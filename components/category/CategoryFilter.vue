@@ -2,8 +2,8 @@
   <div class="create hidden-sm-and-down">
     <el-row :gutter="12">
       <el-col :span="9">
-        <el-input v-model="cateogryStore.filter.fulltext" @change="cateogryStore.fetchCategory"
-          placeholder="Tìm kiếm tên" :suffix-icon="ElIconSearch" />
+        <el-input v-model="cateogryStore.filter.fulltext" @change="cateogryStore.fetchEntity" placeholder="Tìm kiếm tên"
+          :suffix-icon="ElIconSearch" />
       </el-col>
     </el-row>
   </div>
