@@ -1,9 +1,8 @@
 export const doGET = async (url: string, params?: any, query?: any) => {
-  const accessToken = useCookie("accessToken")
-
-  if (accessToken.value === null || accessToken.value === undefined) {
-    return navigateTo('/')
-  }
+  // const accessToken = useCookie("accessToken")
+  // if (accessToken.value === null || accessToken.value === undefined) {
+  //   return navigateTo('/')
+  // }
 
   const { data, status } = await useFetch(
     `http://localhost:3001/${url}`,
@@ -11,7 +10,6 @@ export const doGET = async (url: string, params?: any, query?: any) => {
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${accessToken.value}`,
       },
       method: 'GET',
       params: params,
@@ -25,7 +23,6 @@ export const doGET = async (url: string, params?: any, query?: any) => {
   }
 
   const result: any = data?.value
-  if (result.code === '05') return navigateTo('/')
   return result
 }
 

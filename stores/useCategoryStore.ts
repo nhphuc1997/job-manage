@@ -4,7 +4,7 @@ import type { Category } from "~/utils/interfaces"
 export const useCategoryStore = defineStore('useCategoryStore', {
   state: () => ({
     metadata: {
-      page: 0,
+      page: 1,
       size: 10,
       totalElements: 0,
       currentPage: 0,
@@ -19,22 +19,41 @@ export const useCategoryStore = defineStore('useCategoryStore', {
       categories: [] as Category[],
       viewCategory: {} as Category,
     },
+    dialog: {
+      viewCategoryVisible: false,
+    },
     loading: {
       view: false
     }
   }),
   actions: {
     async fetchCategory() {
-      const categories: any = await doGET(`super-market/backend/category`)
-      if (categories?.statusCode === 200) {
-        this.data.categories = categories?.data?.data
-        this.metadata.totalElements = categories?.data?.total
-        this.metadata.currentPage = categories.data.page
+      const query = {
+        limit: this.metadata.size,
+        page: this.metadata.page,
+      }
+      const entity: any = await doGET(`super-market/backend/category`, query)
+      if (entity?.statusCode === 200) {
+        this.data.categories = entity?.data?.data
+        this.metadata.totalElements = entity?.data?.total
+        this.metadata.currentPage = entity.data.page
         return
       }
 
       ElNotification({ message: 'Hệ thống tạm thời gián đoạn, vui lòng thử lại sau' })
       return
+    },
+    async openDialogView(row: any) {
+      this.dialog.viewCategoryVisible = true
+      this.loading.view = true
+      const { id } = row
+      const entity: any = await doGET(`super-market/backend/category/${id}`)
+
+      if (entity?.statusCode === 200) {
+        this.data.viewCategory = entity.data
+        this.loading.view = false
+        return
+      }
     },
     async paginationSizeChange(size: number) {
       this.metadata.size = size

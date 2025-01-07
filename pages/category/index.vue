@@ -1,10 +1,9 @@
 <template>
   <div class="area-section">
-    <UserFilter />
-    <UserDataTable />
-    <UserPagination />
-
-    <UserDialogView />
+    <!-- <UserFilter /> -->
+    <category-data-table />
+    <category-pagination />
+    <category-dialog-view />
   </div>
 </template>
 
