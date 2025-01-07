@@ -53,6 +53,16 @@ export const useCategoryStore = defineStore('useCategoryStore', {
       await this.fetchEntity()
     },
     async createEntity() {
+      const { name } = this.data.newCategory
+      const entity: any = await doMethod(`super-market/backend/category`, { name }, 'POST')
+
+      if (entity.statusCode === 200) {
+        ElNotification({ message: 'Tạo mới danh mục thành công', type: 'success' })
+        this.data.newCategory = {} as Category
+        this.dialog.createCategoryVisible = false
+        await this.fetchEntity()
+        return
+      }
     },
     async openDialogView(row: any) {
       this.dialog.viewCategoryVisible = true
