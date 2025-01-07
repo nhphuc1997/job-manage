@@ -2,68 +2,6 @@
   <div class="header">
     <el-row :gutter="8">
       <el-col :md="2" class=" hidden-sm-and-down" />
-      <el-col :xs="24" :md="20" class="flex hidden-sm-and-down">
-        <el-statistic :value="areaStore.metadata.totalElements">
-          <template #title>
-            <el-text size="small">Tổng khu vực</el-text>
-            <el-icon style="vertical-align: -0.125em">
-              <CaretTop style="color: green;" />
-            </el-icon>
-          </template>
-        </el-statistic>
-        <el-divider direction="vertical" />
-
-        <el-statistic :value="jobStore.metadata.totalElements" class="">
-          <template #title>
-            <el-text size="small">Tổng công việc</el-text>
-            <el-icon style="vertical-align: -0.125em">
-              <CaretTop style="color: green;" />
-            </el-icon>
-          </template>
-        </el-statistic>
-        <el-divider direction="vertical" />
-
-        <el-statistic :value="userStore.metadata.totalElements">
-          <template #title>
-            <el-text size="small">Tổng người dùng</el-text>
-            <el-icon style="vertical-align: -0.125em">
-              <CaretTop style="color: green;" />
-            </el-icon>
-          </template>
-        </el-statistic>
-        <el-divider direction="vertical" />
-
-        <el-statistic :value="resumesStore.metadata.totalElements">
-          <template #title>
-            <el-text size="small">Tổng hồ sơ</el-text>
-            <el-icon style="vertical-align: -0.125em">
-              <CaretTop style="color: green;" />
-            </el-icon>
-          </template>
-        </el-statistic>
-        <el-divider direction="vertical" />
-
-        <el-statistic :value="smsStore.metadata.totalElements">
-          <template #title>
-            <el-text size="small">Tổng SMS</el-text>
-            <el-icon style="vertical-align: -0.125em">
-              <CaretTop style="color: green;" />
-            </el-icon>
-          </template>
-        </el-statistic>
-        <el-divider direction="vertical" />
-
-        <el-statistic :value="jobConfirmStore.metadata.totalElements">
-          <template #title>
-            <el-text size="small">Tổng hồ sơ xác nhận</el-text>
-            <el-icon style="vertical-align: -0.125em">
-              <CaretTop style="color: green;" />
-            </el-icon>
-          </template>
-        </el-statistic>
-        <el-divider direction="vertical" />
-
-      </el-col>
 
       <el-col :xs="24" :md="2">
         <div class="user-infor">

@@ -7,39 +7,7 @@
         </el-icon>
       </el-tooltip>
     </el-menu-item>
-
-    <el-menu-item @click="navigateTo('/jobs')" :class="route.path === '/jobs' ? 'is-active' : ''">
-      <el-tooltip class="box-item" effect="light" content="Công việc" placement="right-start">
-        <el-icon>
-          <IconMenu />
-        </el-icon>
-      </el-tooltip>
-    </el-menu-item>
-
-    <el-menu-item @click="navigateTo('/job-confirm')" :class="route.path === '/job-confirm' ? 'is-active' : ''">
-      <el-tooltip class="box-item" effect="light" content="Xác nhận" placement="right-start">
-        <el-icon>
-          <TrendCharts />
-        </el-icon>
-      </el-tooltip>
-    </el-menu-item>
-
-    <el-menu-item @click="navigateTo('/sms')" :class="route.path === '/sms' ? 'is-active' : ''">
-      <el-tooltip class="box-item" effect="light" content="SMS" placement="right-start">
-        <el-icon>
-          <DataBoard />
-        </el-icon>
-      </el-tooltip>
-    </el-menu-item>
-
-    <el-menu-item @click="navigateTo('/resumes')" :class="route.path === '/resumes' ? 'is-active' : ''">
-      <el-tooltip class="box-item" effect="light" content="Hồ sơ" placement="right-start">
-        <el-icon>
-          <DataAnalysis />
-        </el-icon>
-      </el-tooltip>
-    </el-menu-item>
-
+    
     <el-menu-item @click="navigateTo('/users')" :class="route.path === '/users' ? 'is-active' : ''">
       <el-tooltip class="box-item" effect="light" content="Người dùng" placement="right-start">
         <el-icon>
