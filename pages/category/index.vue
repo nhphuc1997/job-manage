@@ -1,6 +1,6 @@
 <template>
   <div class="area-section">
-    <!-- <UserFilter /> -->
+    <category-filter />
     <category-data-table />
     <category-pagination />
     <category-dialog-view />
@@ -12,16 +12,12 @@
 </style>
 
 <script lang="ts" setup>
-
 definePageMeta({
   layout: 'default',
   // middleware: ['auth']
 })
-
 const loading = ElLoading.service({ lock: true })
-
 const userStore = useCategoryStore()
 await userStore.fetchCategory()
-
 loading.close()
 </script>

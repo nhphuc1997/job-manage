@@ -11,9 +11,6 @@ export const useCategoryStore = defineStore('useCategoryStore', {
     },
     filter: {
       fulltext: '',
-      status: '',
-      role: '',
-      createdAt: ''
     },
     data: {
       categories: [] as Category[],
@@ -28,9 +25,14 @@ export const useCategoryStore = defineStore('useCategoryStore', {
   }),
   actions: {
     async fetchCategory() {
-      const query = {
+      const query: any = {
         limit: this.metadata.size,
         page: this.metadata.page,
+      }
+      if (this.filter.fulltext !== '') {
+        query['s'] = JSON.stringify({
+          name: { $cont: this.filter.fulltext }
+        })
       }
       const entity: any = await doGET(`super-market/backend/category`, query)
       if (entity?.statusCode === 200) {
