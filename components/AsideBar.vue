@@ -1,9 +1,9 @@
 <template>
   <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="false">
-    <el-menu-item @click="navigateTo('/users')" :class="route.path === '/users' ? 'is-active' : ''">
-      <el-tooltip class="box-item" effect="light" content="Người dùng" placement="right-start">
+    <el-menu-item @click="navigateTo('/users')" :class="route.path === '/category' ? 'is-active' : ''">
+      <el-tooltip class="box-item" effect="light" content="Danh mục" placement="right-start">
         <el-icon>
-          <UserFilled />
+          <Switch />
         </el-icon>
       </el-tooltip>
     </el-menu-item>
@@ -33,9 +33,8 @@
 
 <script lang="ts" setup>
 import {
-  UserFilled
+  Switch
 } from '@element-plus/icons-vue'
 
 const route = useRoute()
-
 </script>
