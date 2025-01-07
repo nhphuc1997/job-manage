@@ -1,13 +1,5 @@
 <template>
   <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="false">
-    <el-menu-item @click="navigateTo('/areas')" :class="route.path === '/areas' ? 'is-active' : ''">
-      <el-tooltip class="box-item" effect="light" content="Khu vực" placement="right-start">
-        <el-icon>
-          <Setting />
-        </el-icon>
-      </el-tooltip>
-    </el-menu-item>
-    
     <el-menu-item @click="navigateTo('/users')" :class="route.path === '/users' ? 'is-active' : ''">
       <el-tooltip class="box-item" effect="light" content="Người dùng" placement="right-start">
         <el-icon>
@@ -41,11 +33,6 @@
 
 <script lang="ts" setup>
 import {
-  Menu as IconMenu,
-  Setting,
-  TrendCharts,
-  DataBoard,
-  DataAnalysis,
   UserFilled
 } from '@element-plus/icons-vue'
 

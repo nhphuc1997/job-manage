@@ -1,10 +1,10 @@
 <template>
-  <div class="job-section">
-    <ResumeFilter />
-    <ResumeDataTable />
-    <ResumePagination />
+  <div class="area-section">
+    <UserFilter />
+    <UserDataTable />
+    <UserPagination />
 
-    <ResumeDialogView />
+    <UserDialogView />
   </div>
 </template>
 
@@ -16,13 +16,13 @@
 
 definePageMeta({
   layout: 'default',
-  middleware: ['auth']
+  // middleware: ['auth']
 })
 
 const loading = ElLoading.service({ lock: true })
 
-const resumeStore = useResumeStore()
-await resumeStore.fetchResumes()
+const userStore = useCategoryStore()
+await userStore.fetchCategory()
 
 loading.close()
 </script>

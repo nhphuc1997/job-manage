@@ -6,7 +6,7 @@ export const doGET = async (url: string, params?: any, query?: any) => {
   }
 
   const { data, status } = await useFetch(
-    `http://18.141.39.162:8089/${url}`,
+    `http://localhost:3001/${url}`,
     {
       headers: {
         "Accept-Language": "en-US",
@@ -24,7 +24,7 @@ export const doGET = async (url: string, params?: any, query?: any) => {
     return
   }
 
-  const result: any = data.value
+  const result: any = data?.value
   if (result.code === '05') return navigateTo('/')
   return result
 }
