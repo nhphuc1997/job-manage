@@ -7,7 +7,7 @@
       </el-col>
 
       <el-col :span="3">
-        <el-button @click="cateogryStore.dialog.createCategoryVisible = true" plain style="width: 100%;" type="success"
+        <el-button @click="cateogryStore.dialog.createEntityVisible = true" plain style="width: 100%;" type="success"
           :icon="ElIconWindPower">Tạo danh mục</el-button>
       </el-col>
     </el-row>

@@ -13,13 +13,15 @@ export const useCategoryStore = defineStore('useCategoryStore', {
       fulltext: '',
     },
     data: {
-      categories: [] as Category[],
-      viewCategory: {} as Category,
-      newCategory: {} as Category,
+      list: [] as Category[],
+      viewEntity: {} as Category,
+      newEntity: {} as Category,
+      editEntity: {} as Category,
     },
     dialog: {
-      viewCategoryVisible: false,
-      createCategoryVisible: false,
+      viewEntityVisible: false,
+      createEntityVisible: false,
+      editEntityVisible: false,
     },
     loading: {
       view: false
@@ -38,7 +40,7 @@ export const useCategoryStore = defineStore('useCategoryStore', {
       }
       const entity: any = await doGET(`super-market/backend/category`, query)
       if (entity?.statusCode === 200) {
-        this.data.categories = entity?.data?.data
+        this.data.list = entity?.data?.data
         this.metadata.totalElements = entity?.data?.total
         this.metadata.currentPage = entity.data.page
         return
@@ -53,25 +55,47 @@ export const useCategoryStore = defineStore('useCategoryStore', {
       await this.fetchEntity()
     },
     async createEntity() {
-      const { name } = this.data.newCategory
+      const { name } = this.data.newEntity
       const entity: any = await doMethod(`super-market/backend/category`, { name }, 'POST')
 
       if (entity.statusCode === 200) {
         ElNotification({ message: 'Tạo mới danh mục thành công', type: 'success' })
-        this.data.newCategory = {} as Category
-        this.dialog.createCategoryVisible = false
+        this.data.newEntity = {} as Category
+        this.dialog.createEntityVisible = false
+        await this.fetchEntity()
+        return
+      }
+    },
+    async editEntity() {
+      const { name, id } = this.data.editEntity
+      const entity: any = await doMethod(`super-market/backend/category/${id}`, { name }, 'PATCH');
+      if (entity.statusCode === 200) {
+        this.data.editEntity = {} as Category
+        this.dialog.editEntityVisible = false
         await this.fetchEntity()
         return
       }
     },
     async openDialogView(row: any) {
-      this.dialog.viewCategoryVisible = true
+      this.dialog.viewEntityVisible = true
       this.loading.view = true
       const { id } = row
       const entity: any = await doGET(`super-market/backend/category/${id}`)
 
       if (entity?.statusCode === 200) {
-        this.data.viewCategory = entity.data
+        this.data.viewEntity = entity.data
+        this.loading.view = false
+        return
+      }
+    },
+    async openDialogEdit(row: any) {
+      this.dialog.editEntityVisible = true
+      this.loading.view = true
+      const { id } = row
+      const entity: any = await doGET(`super-market/backend/category/${id}`)
+
+      if (entity?.statusCode === 200) {
+        this.data.editEntity = entity.data
         this.loading.view = false
         return
       }

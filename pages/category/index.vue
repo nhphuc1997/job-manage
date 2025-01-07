@@ -5,6 +5,7 @@
     <category-pagination />
     <category-dialog-view />
     <category-dialog-create />
+    <category-dialog-edit />
   </div>
 </template>
 
