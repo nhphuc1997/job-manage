@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="orderStore.dialog.viewEntityVisible" title="Chi tiết danh mục" width="600" align-top>
+  <el-dialog v-model="orderStore.dialog.viewEntityVisible" title="Chi tiết đơn hàng" width="600" align-top>
     <el-form v-loading="orderStore.loading.view" :model="orderStore.data.viewEntity">
 
       <el-form-item label="Id" :label-width="formLabelWidth">
@@ -8,6 +8,10 @@
 
       <el-form-item label="Mã đơn hàng" :label-width="formLabelWidth">
         <el-input disabled v-model="orderStore.data.viewEntity.order_number" />
+      </el-form-item>
+
+      <el-form-item label="Tên người đặt hàng" :label-width="formLabelWidth">
+        <el-input disabled v-model="orderStore.data.viewEntity.user_name" />
       </el-form-item>
 
       <el-form-item label="Tổng tiền" :label-width="formLabelWidth">
