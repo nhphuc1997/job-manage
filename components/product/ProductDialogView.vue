@@ -15,7 +15,7 @@
       </el-form-item>
 
       <el-form-item label="Danh mục" :label-width="formLabelWidth">
-        <el-input disabled v-model="productStore.data.viewEntity.categoryId" />
+        <el-input disabled v-model="productStore.data.viewEntity.categoryName" />
       </el-form-item>
 
       <el-form-item label="Tạo lúc" :label-width="formLabelWidth">

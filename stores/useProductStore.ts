@@ -55,8 +55,8 @@ export const useProductStore = defineStore('useProductStore', {
       await this.fetchEntity()
     },
     async createEntity() {
-      const { name } = this.data.newEntity
-      const entity: any = await doMethod(`super-market/backend/product`, { name }, 'POST')
+      const { name, price, categoryName } = this.data.newEntity
+      const entity: any = await doMethod(`super-market/backend/product`, { name, price, categoryName }, 'POST')
 
       if (entity.statusCode === 200) {
         ElNotification({ message: 'Tạo mới thành công', type: 'success' })
@@ -67,8 +67,10 @@ export const useProductStore = defineStore('useProductStore', {
       }
     },
     async editEntity() {
-      const { name, id, price } = this.data.editEntity
-      const entity: any = await doMethod(`super-market/backend/product/${id}`, { name, price }, 'PATCH');
+      const { name, id, price, categoryName } = this.data.editEntity
+      const entity: any = await doMethod(`super-market/backend/product/${id}`, {
+        name, price, categoryName
+      }, 'PATCH');
       if (entity.statusCode === 200) {
         this.data.editEntity = {} as Product
         this.dialog.editEntityVisible = false

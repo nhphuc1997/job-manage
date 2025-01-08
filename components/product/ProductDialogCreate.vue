@@ -10,8 +10,8 @@
       </el-form-item>
 
       <el-form-item label="Danh mục" :label-width="formLabelWidth">
-        <el-select v-model="productStore.data.newEntity.categoryId" placeholder="Danh mục">
-          <el-option v-for="item in categoryStore.data.list" :key="item.id" :label="item.name" :value="item.id" />
+        <el-select v-model="productStore.data.newEntity.categoryName" placeholder="Danh mục">
+          <el-option v-for="item in categoryStore.data.list" :key="item.id" :label="item.name" :value="item.name" />
         </el-select>
       </el-form-item>
     </el-form>

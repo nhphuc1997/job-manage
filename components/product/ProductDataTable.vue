@@ -4,7 +4,7 @@
       <el-table-column prop="id" label="Id" sortable width="80" align="center" />
       <el-table-column prop="name" label="Tên sản phẩm" sortable />
       <el-table-column prop="price" label="Giá" sortable />
-      <el-table-column prop="categoryId" label="Danh mục" sortable />
+      <el-table-column prop="categoryName" label="Danh mục" sortable />
       <el-table-column align="center" width="70" label="Xem">
         <template #default="scope">
           <el-button plain :icon="ElIconView" size="small" @click="productStore.openDialogView(scope.row)" />

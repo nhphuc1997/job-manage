@@ -11,7 +11,8 @@ export interface Product {
   "id": number,
   "name": string,
   "price": string,
-  "categoryId": string,
+  "categoryId": number,
+  "categoryName": string,
   "thumnail": string,
   "images": string
 }
