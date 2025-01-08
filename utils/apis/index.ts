@@ -34,7 +34,6 @@ export const doMethod = async (url: string, payload: any, method: 'POST' | 'PUT'
       headers: {
         "Accept-Language": "en-US",
         "Content-Type": "application/json",
-        // "Authorization": `Bearer ${accessToken.value}`,
       },
       method: method,
       body: payload,
@@ -70,6 +69,5 @@ export const doUpload = async (url: string, payload: any) => {
   }
 
   const result: any = data.value
-  if (result.code === '05') return navigateTo('/')
   return result
 }

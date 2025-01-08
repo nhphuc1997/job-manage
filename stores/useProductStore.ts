@@ -1,4 +1,4 @@
-import { doGET, doMethod } from "~/utils/apis"
+import { doGET, doMethod, doUpload } from "~/utils/apis"
 import type { Product } from "~/utils/interfaces"
 
 export const useProductStore = defineStore('useProductStore', {
@@ -17,6 +17,8 @@ export const useProductStore = defineStore('useProductStore', {
       viewEntity: {} as Product,
       newEntity: {} as Product,
       editEntity: {} as Product,
+      thumnail: '',
+      images: ''
     },
     dialog: {
       viewEntityVisible: false,
@@ -75,6 +77,28 @@ export const useProductStore = defineStore('useProductStore', {
         this.data.editEntity = {} as Product
         this.dialog.editEntityVisible = false
         await this.fetchEntity()
+        return
+      }
+    },
+    async uploadThumnail(file: any) {
+      let data = new FormData()
+      data.append('file', file.raw)
+      const fileUpload = await doUpload('v1/api/job-manger/document/uploads', data)
+
+      if (fileUpload.code === '00') {
+        ElMessage({ message: 'Upload hình ảnh thành công', type: 'success', plain: true })
+        this.data.thumnail = fileUpload.data
+        return
+      }
+    },
+    async uploadImages(file: any) {
+      let data = new FormData()
+      data.append('file', file.raw)
+      const fileUpload = await doUpload('v1/api/job-manger/document/uploads', data)
+
+      if (fileUpload.code === '00') {
+        ElMessage({ message: 'Upload hình ảnh thành công', type: 'success', plain: true })
+        this.data.images = fileUpload.data
         return
       }
     },
