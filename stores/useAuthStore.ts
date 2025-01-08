@@ -1,4 +1,4 @@
-import { doMethod } from "~/utils/apis"
+import { doMethodV2 } from "~/utils/apis"
 
 export const useAuthStore = defineStore('useAuthStore', {
   state: () => ({
@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('useAuthStore', {
   actions: {
     async doLogin() {
       const { username, password } = this.data.login
-      const authInfor: any = await doMethod(`v1/api/job-manger/users/authenticate`, { username, password }, 'POST')
+      const authInfor: any = await doMethodV2(`v1/api/job-manger/users/authenticate`, { username, password }, 'POST')
 
       if (authInfor.code === '00') {
         const accessTokenCookie = useCookie('accessToken')
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('useAuthStore', {
           password: ''
         }
         ElNotification({ message: 'Đăng nhập thành công', type: 'success' })
-        return navigateTo('/areas')
+        return navigateTo('/category')
       }
 
       ElNotification({ message: 'Đăng nhập thất bại', type: 'error' })
