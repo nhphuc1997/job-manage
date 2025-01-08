@@ -9,6 +9,10 @@
       <el-form-item label="Tên sản phẩm" :label-width="formLabelWidth">
         <el-input v-model="productStore.data.editEntity.name" />
       </el-form-item>
+
+      <el-form-item label="Giá sản phẩm" :label-width="formLabelWidth">
+        <el-input v-model="productStore.data.editEntity.price" />
+      </el-form-item>
     </el-form>
 
     <template #footer>

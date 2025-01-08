@@ -1,8 +1,13 @@
 <template>
-  <el-dialog v-model="productStore.dialog.createEntityVisible" title="Tạo danh mục" width="600" align-top>
+  <el-dialog v-model="productStore.dialog.createEntityVisible" title="Tạo sản phẩm" width="600" align-top>
     <el-form :model="productStore.data.newEntity">
       <el-form-item label="Tên" :label-width="formLabelWidth">
-        <el-input v-model="productStore.data.newEntity.name" autocomplete="off" placeholder="Tên danh mục" />
+        <el-input v-model="productStore.data.newEntity.name" autocomplete="off" placeholder="Tên sản phẩm" />
+      </el-form-item>
+    </el-form>
+    <el-form :model="productStore.data.newEntity">
+      <el-form-item label="Giá" :label-width="formLabelWidth">
+        <el-input v-model="productStore.data.newEntity.price" autocomplete="off" placeholder="Giá sản phẩm" />
       </el-form-item>
     </el-form>
     <template #footer>

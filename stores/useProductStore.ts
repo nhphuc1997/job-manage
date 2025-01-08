@@ -67,8 +67,8 @@ export const useProductStore = defineStore('useProductStore', {
       }
     },
     async editEntity() {
-      const { name, id } = this.data.editEntity
-      const entity: any = await doMethod(`super-market/backend/product/${id}`, { name }, 'PATCH');
+      const { name, id, price } = this.data.editEntity
+      const entity: any = await doMethod(`super-market/backend/product/${id}`, { name, price }, 'PATCH');
       if (entity.statusCode === 200) {
         this.data.editEntity = {} as Product
         this.dialog.editEntityVisible = false
