@@ -35,7 +35,10 @@ export const useOrderStore = defineStore('useOrderStore', {
       }
       if (this.filter.fulltext !== '') {
         query['s'] = JSON.stringify({
-          name: { $cont: this.filter.fulltext }
+          $or: [
+            { order_number: { $cont: this.filter.fulltext } },
+            { user_name: { $cont: this.filter.fulltext } },
+          ]
         })
       }
       const entity: any = await doGET(`super-market/backend/order`, query)
