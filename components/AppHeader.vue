@@ -3,7 +3,7 @@
     <el-row :gutter="8">
       <el-col :md="2" class=" hidden-sm-and-down" />
 
-      <!-- <el-col :xs="24" :md="2">
+      <el-col :xs="24" :md="2">
         <div class="user-infor">
           <div class="avatar">
             <el-dropdown>
@@ -25,7 +25,7 @@
             </el-dropdown>
           </div>
         </div>
-      </el-col> -->
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -57,8 +57,11 @@
 </style>
 
 <script lang="ts" setup>
+import { TopRight, User, CaretTop } from '@element-plus/icons-vue';
 import { ElLoading } from 'element-plus'
-
 const loading = ElLoading.service({ lock: true })
+const authStore = useAuthStore()
+const usernameCookie: any = useCookie('userName')
+const userName = usernameCookie.value
 loading.close()
 </script>
