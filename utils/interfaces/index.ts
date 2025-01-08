@@ -14,3 +14,12 @@ export interface Product {
   "thumnail": string,
   "images": string
 }
+
+export interface Order {
+  "createAt": string,
+  "updatedAt": string,
+  "id": number,
+  "order_number": string,
+  "total_price": string,
+  "user_name": string
+}

@@ -15,6 +15,14 @@
         </el-icon>
       </el-tooltip>
     </el-menu-item>
+
+    <el-menu-item @click="navigateTo('/order')" :class="route.path === '/order' ? 'is-active' : ''">
+      <el-tooltip class="box-item" effect="light" content="Đơn hàng" placement="right-start">
+        <el-icon>
+          <PictureFilled />
+        </el-icon>
+      </el-tooltip>
+    </el-menu-item>
   </el-menu>
 
 
@@ -42,7 +50,8 @@
 <script lang="ts" setup>
 import {
   Switch,
-  PieChart
+  PieChart,
+  PictureFilled
 } from '@element-plus/icons-vue'
 
 const route = useRoute()
