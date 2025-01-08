@@ -25,3 +25,10 @@ export interface Order {
   "total_price": string,
   "user_name": string
 }
+
+export interface Banner {
+  "createAt": string,
+  "updatedAt": string,
+  "id": number,
+  "url": string,
+}
