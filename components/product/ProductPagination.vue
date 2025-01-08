@@ -3,15 +3,15 @@
     <el-row>
       <el-col :span="24">
         <div class="paginate hidden-sm-and-down">
-          <el-pagination v-model:current-page="categoryStore.metadata.currentPage"
-            v-model:page-size="categoryStore.metadata.size" :page-sizes="[5, 10, 100]"
-            layout="total, sizes, prev, pager, next, jumper" :total="categoryStore.metadata.totalElements"
-            @size-change="categoryStore.paginationSizeChange" @current-change="categoryStore.paginationPageChange" />
+          <el-pagination v-model:current-page="productStore.metadata.currentPage"
+            v-model:page-size="productStore.metadata.size" :page-sizes="[5, 10, 100]"
+            layout="total, sizes, prev, pager, next, jumper" :total="productStore.metadata.totalElements"
+            @size-change="productStore.paginationSizeChange" @current-change="productStore.paginationPageChange" />
         </div>
 
         <div class="paginate hidden-sm-and-up">
-          <el-pagination layout="prev, pager, next" :total="categoryStore.metadata.totalElements"
-            @current-change="categoryStore.paginationPageChange" />
+          <el-pagination layout="prev, pager, next" :total="productStore.metadata.totalElements"
+            @current-change="productStore.paginationPageChange" />
         </div>
       </el-col>
     </el-row>
@@ -24,5 +24,5 @@
 </style>
 
 <script lang="ts" setup>
-const categoryStore = useCategoryStore()
+const productStore = useProductStore()
 </script>
