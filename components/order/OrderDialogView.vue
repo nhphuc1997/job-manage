@@ -6,12 +6,12 @@
         <el-input disabled v-model="orderStore.data.viewEntity.id" />
       </el-form-item>
 
-      <el-form-item label="Tên sản phẩm" :label-width="formLabelWidth">
-        <el-input disabled v-model="orderStore.data.viewEntity.name" />
+      <el-form-item label="Mã đơn hàng" :label-width="formLabelWidth">
+        <el-input disabled v-model="orderStore.data.viewEntity.order_number" />
       </el-form-item>
 
-      <el-form-item label="Giá sản phẩm" :label-width="formLabelWidth">
-        <el-input disabled v-model="orderStore.data.viewEntity.price" />
+      <el-form-item label="Tổng tiền" :label-width="formLabelWidth">
+        <el-input disabled v-model="orderStore.data.viewEntity.total_price" />
       </el-form-item>
 
       <el-form-item label="Tạo lúc" :label-width="formLabelWidth">
