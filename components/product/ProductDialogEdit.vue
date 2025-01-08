@@ -13,6 +13,12 @@
       <el-form-item label="Giá sản phẩm" :label-width="formLabelWidth">
         <el-input v-model="productStore.data.editEntity.price" />
       </el-form-item>
+
+      <el-form-item label="Danh mục" :label-width="formLabelWidth">
+        <el-select v-model="productStore.data.newEntity.categoryId" placeholder="Danh mục">
+          <el-option v-for="item in categoryStore.data.list" :key="item.id" :label="item.name" :value="item.id" />
+        </el-select>
+      </el-form-item>
     </el-form>
 
     <template #footer>
@@ -29,4 +35,6 @@
 <script lang="ts" setup>
 const formLabelWidth = '140px'
 const productStore = useProductStore()
+const categoryStore = useCategoryStore()
+categoryStore.fetchEntity()
 </script>
