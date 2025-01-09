@@ -14,7 +14,7 @@ export interface Product {
   "categoryId": number,
   "categoryName": string,
   "thumnail": string,
-  "images": string
+  "images": string[]
 }
 
 export interface Order {

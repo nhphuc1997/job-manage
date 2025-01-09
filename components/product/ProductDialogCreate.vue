@@ -14,6 +14,24 @@
           <el-option v-for="item in categoryStore.data.list" :key="item.id" :label="item.name" :value="item.name" />
         </el-select>
       </el-form-item>
+
+      <el-form-item label="Hình ảnh thumnail" :label-width="formLabelWidth">
+        <el-upload :limit="1" list-type="picture-card" :auto-upload="false"
+          :on-change="productStore.uploadFileThumbnail">
+          <el-icon>
+            <Plus />
+          </el-icon>
+        </el-upload>
+      </el-form-item>
+
+      <el-form-item label="Hình ảnh sản phẩm" :label-width="formLabelWidth">
+        <el-upload :multiple="true" :limit="3" list-type="picture-card" :auto-upload="false"
+          :on-change="productStore.uploadImages">
+          <el-icon>
+            <Plus />
+          </el-icon>
+        </el-upload>
+      </el-form-item>
     </el-form>
 
     <template #footer>

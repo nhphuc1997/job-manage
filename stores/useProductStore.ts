@@ -18,7 +18,7 @@ export const useProductStore = defineStore('useProductStore', {
       newEntity: {} as Product,
       editEntity: {} as Product,
       thumnail: '',
-      images: ''
+      images: [] as Array<String>
     },
     dialog: {
       viewEntityVisible: false,
@@ -57,8 +57,12 @@ export const useProductStore = defineStore('useProductStore', {
       await this.fetchEntity()
     },
     async createEntity() {
-      const { name, price, categoryName } = this.data.newEntity
-      const entity: any = await doMethod(`super-market/backend/product`, { name, price, categoryName }, 'POST')
+      const { name, price, categoryName, thumnail } = this.data.newEntity
+      const entity: any = await doMethod(
+        `super-market/backend/product`,
+        { name, price, categoryName, thumnail, images: this.data.images.join(';') },
+        'POST'
+      )
 
       if (entity.statusCode === 200) {
         ElNotification({ message: 'Tạo mới thành công', type: 'success' })
@@ -80,14 +84,12 @@ export const useProductStore = defineStore('useProductStore', {
         return
       }
     },
-    async uploadThumnail(file: any) {
+    async uploadFileThumbnail(file: any) {
       let data = new FormData()
       data.append('file', file.raw)
-      const fileUpload = await doUpload('v1/api/job-manger/document/uploads', data)
-
+      const fileUpload = await doUpload('v1/api/job-manger/document/uploads', data);
       if (fileUpload.code === '00') {
-        ElMessage({ message: 'Upload hình ảnh thành công', type: 'success', plain: true })
-        this.data.thumnail = fileUpload.data
+        this.data.newEntity.thumnail = fileUpload?.data
         return
       }
     },
@@ -98,7 +100,7 @@ export const useProductStore = defineStore('useProductStore', {
 
       if (fileUpload.code === '00') {
         ElMessage({ message: 'Upload hình ảnh thành công', type: 'success', plain: true })
-        this.data.images = fileUpload.data
+        this.data?.images.push(fileUpload.data)
         return
       }
     },
