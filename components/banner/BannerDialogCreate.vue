@@ -2,7 +2,12 @@
   <el-dialog v-model="bannerStore.dialog.createEntityVisible" title="Tạo banner" width="600" align-top>
     <el-form :model="bannerStore.data.newEntity">
       <el-form-item label="Tên" :label-width="formLabelWidth">
-        <el-input v-model="bannerStore.data.newEntity.url" autocomplete="off" placeholder="url" />
+        <el-upload :limit="1" list-type="picture-card" :auto-upload="false"
+          :on-change="bannerStore.uploadFileThumbnail">
+          <el-icon>
+            <Plus />
+          </el-icon>
+        </el-upload>
       </el-form-item>
     </el-form>
 

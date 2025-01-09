@@ -1,9 +1,7 @@
 <template>
   <div class="header">
-    <el-row :gutter="8">
-      <el-col :md="2" class=" hidden-sm-and-down" />
-
-      <el-col :xs="24" :md="2">
+    <el-row :gutter="1">
+      <el-col :xs="24" :md="24">
         <div class="user-infor">
           <div class="avatar">
             <el-dropdown>

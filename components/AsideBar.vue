@@ -23,6 +23,14 @@
         </el-icon>
       </el-tooltip>
     </el-menu-item>
+
+    <el-menu-item @click="navigateTo('/banner')" :class="route.path === '/banner' ? 'is-active' : ''">
+      <el-tooltip class="box-item" effect="light" content="Banner" placement="right-start">
+        <el-icon>
+          <CameraFilled />
+        </el-icon>
+      </el-tooltip>
+    </el-menu-item>
   </el-menu>
 
 
@@ -51,7 +59,8 @@
 import {
   Switch,
   PieChart,
-  PictureFilled
+  PictureFilled,
+  CameraFilled
 } from '@element-plus/icons-vue'
 
 const route = useRoute()

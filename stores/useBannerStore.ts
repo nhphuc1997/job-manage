@@ -1,3 +1,4 @@
+import type { UploadFile, UploadUserFile } from "element-plus"
 import { doGET, doMethod, doUpload } from "~/utils/apis"
 import type { Banner } from "~/utils/interfaces"
 
@@ -17,6 +18,8 @@ export const useBannerStore = defineStore('useBannerStore', {
       viewEntity: {} as Banner,
       newEntity: {} as Banner,
       editEntity: {} as Banner,
+      thumbnail: {} as UploadFile,
+      images: [{}] as UploadUserFile[]
     },
     dialog: {
       viewEntityVisible: false,
@@ -31,7 +34,7 @@ export const useBannerStore = defineStore('useBannerStore', {
     async fetchEntity() {
       const entity: any = await doGET(`super-market/backend/banner`)
       if (entity?.statusCode === 200) {
-        this.data.list = entity?.data?.data
+        this.data.list = entity?.data
         this.metadata.totalElements = entity?.data?.total
         this.metadata.currentPage = entity.data.page
         return
@@ -65,6 +68,22 @@ export const useBannerStore = defineStore('useBannerStore', {
         return
       }
     },
+    async uploadFileThumbnail(file: any) {
+      let data = new FormData()
+      data.append('file', file.raw)
+      const fileUpload = await doUpload('v1/api/job-manger/document/uploads', data);
+      if (fileUpload.code === '00') {
+        const entity: any = await doMethod(`super-market/backend/banner`, { url: fileUpload.data }, 'POST')
+        if (entity.statusCode === 200) {
+          ElNotification({ message: 'Tạo mới thành công', type: 'success' })
+          this.data.newEntity = {} as Banner
+          this.dialog.createEntityVisible = false
+          await this.fetchEntity()
+          return
+        }
+        return
+      }
+    }, 
     async paginationSizeChange(size: number) {
       this.metadata.size = size
       await this.fetchEntity()
