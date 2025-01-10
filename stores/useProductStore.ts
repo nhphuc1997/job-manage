@@ -68,6 +68,7 @@ export const useProductStore = defineStore('useProductStore', {
         ElNotification({ message: 'Tạo mới thành công', type: 'success' })
         this.data.newEntity = {} as Product
         this.dialog.createEntityVisible = false
+        this.data.images = []
         await this.fetchEntity()
         return
       }
